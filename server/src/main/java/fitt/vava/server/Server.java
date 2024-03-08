@@ -1,6 +1,5 @@
 package fitt.vava.server;
 
-import fitt.vava.server.services.ExampleService;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
 
@@ -16,7 +15,7 @@ public class Server {
 
     private void start() throws IOException {
         server = Grpc.newServerBuilderForPort(PORT, InsecureServerCredentials.create())
-                .addService(new ExampleService())
+//                .addService(new ExampleService())
                 .build()
                 .start();
 
