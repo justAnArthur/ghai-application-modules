@@ -1,5 +1,6 @@
-package fitt.vava.server;
+package fiit.vava.server;
 
+import fiit.vava.server.services.UserService;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
 
@@ -8,14 +9,16 @@ import java.util.concurrent.TimeUnit;
 
 public class Server {
 
-    private final String name = "ServeR";
     public static final int PORT = 50031;
 
     private io.grpc.Server server;
 
     private void start() throws IOException {
+        UserService userService = new UserService();
+
         server = Grpc.newServerBuilderForPort(PORT, InsecureServerCredentials.create())
-//                .addService(new ExampleService())
+                .addService(userService)
+                .intercept(new AuthorizationServerInterceptor(userService))
                 .build()
                 .start();
 
@@ -32,6 +35,8 @@ public class Server {
                 System.err.println("*** server shut down");
             }
         });
+
+        System.out.println("run");
     }
 
     private void stop() throws InterruptedException {

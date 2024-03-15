@@ -1,68 +1,58 @@
 syntax = "proto3";
-//  Assumption 1 - each rpc has userId of caller
+
 option java_multiple_files = true;
-package fitt.vava.server;
+package fiit.vava.server;
 
-message ErrorResponse {
-  string message = 1;
+message LoginUserRequest {
+  string email = 2;
+  string password = 3;
 }
 
-service Auth {
-  //  rpc register(registerRequest) returns (registerRespon)
-  //  rpc login(loginRequest) returns (logitResponse)
-}
-
-message UserAvailability {
-  UserStatus status = 1;
-  string note = 2;
-}
-
-message LoginResponse {
+message Response {
   oneof response {
-    UserAvailability data = 1;
-    ErrorResponse error = 2;
+    User user = 1;
+    string error = 2;
   }
 }
 
-message LoginUserRequest {
-  string email = 1;
-  string password = 2;
-}
-
-enum UserStatus {
-  PENDING = 0;
-  APPROVED = 1;
-  REJECTED = 2;
-}
-
-message RegisterClientRequest {
-  string email = 1;
-  string password = 2;
-  string firstName = 3;
-  string lastName = 4;
-  string dateOfBirth = 5;
-  string regionInNewCountry = 6;
-  string country = 7;
-}
-
-message ClientChangeStatusRequest {
-  UserStatus newStatus = 1;
-}
-
-message CreateCoworkerRequest {
-  string name = 1;
-  repeated string preferredCountries = 2;
-}
+message Empty {}
 
 service UserService {
-  rpc login(LoginUserRequest) returns (LoginResponse);
+  rpc login(LoginUserRequest) returns (Response);
 
-  rpc registerClient(RegisterClientRequest) returns (LoginResponse);
-  rpc changeClientStatus(ClientChangeStatusRequest) returns (LoginResponse);
+  rpc registerClient(Client) returns (Response);
 
-  rpc createCoworker(CreateCoworkerRequest) returns (LoginResponse);
-  rpc updateCoworker(CreateCoworkerRequest) returns (LoginResponse);
+  rpc me(Empty) returns (User);
+}
 
-//  rpc getAllCoworkers(getAllCoworkersRequest) returns (getAllCoworkersResponse
-//  rpc getAllClients()
+enum UserState {
+  PENDING = 0;
+  APPROVED = 1;
+  REJECRED = 2;
+}
+
+enum UserRole {
+  CLIENT = 0;
+  COWORKER = 1;
+  ADMIN = 2;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string password = 3;
+  bool confirmed = 4;
+  UserState status = 5;
+  UserRole role = 6;
+}
+
+message Client {
+  string id = 1;
+  User user = 2;
+  optional string registration_date = 3;
+  string firstName = 4;
+  string lastName = 5;
+  string dateOfBirth = 6;
+  string region = 7;
+  string country = 8;
 }
