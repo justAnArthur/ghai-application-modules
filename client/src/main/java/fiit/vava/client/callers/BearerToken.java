@@ -1,6 +1,6 @@
 package fiit.vava.client.callers;
 
-import fiit.vava.server.Constants;
+import fiit.vava.server.config.Constants;
 import io.grpc.CallCredentials;
 import io.grpc.Metadata;
 import io.grpc.Status;

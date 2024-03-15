@@ -1,5 +1,6 @@
-package fiit.vava.server;
+package fiit.vava.server.config;
 
+import fiit.vava.server.User;
 import io.grpc.Context;
 import io.grpc.Metadata;
 

@@ -1,5 +1,6 @@
 package fiit.vava.server;
 
+import fiit.vava.server.config.Constants;
 import fiit.vava.server.services.SkipAuthorization;
 import fiit.vava.server.services.UserService;
 import io.grpc.*;

@@ -49,11 +49,27 @@
 
             <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
             <TextField fx:id="registerUsernameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-            <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <PasswordField fx:id="registerPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Button text="Register" GridPane.columnIndex="1" GridPane.rowIndex="2"
-                    onAction="#handleRegisterClient"/>
-            <Label fx:id="registerMessageLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="FirstName:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="registerFirstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="LastName:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="registerLastNameField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="DateOfBirth:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <DatePicker fx:id="registerDateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="Region:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="registerRegionField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text="Country:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField fx:id="registerCountryField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+            <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <PasswordField fx:id="registerPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            <Button text="Register" GridPane.columnIndex="1" GridPane.rowIndex="7" onAction="#handleRegisterClient"/>
+            <Label fx:id="registerMessageLabel" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
         </GridPane>
     </Tab>
 </TabPane>

@@ -3,14 +3,15 @@ package fiit.vava.server.dao.repositories;
 import fiit.vava.server.User;
 import fiit.vava.server.UserRole;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserRepository implements IRepository<User> {
 
     private static UserRepository instance = null;
 
-    public UserRepository() {
+    private UserRepository() {
     }
 
     public static synchronized UserRepository getInstance() {
@@ -20,19 +21,26 @@ public class UserRepository implements IRepository<User> {
         return instance;
     }
 
-    private final User[] users = new User[]{
-            User.newBuilder().setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).build(),
-            User.newBuilder().setEmail("second@second.second").setPassword("second").setRole(UserRole.COWORKER).build(),
-            User.newBuilder().setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build(),
-    };
+
+    private final ArrayList<User> users = new ArrayList<>() {{
+        add(User.newBuilder().setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).build());
+        add(User.newBuilder().setEmail("second@second.second").setPassword("second").setRole(UserRole.COWORKER).build());
+        add(User.newBuilder().setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build());
+    }};
 
     @Override
-    public User[] findAll() {
+    public List<User> findAll() {
         return users;
     }
 
+    @Override
+    public User save(User toSave) {
+        users.add(toSave);
+        return toSave;
+    }
+
     public Optional<User> findByEmail(String email) {
-        return Arrays.stream(users)
+        return users.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
     }

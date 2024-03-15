@@ -10,4 +10,5 @@ module server {
     requires jjwt;
 
     exports fiit.vava.server;
+    exports fiit.vava.server.config;
 }
