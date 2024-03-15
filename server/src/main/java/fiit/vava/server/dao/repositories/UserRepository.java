@@ -23,7 +23,7 @@ public class UserRepository implements IRepository<User> {
 
 
     private final ArrayList<User> users = new ArrayList<>() {{
-        add(User.newBuilder().setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).build());
+        add(User.newBuilder().setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).setConfirmed(true).build());
         add(User.newBuilder().setEmail("second@second.second").setPassword("second").setRole(UserRole.COWORKER).build());
         add(User.newBuilder().setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build());
     }};

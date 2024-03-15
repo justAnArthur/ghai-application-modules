@@ -1,10 +1,15 @@
-# grpc services
+# start an application
 
-## Authorization
+```
+mvn clean install
+```
 
-## Document & Request
+```
+cd server
+mvn clean compile exec:java --% -Dexec.mainClass="fiit.vava.server.Server"
+```
 
-## Notification
-
-## User
-
+```
+cd client
+mvn compile org.openjfx:javafx-maven-plugin:0.0.8:run 
+```

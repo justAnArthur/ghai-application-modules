@@ -64,6 +64,9 @@ public class LoginRegisterController {
         try {
             User user = stub.me(Empty.newBuilder().build());
 
+            if (user.getRole().equals(UserRole.CLIENT) && !user.getConfirmed())
+                throw new Exception("User is not confirmed");
+
             Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
         } catch (Exception ex) {
             messageLabel.setText(ex.getMessage());
