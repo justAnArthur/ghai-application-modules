@@ -23,9 +23,8 @@ public class AuthorizationServerInterceptor implements ServerInterceptor {
 
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> serverCall, Metadata metadata, ServerCallHandler<ReqT, RespT> serverCallHandler) {
-        if (checkAuthorization(serverCall.getMethodDescriptor().getFullMethodName())) {
+        if (!checkAuthorization(serverCall.getMethodDescriptor().getFullMethodName()))
             return Contexts.interceptCall(Context.current(), serverCall, metadata, serverCallHandler);
-        }
 
         String value = metadata.get(Constants.AUTHORIZATION_METADATA_KEY);
 
@@ -56,6 +55,9 @@ public class AuthorizationServerInterceptor implements ServerInterceptor {
         };
     }
 
+    /**
+     * @return true - if authorization is required
+     */
     private boolean checkAuthorization(String methodName) {
         try {
             Class<?> clazz = Class.forName(methodName.split("/")[0]);
