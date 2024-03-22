@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="TOP_CENTER" hgap="10.0" prefHeight="100.0" prefWidth="1280.0" style="-fx-background-color: #6495ED;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" percentWidth="20.0" prefWidth="370.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" percentWidth="20.0" prefWidth="370.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" percentWidth="20.0" prefWidth="370.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" percentWidth="20.0" prefWidth="370.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" percentWidth="20.0" prefWidth="370.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="100.0" minHeight="70.0" prefHeight="100.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <MFXButton fx:id="profileBtn" buttonType="RAISED" depthLevel="LEVEL3" prefHeight="67.0" prefWidth="370.0" rippleColor="#6ee3b7" style="-fx-background-color: #f0f8ff; -fx-background-radius: 10;" text="Profile" textFill="#2d3480">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </MFXButton>
+      <MFXButton fx:id="libraryBtn" buttonType="RAISED" depthLevel="LEVEL3" prefHeight="67.0" prefWidth="370.0" rippleColor="#6ee3b7" style="-fx-background-color: #6ee3b7; -fx-background-radius: 10;" text="Library" textFill="#2d3480" GridPane.columnIndex="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="documentsBtn" buttonType="RAISED" depthLevel="LEVEL3" prefHeight="67.0" prefWidth="370.0" rippleColor="#6ee3b7" style="-fx-background-color: #f0f8ff; -fx-background-radius: 10;" text="Documents" textFill="#2d3480" GridPane.columnIndex="2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="questionBtn" buttonType="RAISED" depthLevel="LEVEL3" prefHeight="67.0" prefWidth="370.0" rippleColor="#6ee3b7" style="-fx-background-color: #f0f8ff; -fx-background-radius: 10;" text="Ask question" textFill="#2d3480" GridPane.columnIndex="3">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="settingBtn" buttonType="RAISED" depthLevel="LEVEL3" prefHeight="67.0" prefWidth="370.0" rippleColor="#6ee3b7" style="-fx-background-color: #f0f8ff; -fx-background-radius: 10;" text="Settings" textFill="#2d3480" GridPane.columnIndex="4">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </MFXButton>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</GridPane>

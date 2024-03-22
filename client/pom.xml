@@ -70,7 +70,12 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.3.1</version>
-        </dependency>
+      </dependency>
+      <dependency>
+          <groupId>io.github.palexdev</groupId>
+          <artifactId>materialfx</artifactId>
+          <version>11.17.0</version>
+      </dependency>
     </dependencies>
 
     <build>
