@@ -1,13 +1,11 @@
 package fiit.vava.client.controllers;
 
+import fiit.vava.client.CredentialsManager;
 import fiit.vava.client.Router;
-import fiit.vava.client.callers.BearerToken;
+import fiit.vava.client.StubsManager;
 import fiit.vava.server.*;
-import fiit.vava.server.config.Constants;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -44,22 +42,9 @@ public class LoginRegisterController {
     protected void handleLogin() {
         messageLabel.setText(null);
 
-        BearerToken token = new BearerToken(
-                Jwts.builder()
-                        .setSubject(usernameField.getText())
-                        .claim("password", passwordField.getText())
-                        .signWith(SignatureAlgorithm.HS256, Constants.JWT_SIGNING_KEY)
-                        .compact()
-        );
+        CredentialsManager.storeCredentials(usernameField.getText(), passwordField.getText());
 
-        ManagedChannel channel = ManagedChannelBuilder
-                .forAddress("localhost", Server.PORT)
-                .usePlaintext()
-                .build();
-
-        UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc
-                .newBlockingStub(channel)
-                .withCallCredentials(token);
+        UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
 
         try {
             User user = stub.me(Empty.newBuilder().build());
@@ -67,8 +52,9 @@ public class LoginRegisterController {
             if (user.getRole().equals(UserRole.CLIENT) && !user.getConfirmed())
                 throw new Exception("User is not confirmed");
 
-            Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
+            Router.getInstance().navigateTo(user.getRole().name().toLowerCase() + "/index");
         } catch (Exception ex) {
+            ex.printStackTrace();
             messageLabel.setText(ex.getMessage());
         }
     }

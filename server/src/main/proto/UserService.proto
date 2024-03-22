@@ -3,10 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 package fiit.vava.server;
 
-message LoginUserRequest {
-  string email = 2;
-  string password = 3;
-}
+message Empty {}
 
 message Response {
   oneof response {
@@ -15,14 +12,24 @@ message Response {
   }
 }
 
-message Empty {}
+message LoginUserRequest {
+  string email = 2;
+  string password = 3;
+}
+
+message NonApprovedClientsResponse {
+  repeated Client client = 1;
+}
 
 service UserService {
   rpc login(LoginUserRequest) returns (Response);
 
+  rpc me(Empty) returns (User);
+
   rpc registerClient(Client) returns (Response);
 
-  rpc me(Empty) returns (User);
+  rpc getNonApprovedClients(Empty) returns (NonApprovedClientsResponse);
+  rpc approveClient(Client) returns (Response);
 }
 
 enum UserState {

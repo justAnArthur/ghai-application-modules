@@ -6,6 +6,7 @@ import fiit.vava.server.dao.repositories.ClientRepository;
 import fiit.vava.server.dao.repositories.UserRepository;
 import io.grpc.stub.StreamObserver;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class UserService extends UserServiceGrpc.UserServiceImplBase {
@@ -56,5 +57,23 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
             responseObserver.onNext(response);
         }
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getNonApprovedClients(Empty request, StreamObserver<NonApprovedClientsResponse> responseObserver) {
+        List<Client> clients = clientRepository.getNonConfirmedClients();
+
+        NonApprovedClientsResponse.Builder builder = NonApprovedClientsResponse.newBuilder();
+
+        clients.forEach(builder::addClient);
+
+        NonApprovedClientsResponse response = builder.build();
+
+        responseObserver.onNext(response);
+    }
+
+    @Override
+    public void approveClient(Client request, StreamObserver<Response> responseObserver) {
+        super.approveClient(request, responseObserver);
     }
 }

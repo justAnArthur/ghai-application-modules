@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 public class Router {
     private Stage primaryStage;
-    private final Map<String, String> routes;
+    public final Map<String, String> routes;
 
     private static Router instance;
 
@@ -35,18 +35,17 @@ public class Router {
         routes.put(route, fxmlPath);
     }
 
-    public void navigateTo(String route) {
+    public void navigateTo(String route) throws IOException, NoSuchElementException {
         String fxmlPath = routes.get(route);
         if (fxmlPath != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                primaryStage.setTitle(route);
-                primaryStage.show();
-            } catch (IOException ignored) {
-            }
+            System.out.println("Navigating to: " + route + " : " + fxmlPath);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle(route);
+            primaryStage.show();
         } else {
             throw new NoSuchElementException("No route defined for: " + route);
         }

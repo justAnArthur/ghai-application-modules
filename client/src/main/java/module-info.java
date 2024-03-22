@@ -9,6 +9,7 @@ module fitt.vava.client {
     requires server;
     requires annotations.api;
     requires jjwt;
+    requires io.grpc.stub;
 
     opens fiit.vava.client to javafx.fxml;
     exports fiit.vava.client;
