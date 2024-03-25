@@ -1,4 +1,4 @@
-package fiit.vava.client.controllers;
+package fiit.vava.client.controllers.coworker;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
