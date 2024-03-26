@@ -8,6 +8,8 @@ module server {
     requires protobuf.java;
     requires com.google.common;
     requires jjwt;
+    
+    requires org.slf4j;
 
     exports fiit.vava.server;
     exports fiit.vava.server.config;
