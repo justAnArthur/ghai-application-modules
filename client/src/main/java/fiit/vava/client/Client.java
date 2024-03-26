@@ -13,7 +13,12 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 public class Client extends Application {
+
+    private static final Logger logger = LoggerFactory.getLogger("client");
     private static final String FXML_RESOURCES_PATH = "src/main/resources/fiit/vava/client";
 
     @Override
@@ -56,6 +61,7 @@ public class Client extends Application {
     }
 
     public static void main(String[] args) {
+        logger.info("Client started");
         launch();
     }
 }
