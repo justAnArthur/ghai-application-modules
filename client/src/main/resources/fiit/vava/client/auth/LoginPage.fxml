@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -35,7 +36,7 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </MFXPasswordField>
-      <MFXButton fx:id="signInBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" defaultButton="true" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: lightblue;" text="Sign In" textFill="#2d3480" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+      <MFXButton fx:id="signInBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" defaultButton="true" onAction="#handleLogin" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: lightblue;" text="Sign In" textFill="#2d3480" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
@@ -73,5 +74,6 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <MFXComboBox fx:id="langSelect" floatingText="Language" GridPane.rowIndex="5" />
    </children>
 </GridPane>

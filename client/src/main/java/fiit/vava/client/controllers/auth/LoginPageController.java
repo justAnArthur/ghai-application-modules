@@ -1,6 +1,7 @@
 package fiit.vava.client.controllers.auth;
 
 import fiit.vava.client.Router;
+import fiit.vava.client.Routes;
 import fiit.vava.client.callers.BearerToken;
 import fiit.vava.server.*;
 import fiit.vava.server.config.Constants;
@@ -11,11 +12,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.scene.control.Label;
 import javafx.fxml.FXML;
 
 public class LoginPageController {
-
+    private boolean offline = true;
     @FXML
     private MFXPasswordField passwordField;
 
@@ -30,9 +32,32 @@ public class LoginPageController {
 
     @FXML
     private Label messageLabel;
-    
+   
+    @FXML 
+    void initialize(){
+      
+    }
     @FXML
     private void handleLogin(){
+      if(offline){
+        switch (usernameField.getText()) {
+        case "client":
+            Router.getInstance().changeNavBar(Routes.Navigation.CLIENT_NAV_BAR);
+            Router.getInstance().navigateTo(Routes.Client.PROFILE);
+            break;
+
+          case "coworker":
+            Router.getInstance().changeNavBar(Routes.Navigation.COWORKER_NAV_BAR);
+            Router.getInstance().navigateTo(Routes.Coworker.USER_VERIFICATION);
+            break;
+          case "admin":
+            
+            break;
+          default:
+            break;
+        }
+        return;
+      }
       messageLabel.setText(null);
       BearerToken token = new BearerToken(
               Jwts.builder()
@@ -57,10 +82,25 @@ public class LoginPageController {
           if (user.getRole().equals(UserRole.CLIENT) && !user.getConfirmed())
               throw new Exception("User is not confirmed");
 
-          Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
-      } catch (Exception ex) {
-          messageLabel.setText(ex.getMessage());
-      }
+          switch (user.getRole().name().toLowerCase()) {
+          case "client":
+              Router.getInstance().changeNavBar(Routes.Navigation.CLIENT_NAV_BAR);
+              Router.getInstance().navigateTo(Routes.Client.PROFILE);
+              break;
+
+            case "coworker":
+              Router.getInstance().changeNavBar(Routes.Navigation.COWORKER_NAV_BAR);
+              Router.getInstance().navigateTo(Routes.Coworker.USER_VERIFICATION);
+              break;
+            case "admin":
+              
+              break;
+            default:
+              break;
+          }
+        } catch (Exception ex) {
+                messageLabel.setText(ex.getMessage());
+            }
     
-    } 
+    }
 }

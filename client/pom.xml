@@ -98,7 +98,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>fitt.vava.client/fiit.vava.client.Client</mainClass>
+                            <mainClass>fiit.vava.client/fiit.vava.client.Client</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

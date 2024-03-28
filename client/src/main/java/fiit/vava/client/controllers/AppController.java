@@ -22,6 +22,6 @@ public class AppController {
       borderPane.setCenter(page);
     }
     public void setNavBar(Node navBar){
-      borderPane.setTop(navBar);
+      borderPane.setLeft(navBar);
   }
 }
