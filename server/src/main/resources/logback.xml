@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <property name="LOG_DIR" value="logs"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender" target="System.out">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/app.xml</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/app-%d{yyyy-MM-dd}.xml.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>
+            <layout class="ch.qos.logback.classic.log4j.XMLLayout"> <!-- encoder.XMLLayout "> -->
+                <locationInfo>true</locationInfo>
+                <properties>true</properties>
+            </layout>
+        </encoder>
+    </appender>
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>20</discardingThreshold>
+        <appender-ref ref="CONSOLE"/>
+        <queueSize>256</queueSize>
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>true</neverBlock>
+    </appender>
+    <appender name="ASYNC_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>20</discardingThreshold>
+        <appender-ref ref="FILE"/>
+        <queueSize>256</queueSize>
+        <includeCallerData>false</includeCallerData>
+        <neverBlock>true</neverBlock>
+    </appender>
+    <logger name="server" level="debug" additivity="false">
+        <appender-ref ref="ASYNC_CONSOLE"/>
+        <appender-ref ref="ASYNC_FILE"/>
+    </logger>
+    <logger name="client" level="debug" additivity="false">
+        <appender-ref ref="ASYNC_CONSOLE"/>
+        <appender-ref ref="ASYNC_FILE"/>
+    </logger>
+    <root level="error">
+        <appender-ref ref="ASYNC_CONSOLE"/>
+        <appender-ref ref="ASYNC_FILE"/>
+    </root>
+</configuration>

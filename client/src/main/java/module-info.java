@@ -1,26 +1,44 @@
-module fiit.vava.client {
+module fitt.vava.client {
     requires javafx.controls;
     requires javafx.fxml;
+
     requires org.controlsfx.controls;
     requires org.kordamp.ikonli.javafx;
     requires io.grpc;
-    requires MaterialFX; 
+
     requires server;
     requires annotations.api;
     requires jjwt;
+    requires io.grpc.stub;
+    requires org.slf4j;
+    requires MaterialFX;
 
     opens fiit.vava.client to javafx.fxml;
     exports fiit.vava.client;
-    exports fiit.vava.client.controllers;
-    opens fiit.vava.client.controllers to javafx.fxml;
-    exports fiit.vava.client.controllers.auth;
-    opens fiit.vava.client.controllers.auth to javafx.fxml;
-    exports fiit.vava.client.controllers.client;
-    opens fiit.vava.client.controllers.client to javafx.fxml;
-    exports fiit.vava.client.controllers.coworker;
-    opens fiit.vava.client.controllers.coworker to javafx.fxml;
-    exports fiit.vava.client.controllers.utils;
-    opens fiit.vava.client.controllers.utils to javafx.fxml;
-    // exports fiit.vava.client.controllers.admin;
-    // opens fiit.vava.client.controllers.admin to javafx.fxml;
+
+    opens fiit.vava.client.routes to javafx.fxml;
+
+    exports fiit.vava.client.routes.admin;
+    opens fiit.vava.client.routes.admin to javafx.fxml;
+
+    exports fiit.vava.client.routes.client;
+    opens fiit.vava.client.routes.client to javafx.fxml;
+
+    exports fiit.vava.client.routes.coworker;
+    opens fiit.vava.client.routes.coworker to javafx.fxml;
+
+    exports fiit.vava.client.routes.coworker.clients.approve;
+    opens fiit.vava.client.routes.coworker.clients.approve to javafx.fxml;
+
+    exports fiit.vava.client.routes._components.routing;
+    opens fiit.vava.client.routes._components.routing to javafx.fxml;
+
+    exports fiit.vava.client.routes.auth.login;
+    opens fiit.vava.client.routes.auth.login to javafx.fxml;
+
+    exports fiit.vava.client.routes.client.documents;
+    opens fiit.vava.client.routes.client.documents to javafx.fxml;
+
+    exports fiit.vava.client.routes.client.profile;
+    opens fiit.vava.client.routes.client.profile to javafx.fxml;
 }

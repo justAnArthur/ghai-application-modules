@@ -23,9 +23,9 @@ public class UserRepository implements IRepository<User> {
 
 
     private final ArrayList<User> users = new ArrayList<>() {{
-        add(User.newBuilder().setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).setConfirmed(true).build());
-        add(User.newBuilder().setEmail("second@second.second").setPassword("second").setRole(UserRole.COWORKER).build());
-        add(User.newBuilder().setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build());
+        add(User.newBuilder().setId("1").setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).build());
+        add(User.newBuilder().setId("2").setEmail("second@second.second").setPassword("second").setRole(UserRole.COWORKER).build());
+        add(User.newBuilder().setId("3").setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build());
     }};
 
     @Override
@@ -35,6 +35,9 @@ public class UserRepository implements IRepository<User> {
 
     @Override
     public User save(User toSave) {
+        if (toSave.getId() != null)
+            users.removeIf(user -> user.getId().equals(toSave.getId()));
+
         users.add(toSave);
         return toSave;
     }
@@ -43,5 +46,23 @@ public class UserRepository implements IRepository<User> {
         return users.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
+    }
+
+    public boolean setConfirmed(User requested) {
+        Optional<User> userOptional = users.stream()
+                .filter(_user -> _user.getId().equals(requested.getId()))
+                .findFirst();
+
+        if (userOptional.isEmpty())
+            return false;
+
+        User user = userOptional.get();
+
+        user.toBuilder().setConfirmed(true);
+        this.save(user);
+
+        users.forEach(_user -> System.out.println(_user.getId() + " " + _user.getEmail() + " " + _user.getConfirmed()));
+
+        return true;
     }
 }
