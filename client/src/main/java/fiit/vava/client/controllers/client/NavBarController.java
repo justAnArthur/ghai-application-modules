@@ -45,6 +45,7 @@ public class NavBarController {
 
     @FXML
     private void handleLibraryBtn() {
+      Router.getInstance().showModal(Routes.Utils.DIALOG);
       System.out.println("What the fuck is library?");
     }
 

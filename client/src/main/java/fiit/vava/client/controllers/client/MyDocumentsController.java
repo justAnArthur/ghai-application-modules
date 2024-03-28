@@ -45,6 +45,11 @@ public class MyDocumentsController {
     }
 
     @FXML
+    void handleAddPassport(ActionEvent event) {
+     Router.getInstance().showModal(Routes.Utils.DIALOG); 
+    }
+
+    @FXML
     void initialize() {
         dNameColumn.setCellValueFactory(data -> data.getValue().documentNameProperty());
         createdAtColumn.setCellValueFactory(data -> data.getValue().createdAtProperty());

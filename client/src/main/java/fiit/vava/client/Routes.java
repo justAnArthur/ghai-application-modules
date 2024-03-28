@@ -5,6 +5,9 @@ public class Routes{
     public static final String CLIENT_NAV_BAR = "client/NavBar.fxml";
     public static final String COWORKER_NAV_BAR = "coworker/NavBar.fxml";
   }
+  public class Utils {
+    public static final String DIALOG = "client/Dialog.fxml";
+  }
   public static final String LOGIN_PAGE = "auth/LoginPage.fxml";
   public static final String REGISTRATION_PAGE = "auth/RegistrationPage.fxml";
   public static final class Coworker {
