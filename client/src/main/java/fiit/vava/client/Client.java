@@ -10,11 +10,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Client extends Application {
-    private static final String FXML_RESOURCES_PATH = "src/main/resources/fiit/vava/client";
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -40,19 +39,28 @@ public class Client extends Application {
         Router router = Router.getInstance();
         router.setPrimaryStage(stage);
 
-        getRoutes(FXML_RESOURCES_PATH)
-                .forEach(path -> router.addRoute(path.replaceAll(".fxml", ""), path));
+        getRoutes().forEach(router::addRoute);
 
         router.navigateTo(startingScenePath);
     }
 
-    public List<String> getRoutes(String path) throws IOException {
-        Path start = Paths.get(path);
+    public Map<String, Path> getRoutes() throws IOException {
+        Path start = Paths.get("src/main/java/fiit/vava/client/routes");
 
-        return Files.walk(start)
+        Map<String, Path> routes = new HashMap<>();
+
+        Files.walk(start)
                 .filter(Files::isRegularFile)
-                .map(_path -> Path.of(path).relativize(_path).toString().replaceAll("\\\\", "/"))
-                .collect(Collectors.toList());
+                .filter(_path -> !_path.toString().contains("_")) // filter `_components`
+                .filter(_path -> _path.toString().endsWith(".fxml")) // filter only `.fxml`s
+                .forEach(_path -> {
+                    String route = start.relativize(_path).toString()
+                            .replaceAll("\\\\", "/")
+                            .replaceAll(".fxml", "");
+                    routes.put(route, _path);
+                });
+
+        return routes;
     }
 
     public static void main(String[] args) {

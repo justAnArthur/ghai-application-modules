@@ -23,6 +23,8 @@ public class AuthorizationServerInterceptor implements ServerInterceptor {
 
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> serverCall, Metadata metadata, ServerCallHandler<ReqT, RespT> serverCallHandler) {
+        logRoute(serverCall.getMethodDescriptor().getFullMethodName());
+
         if (!checkAuthorization(serverCall.getMethodDescriptor().getFullMethodName()))
             return Contexts.interceptCall(Context.current(), serverCall, metadata, serverCallHandler);
 
@@ -68,5 +70,9 @@ public class AuthorizationServerInterceptor implements ServerInterceptor {
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             return true;
         }
+    }
+
+    private void logRoute(String methodName) {
+        System.out.println(methodName);
     }
 }

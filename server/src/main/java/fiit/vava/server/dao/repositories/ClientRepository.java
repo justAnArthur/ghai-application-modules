@@ -2,7 +2,6 @@ package fiit.vava.server.dao.repositories;
 
 import fiit.vava.server.Client;
 import fiit.vava.server.User;
-import fiit.vava.server.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +22,36 @@ public class ClientRepository implements IRepository<Client> {
     }
 
     private final ArrayList<Client> clients = new ArrayList<>() {{
-        add(Client.newBuilder().setFirstName("first").setLastName("first").setUser(
-                User.newBuilder().setEmail("first@first.first").setPassword("first").setRole(UserRole.CLIENT).setConfirmed(false).build()
+        add(Client.newBuilder().setId("1").setFirstName("first").setLastName("first").setUser(
+                User.newBuilder().setId("1").build()
         ).build());
     }};
 
     public Client save(Client toSave) {
+        if (toSave.getId() != null)
+            clients.removeIf(client -> client.getId().equals(toSave.getId()));
+
         clients.add(toSave);
         return toSave;
     }
 
     public List<Client> findAll() {
-        return clients;
+        UserRepository userRepository = UserRepository.getInstance();
+
+        return clients.stream()
+                .map(client -> client.toBuilder()
+                        .setUser(userRepository.findAll().stream()
+                                .filter(user -> user.getId().equals(client.getUser().getId()))
+                                .findFirst()
+                                .orElse(null))
+                        .build())
+                .collect(Collectors.toList());
     }
 
     /*
      * TODO add filtering by coworker
      */
     public List<Client> getNonConfirmedClients() {
-        return clients.stream().filter(client -> !client.getUser().getConfirmed()).collect(Collectors.toList());
+        return findAll().stream().filter(client -> !client.getUser().getConfirmed()).collect(Collectors.toList());
     }
 }

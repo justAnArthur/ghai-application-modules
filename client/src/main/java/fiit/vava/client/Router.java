@@ -6,18 +6,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.nio.file.Path;
+import java.util.*;
 
 public class Router {
     private Stage primaryStage;
-    public final Map<String, String> routes;
+    private final Map<String, Path> routes;
+    private final List<String> routesHistory;
 
     private static Router instance;
 
     private Router() {
         routes = new HashMap<>();
+        routesHistory = new ArrayList<>();
     }
 
     public static Router getInstance() {
@@ -31,16 +32,18 @@ public class Router {
         this.primaryStage = primaryStage;
     }
 
-    public void addRoute(String route, String fxmlPath) {
-        routes.put(route, fxmlPath);
+    public void addRoute(String route, Path path) {
+        routes.put(route, path);
     }
 
     public void navigateTo(String route) throws IOException, NoSuchElementException {
-        String fxmlPath = routes.get(route);
-        if (fxmlPath != null) {
-            System.out.println("Navigating to: " + route + " : " + fxmlPath);
+        Path path = routes.get(route);
+        if (path != null) {
+            System.out.println("Navigating to: " + route + " : " + path);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            routesHistory.add(route);
+
+            FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -49,5 +52,15 @@ public class Router {
         } else {
             throw new NoSuchElementException("No route defined for: " + route);
         }
+    }
+
+    public void navigateBack() throws IOException, NoSuchElementException {
+        if (routesHistory.size() <= 1)
+            return;
+
+        routesHistory.remove(routesHistory.size() - 1);
+        String previousRoute = routesHistory.get(routesHistory.size() - 1);
+
+        navigateTo(previousRoute);
     }
 }

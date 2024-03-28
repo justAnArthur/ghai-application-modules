@@ -1,11 +1,9 @@
-package fiit.vava.client.controllers;
+package fiit.vava.client.routes;
 
 import fiit.vava.client.CredentialsManager;
 import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
 import fiit.vava.server.*;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -59,16 +57,11 @@ public class LoginRegisterController {
         }
     }
 
+    @FXML
     public void handleRegisterClient() {
         messageLabel.setText(null);
 
-        ManagedChannel channel = ManagedChannelBuilder
-                .forAddress("localhost", Server.PORT)
-                .usePlaintext()
-                .build();
-
-        UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc
-                .newBlockingStub(channel);
+        UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
 
         Client request = Client.newBuilder()
                 .setUser(User.newBuilder()
