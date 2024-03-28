@@ -1,5 +1,14 @@
 # Changelog
 
+#### justAnArthur on 3/28/2024 at 10:54 PM
+
+### Server
+
+- **Repository**
+    - #### Managed repository type for internal and sql implementation driving via `.env` file.
+
+---
+
 #### justAnArthur on 3/28/2024 at 9:04 PM
 
 ### Client

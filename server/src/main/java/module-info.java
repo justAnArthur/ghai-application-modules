@@ -10,6 +10,7 @@ module server {
     requires jjwt;
 
     requires org.slf4j;
+    requires java.dotenv;
 
     exports fiit.vava.server;
     exports fiit.vava.server.config;

@@ -1,57 +1,35 @@
 package fiit.vava.server.dao.repositories;
 
 import fiit.vava.server.Client;
-import fiit.vava.server.User;
+import io.github.cdimascio.dotenv.Dotenv;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ClientRepository implements IRepository<Client> {
+public abstract class ClientRepository implements IRepository<Client> {
 
     private static ClientRepository instance = null;
 
-    private ClientRepository() {
-    }
-
     public static synchronized ClientRepository getInstance() {
-        if (instance == null)
-            instance = new ClientRepository();
+        if (instance == null) {
+            Dotenv dotenv = Dotenv.load();
+
+            switch (dotenv.get("REPOSITORY_TYPE")) {
+                case "internal":
+                    instance = new ClientRepositoryInternal();
+                    break;
+                case "sql":
+                    instance = new ClientRepositorySql();
+                    break;
+                default:
+                    throw new RuntimeException("Unknown repository implementation");
+            }
+        }
 
         return instance;
-    }
-
-    private final ArrayList<Client> clients = new ArrayList<>() {{
-        add(Client.newBuilder().setId("1").setFirstName("first").setLastName("first").setUser(
-                User.newBuilder().setId("1").build()
-        ).build());
-    }};
-
-    public Client save(Client toSave) {
-        if (toSave.getId() != null)
-            clients.removeIf(client -> client.getId().equals(toSave.getId()));
-
-        clients.add(toSave);
-        return toSave;
-    }
-
-    public List<Client> findAll() {
-        UserRepository userRepository = UserRepository.getInstance();
-
-        return clients.stream()
-                .map(client -> client.toBuilder()
-                        .setUser(userRepository.findAll().stream()
-                                .filter(user -> user.getId().equals(client.getUser().getId()))
-                                .findFirst()
-                                .orElse(null))
-                        .build())
-                .collect(Collectors.toList());
     }
 
     /*
      * TODO add filtering by coworker
      */
-    public List<Client> getNonConfirmedClients() {
-        return findAll().stream().filter(client -> !client.getUser().getConfirmed()).collect(Collectors.toList());
-    }
+    public abstract List<Client> getNonConfirmedClients();
 }

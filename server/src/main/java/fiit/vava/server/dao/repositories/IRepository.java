@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface IRepository<T> {
 
+    T save(T toSave);
+
     List<T> findAll();
 
-    T save(T toSave);
+    T findById(String id);
 }
