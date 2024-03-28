@@ -70,10 +70,21 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
         NonApprovedClientsResponse response = builder.build();
 
         responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void approveClient(Client request, StreamObserver<Response> responseObserver) {
-        super.approveClient(request, responseObserver);
+        boolean result = userRepository.setConfirmed(request.getUser());
+
+        Response.Builder builder = Response.newBuilder();
+
+        if (!result)
+            builder.setError("unable to approve");
+
+        Response response = builder.build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }
