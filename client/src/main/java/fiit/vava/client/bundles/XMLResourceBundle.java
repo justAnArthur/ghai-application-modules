@@ -6,27 +6,25 @@ import java.util.*;
 
 /**
  * XML Resource Bundle
- *
  * @author slabbe
  */
 public class XMLResourceBundle extends ResourceBundle {
 
-    private Properties props;
+    private final Properties properties;
 
     public XMLResourceBundle(InputStream stream) throws IOException {
-        props = new Properties();
-        props.loadFromXML(stream);
+        properties = new Properties();
+        properties.loadFromXML(stream);
     }
 
     @Override
     protected Object handleGetObject(String key) {
-        return props.getProperty(key);
+        return properties.getProperty(key);
     }
 
     @Override
     public Enumeration<String> getKeys() {
-        Set<String> handleKeys = props.stringPropertyNames();
+        Set<String> handleKeys = properties.stringPropertyNames();
         return Collections.enumeration(handleKeys);
     }
-
 }

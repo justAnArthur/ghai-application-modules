@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -82,6 +82,10 @@
                 <Font size="20.0"/>
             </font>
         </Label>
-        <MFXComboBox fx:id="langSelect" floatingText="Language" GridPane.rowIndex="5"/>
+        <MFXComboBox fx:id="langSelectCombo" GridPane.rowIndex="5">
+            <GridPane.margin>
+                <Insets left="10.0"/>
+            </GridPane.margin>
+        </MFXComboBox>
     </children>
 </GridPane>

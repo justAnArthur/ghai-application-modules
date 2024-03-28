@@ -91,6 +91,16 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.32</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency>
+        <!-- <dependency>
+          <groupId>com.powsybl</groupId>
+          <artifactId>powsybl-iidm-xml-converter</artifactId>
+          <version>3.1.0</version>
+        </dependency> -->
     </dependencies>
 
     <build>

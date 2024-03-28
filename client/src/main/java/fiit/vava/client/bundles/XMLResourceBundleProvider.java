@@ -12,8 +12,27 @@ import java.util.spi.ResourceBundleProvider;
  *
  * @author qvadym
  */
-
 public class XMLResourceBundleProvider implements ResourceBundleProvider {
+
+    private static XMLResourceBundleProvider instance = null;
+
+    private SupportedLanguages currentLanguage;
+
+    private XMLResourceBundleProvider() {
+        this.currentLanguage = SupportedLanguages.ENGLISH;
+    }
+
+    public static synchronized XMLResourceBundleProvider getInstance() {
+        if (instance == null) {
+            instance = new XMLResourceBundleProvider();
+        }
+
+        return instance;
+    }
+
+    public XMLResourceBundle getBundle(String baseName) {
+        return getBundle(baseName, currentLanguage.getLocale());
+    }
 
     @Override
     public XMLResourceBundle getBundle(String baseName, Locale locale) {
@@ -21,9 +40,9 @@ public class XMLResourceBundleProvider implements ResourceBundleProvider {
         String resourceName = toResourceName(bundleName, "xml");
 
         URL url = XMLResourceBundleProvider.class.getResource("/" + resourceName);
-        if (url == null) {
+
+        if (url == null)
             return null;
-        }
 
         try (InputStream stream = url.openStream();
              BufferedInputStream bis = new BufferedInputStream(stream)) {
@@ -39,5 +58,13 @@ public class XMLResourceBundleProvider implements ResourceBundleProvider {
 
     private String toResourceName(String bundleName, String format) {
         return bundleName.replace('.', '/') + "." + format;
+    }
+
+    public void changeLanguage(SupportedLanguages locale) {
+        this.currentLanguage = locale;
+    }
+
+    public SupportedLanguages getCurrentLanguage() {
+        return currentLanguage;
     }
 }

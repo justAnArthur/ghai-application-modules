@@ -1,5 +1,14 @@
 # Changelog
 
+#### justAnArthur on 3/28/2024 at 11:39 PM
+
+### Client
+
+- **Localization**
+    - #### Added localization. Example in `auth/login.fxml` and `auth/LoginController.java`.
+
+---
+
 #### justAnArthur on 3/28/2024 at 10:54 PM
 
 ### Server

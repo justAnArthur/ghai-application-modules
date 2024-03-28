@@ -1,4 +1,4 @@
-module fitt.vava.client {
+module fiit.vava.client {
     requires javafx.controls;
     requires javafx.fxml;
 
