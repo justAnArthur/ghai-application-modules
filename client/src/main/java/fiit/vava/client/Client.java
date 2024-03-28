@@ -12,10 +12,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Client extends Application {
 
-    private static final Logger logger = LoggerFactory.getLogger("client");
+    private static final Logger logger = LoggerFactory.getLogger(Application.class.toString());
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,6 +35,8 @@ public class Client extends Application {
                 System.out.println("Unable to call me" + ex);
             }
         }
+
+        logger.info("Starting scene: " + startingScenePath);
 
         stage.setTitle("GHAI");
 

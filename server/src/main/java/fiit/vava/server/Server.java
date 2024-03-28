@@ -3,16 +3,15 @@ package fiit.vava.server;
 import fiit.vava.server.services.UserService;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
-
 public class Server {
 
-    Logger logger = LoggerFactory.getLogger("server." + Server.class);
+    private static final Logger logger = LoggerFactory.getLogger(Server.class.toString());
 
     public static final int PORT = 50031;
 
@@ -59,6 +58,7 @@ public class Server {
     public static void main(String[] args) throws IOException, InterruptedException {
         final Server server = new Server();
         server.start();
+        logger.info("Server started");
         server.blockUntilShutdown();
     }
 }

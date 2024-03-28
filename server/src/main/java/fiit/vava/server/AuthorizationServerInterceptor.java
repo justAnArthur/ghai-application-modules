@@ -8,10 +8,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
 public class AuthorizationServerInterceptor implements ServerInterceptor {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerInterceptor.class.toString());
 
     private final JwtParser parser = Jwts.parser().setSigningKey(Constants.JWT_SIGNING_KEY);
 
@@ -23,7 +27,7 @@ public class AuthorizationServerInterceptor implements ServerInterceptor {
 
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> serverCall, Metadata metadata, ServerCallHandler<ReqT, RespT> serverCallHandler) {
-        logRoute(serverCall.getMethodDescriptor().getFullMethodName());
+        logger.info("Called: " + serverCall.getMethodDescriptor().getFullMethodName());
 
         if (!checkAuthorization(serverCall.getMethodDescriptor().getFullMethodName()))
             return Contexts.interceptCall(Context.current(), serverCall, metadata, serverCallHandler);
@@ -70,9 +74,5 @@ public class AuthorizationServerInterceptor implements ServerInterceptor {
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             return true;
         }
-    }
-
-    private void logRoute(String methodName) {
-        System.out.println(methodName);
     }
 }
