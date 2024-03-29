@@ -1,0 +1,97 @@
+Table User {
+  id string [pk]
+  confirmed boolean
+  email string [note: '''
+    Is Email confirmed. But requires Email service and server.
+  ''']
+  password string
+  role string
+}
+
+Table Admin {
+  id string [pk]
+  name string
+  user_id string [ref: - User.id]
+  responsible_for_region string
+}
+
+Table Coworker {
+  id string [pk]
+  name string
+  user_id string [ref: - User.id]
+  created_by string [ref: > Admin.id]
+  prefered_countries string[]
+}
+
+Table Client {
+  id string [pk]
+  user_id string [ref: - User.id]
+  registration_date date
+  iname string
+  last_name string
+  date_of_birth date
+  region_in_new_country string [note: 'Допустим, для меня это - Братислава']
+  country string
+}
+
+Table DocumentRequest {
+  id string [pk]
+  status string
+  requested_template_id string [ref: > Template.id]
+  client_id string [ref: > Client.id]
+  reviewed_by_id string [ref: - Coworker.id]
+  generated_document_id string [ref: - Document.id]
+  feedback string [note: 'Заполняет, если что-то не понравилось, либо просто заметки. Клиент это будет видеть, только, когда статут != approved']
+}
+
+Table EventWatcher {
+  id string [pk]
+  request_id string [ref: > DocumentRequest.id]
+  created_at date
+  previous_state string [note: 'да, как, JSON, в любом случае только для отображения Админу']
+}
+
+Table Document {
+  id string [pk]
+  owned_by_id string [ref: > Client.id]
+  name string
+  path string [note: 'To file in a system']
+}
+
+Table DocumentFields {
+  id string [pk]
+  request_id string [ref: > DocumentRequest.id]
+  template_field_id string [ref: > TemplateField.id]
+  value string [note: '''
+    Ибо в любом случае, чтобы добавить что-то на изображение, либо PDF - его нужно серелизоровать.
+  ''']
+}
+
+Table TemplateField {
+  id string [pk]
+  template_id string [ref: > Template.id]
+  name string
+  type string
+  required boolean
+}
+
+Table Template {
+  id string [pk]
+  name string
+  file_path string [note: '''
+    Будь то изображение (преуказ, виза, как документ), будьто генерированная справка.
+  ''']
+  required_templates_generated_ids string[]
+}
+
+Note about {
+  '''
+    1. Клиент регистрируеться, заполняет необходимые поля и ему необходимо добавить свой паспорт (загран).
+    Мы этот паспорт сохраняем как Document, но без DocumentRequest. (Работник может посмотреть его документ при проверке)
+    Соединим функционал, как хотел Миша.
+    2. Работник будет иметь два окна. Одно - для approve клиенто (просто таблица с не approved клиентами из его региона),
+    вторая - для проверки DocumentRequest'ов. Если окей - документ генерируеться (здесь важно сделать его неизменяемым, поэтому только pdf и e-sign),
+    сохраняеться на диске, меняется статус, и все. Он в любом случае может написать feedback (note), только клиент её будет видеть, если non aprove
+  '''
+}
+
