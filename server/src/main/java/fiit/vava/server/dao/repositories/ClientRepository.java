@@ -1,32 +1,35 @@
 package fiit.vava.server.dao.repositories;
 
 import fiit.vava.server.Client;
+import io.github.cdimascio.dotenv.Dotenv;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ClientRepository implements IRepository<Client> {
+public abstract class ClientRepository implements IRepository<Client> {
 
     private static ClientRepository instance = null;
 
-    private ClientRepository() {
-    }
-
     public static synchronized ClientRepository getInstance() {
-        if (instance == null)
-            instance = new ClientRepository();
+        if (instance == null) {
+            Dotenv dotenv = Dotenv.load();
+
+            switch (dotenv.get("REPOSITORY_TYPE")) {
+                case "internal":
+                    instance = new ClientRepositoryInternal();
+                    break;
+                case "sql":
+                    instance = new ClientRepositorySql();
+                    break;
+                default:
+                    throw new RuntimeException("Unknown repository implementation");
+            }
+        }
 
         return instance;
     }
 
-
-    private final ArrayList<Client> clients = new ArrayList<>();
-
-    public Client save(Client toSave) {
-        clients.add(toSave);
-        return toSave;
-    }
-
-    public ArrayList<Client> findAll() {
-        return clients;
-    }
+    /*
+     * TODO add filtering by coworker
+     */
+    public abstract List<Client> getNonConfirmedClients();
 }

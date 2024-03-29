@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<GridPane maxHeight="600.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+          prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="fiit.vava.client.routes.auth.login.Controller">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <MFXTextField fx:id="usernameField" alignment="CENTER" floatingText="Username" floatingTextGap="10.0"
+                      maxHeight="-Infinity" maxWidth="600.0" minHeight="-Infinity" minWidth="300.0" prefHeight="50.0"
+                      prefWidth="300.0" styleClass="mfx-text-field" textLimit="254" GridPane.halignment="CENTER"
+                      GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <GridPane.margin>
+                <Insets left="50.0" right="50.0"/>
+            </GridPane.margin>
+        </MFXTextField>
+        <MFXPasswordField fx:id="passwordField" alignment="CENTER" floatingText="Password" maxHeight="50.0"
+                          maxWidth="600.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0"
+                          GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets left="50.0" right="50.0"/>
+            </GridPane.margin>
+        </MFXPasswordField>
+        <MFXButton fx:id="signInBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" defaultButton="true"
+                   onAction="#handleLogin" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: lightblue;"
+                   text="Sign In" textFill="#2d3480" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                   GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </MFXButton>
+        <Label text="Login">
+            <font>
+                <Font size="48.0"/>
+            </font>
+        </Label>
+        <GridPane GridPane.rowIndex="4">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label text="Don't have an account yet?">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <MFXButton fx:id="signUpBtn" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #0aee56;"
+                           text="Create one now" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </MFXButton>
+            </children>
+        </GridPane>
+        <Label fx:id="errorMessageLabel" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="5"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <MFXComboBox fx:id="langSelectCombo" GridPane.rowIndex="5">
+            <GridPane.margin>
+                <Insets left="10.0"/>
+            </GridPane.margin>
+        </MFXComboBox>
+    </children>
+</GridPane>

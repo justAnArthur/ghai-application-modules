@@ -39,3 +39,6 @@ build/
 
 ### IDE's ###
 /.idea
+
+### Logs ###
+logs/
