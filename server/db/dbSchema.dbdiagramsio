@@ -1,3 +1,4 @@
+https://dbdiagram.io/d/VAVA-65e2358fcd45b569fb53606d
 Table User {
   id string [pk]
   confirmed boolean
