@@ -11,8 +11,4 @@ public class Controller {
     void initialize() throws IOException {
       Router.getInstance().changeNavBar("coworker/sideBar");
     }
-    @FXML
-    public void handleGoToApproveClients() throws IOException {
-        Router.getInstance().navigateTo("coworker/clients/approve");
-    }
 }

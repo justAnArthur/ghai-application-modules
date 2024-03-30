@@ -1,4 +1,4 @@
-package fiit.vava.client.controllers.admin;
+package fiit.vava.client.controllers.client;
 
 import fiit.vava.client.Router;
 import javafx.fxml.FXML;
@@ -6,8 +6,9 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 
 public class Controller {
+    
     @FXML
     void initialize() throws IOException {
-      Router.getInstance().changeNavBar("admin/sideBar");
+      Router.getInstance().changeNavBar("client/sideBar");
     }
 }

@@ -1,4 +1,4 @@
-package fiit.vava.client.controllers.client;
+package fiit.vava.client.controllers.admin;
 
 import fiit.vava.client.Router;
 import javafx.scene.input.MouseEvent;
@@ -21,10 +21,7 @@ public class SideBarController {
     private Label documentsBtn;
     
     @FXML
-    private Label libraryBtn;
-    
-    @FXML
-    private Label askQuestionBtn;
+    private Label usersBtn;
     
     @FXML
     private Label settingsBtn;
@@ -38,39 +35,29 @@ public class SideBarController {
     }
     
     @FXML
-    private void handleLibraryBtn(MouseEvent event) throws IOException {
+    private void handleUsersBtn(MouseEvent event) throws IOException {
         noHighlight();
-        libraryBtn.setStyle("-fx-background-color: #555;");
+        usersBtn.setStyle("-fx-background-color: #555;");
     }
 
-    @FXML
-    private void handleProfileBtn(MouseEvent event) {
+    public void handleProfileBtn(MouseEvent event) {
         noHighlight();
         profileBtn.setStyle("-fx-background-color: #555;");
     }
 
-    @FXML
-    private void handleAskQuestionBtn(MouseEvent event) {
-        noHighlight();
-        askQuestionBtn.setStyle("-fx-background-color: #555;");
-    }
-
-    @FXML
-    private void handleSettingsBtn(MouseEvent event) {
+    public void handleSettingsBtn(MouseEvent event) {
         noHighlight();
         settingsBtn.setStyle("-fx-background-color: #555;");
     }
 
-    @FXML
-    private void handleDocumentsBtn(MouseEvent event) {
+    public void handleDocumentsBtn(MouseEvent event) {
         noHighlight();
         documentsBtn.setStyle("-fx-background-color: #555;");
     }
 
     private void noHighlight(){
       documentsBtn.setStyle("-fx-background-color: transparent;");
-      askQuestionBtn.setStyle("-fx-background-color: transparent;");
-      libraryBtn.setStyle("-fx-background-color: transparent;");
+      usersBtn.setStyle("-fx-background-color: transparent;");
       settingsBtn.setStyle("-fx-background-color: transparent;");
       profileBtn.setStyle("-fx-background-color: transparent;");
     }
