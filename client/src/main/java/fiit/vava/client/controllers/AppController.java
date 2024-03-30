@@ -9,10 +9,14 @@ import fiit.vava.server.UserServiceGrpc;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class AppController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppController.class.toString());
 
     @FXML
     private BorderPane borderPane;
@@ -25,10 +29,10 @@ public class AppController {
         String startingScenePath = "auth/login";
 
         String[] credentials = CredentialsManager.retrieveCredentials();
-        for (String str : credentials) {
-          System.out.println(str);
-        }
+
         if (credentials != null) {
+            logger.info("Using credentials: " + credentials[0] + " " + credentials[1]);
+
             UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
 
             try {
