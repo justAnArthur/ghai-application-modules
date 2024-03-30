@@ -35,7 +35,7 @@ service UserService {
 enum UserState {
   PENDING_USER_STATE = 0;
   APPROVED_USER_STATE = 1;
-  REJECRED = 2;
+  REJECRED_USER_STATE = 2;
 }
 
 enum UserRole {
@@ -70,38 +70,3 @@ message Coworker {
   string createdBy = 3;
   repeated string preferredCountries = 4;
 }
-
-message DocumentRequest {
-  string id = 1;
-  User requestedBy = 2;
-  string status = 3; // Consider using an enum for status if you have a limited set of possible values
-  string requestedTemplateId = 4;
-  string clientId = 5;
-  string reviewedById = 6;
-  string generatedDocumentId = 7;
-  string feedback = 8;
-}
-
-// Utility messages for common responses and actions
-
-message ActionResponse {
-  oneof result {
-    bool success = 1;
-    string message = 2;
-  }
-}
-
-// Additional enum definitions for new or updated states and roles, if necessary
-
-enum DocumentRequestStatus {
-  PENDING_DOCUMENT_REQUEST_STATUS = 0;
-  APPROVED_DOCUMENT_REQUEST_STATUS = 1;
-  REJECTED = 2;
-  GENERATED = 3;
-}
-
-service DocumentService {
-  rpc submitDocumentRequest(DocumentRequest) returns (ActionResponse);
-  rpc updateDocumentRequestStatus(DocumentRequest) returns (ActionResponse);
-}
-

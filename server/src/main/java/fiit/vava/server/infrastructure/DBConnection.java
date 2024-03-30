@@ -6,12 +6,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnection {
+public class DBConnection {
 
 //    private static final String URL = "jdbc:postgresql://localhost:5432/db";
     private static final String URL = Dotenv.load().get("DATABASE_URL");
-    private static final String USER = "pastgres";
-    private static final String PASSWORD = "postgres";
 
     public static Connection getConnection() throws SQLException {
         try {

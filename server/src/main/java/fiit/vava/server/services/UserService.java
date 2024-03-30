@@ -42,7 +42,7 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
         try {
             User user = userRepository.save(request.getUser().toBuilder()
                     /*.setStatus(UserState.PENDING)*/.build());
-
+            
             Client client = clientRepository.save(request.toBuilder()
                     .setUser(user).build());
 

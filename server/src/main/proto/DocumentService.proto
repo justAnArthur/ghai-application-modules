@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package fiit.vava.server;
+
+import "UserService.proto";
+
+// Utility messages for common responses and actions
+message ActionResponse {
+  oneof result {
+    bool success = 1;
+    string message = 2;
+  }
+}
+
+// Additional enum definitions for new or updated states and roles, if necessary
+
+enum DocumentRequestStatus {
+  PENDING_DOCUMENT_REQUEST_STATUS = 0;
+  APPROVED_DOCUMENT_REQUEST_STATUS = 1;
+  REJECTED = 2;
+  GENERATED = 3;
+}
+
+service DocumentService {
+  rpc submitDocumentRequest(DocumentRequest) returns (ActionResponse);
+  rpc updateDocumentRequestStatus(DocumentRequest) returns (ActionResponse);
+}
+
+enum DocumentRequestState {
+  PENDING_REQUEST_STATE = 0;
+  GENERATED_REQUEST_STATE = 1;
+  REJECRED_REQUEST_STATE = 2;
+}
+
+message DocumentRequest {
+  string id = 1;
+  Client requestedBy = 2;
+  string reviewedById = 3;
+  DocumentRequestState status = 4; // Consider using an enum for status if you have a limited set of possible values
+  string requestedTemplateId = 5;
+  string generatedDocumentId = 6;
+  string feedback = 7;
+}
