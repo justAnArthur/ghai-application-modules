@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class Controller {
-    private boolean offline = false;
+    private boolean offline = true;
     @FXML
     private MFXPasswordField passwordField;
 
@@ -70,7 +70,7 @@ public class Controller {
             Router.getInstance().navigateTo("coworker");
             break;
           case "admin":
-            
+            Router.getInstance().navigateTo("admin");
             break;
           default:
             break;
