@@ -10,11 +10,11 @@ import fiit.vava.server.Empty;
 import fiit.vava.server.User;
 import fiit.vava.server.UserRole;
 import fiit.vava.server.UserServiceGrpc;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXPasswordField;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -22,16 +22,16 @@ import java.io.IOException;
 public class Controller {
     private boolean offline = true;
     @FXML
-    private MFXPasswordField passwordField;
+    private PasswordField passwordField;
 
     @FXML
-    private MFXButton signInBtn;
+    private Button signInBtn;
 
     @FXML
-    private MFXButton signUpBtn;
+    private Button signUpBtn;
 
     @FXML
-    private MFXTextField usernameField;
+    private TextField usernameField;
 
     @FXML
     private Label errorMessageLabel;
@@ -92,4 +92,8 @@ public class Controller {
 
         Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
     }
+  @FXML
+  private void goToRegistration() throws IOException{
+    Router.getInstance().navigateTo("auth/registration");
+  }
 }
