@@ -9,43 +9,46 @@ import fiit.vava.client.StubsManager;
 import fiit.vava.server.*;
 import fiit.vava.client.Router;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
 public class Controller {
  @FXML
-    private TextField countryField;
+    private MFXTextField countryField;
 
     @FXML
     private DatePicker dateOfBirthPicker;
 
     @FXML
-    private TextField emailField;
+    private MFXTextField emailField;
 
     @FXML
     private Label errorMessageLabel;
 
     @FXML
-    private TextField fNameField;
+    private MFXTextField fNameField;
 
     @FXML
-    private TextField lNameField;
+    private MFXTextField lNameField;
 
     @FXML
     private MFXComboBox<String> langSelectCombo;
 
     @FXML
-    private PasswordField passwordField;
+    private MFXPasswordField passwordField;
 
     @FXML
-    private TextField regionField;
+    private MFXPasswordField passwordAgainField;
+    
+    @FXML
+    private MFXTextField regionField;
 
     @FXML
     private Button signInBtn;
@@ -76,8 +79,16 @@ public class Controller {
     // Doesn't work
     @FXML
     private void handleRegistration(ActionEvent event) {
+ 
         errorMessageLabel.setText(null);
-
+        if (fNameField.getText() == null || lNameField.getText() == null || countryField.getText() == null || regionField.getText() == null || emailField.getText() == null || passwordField.getText() == null || passwordAgainField.getText() == null || dateOfBirthPicker.getValue() == null) {
+          errorMessageLabel.setText("All fields must be completed.");
+          return;
+        }
+        if (passwordField.getText() != passwordAgainField.getText()){
+          errorMessageLabel.setText("Passwords don't match.");
+          return;
+        }
         UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
 
         Client request = Client.newBuilder()
