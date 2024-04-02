@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="600.0" minWidth="800.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.coworker.profile.Controller">
+   <center>
+      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab text="View">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <GridPane hgap="20.0" vgap="30.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+                          </rowConstraints>
+                           <padding>
+                              <Insets top="30.0" />
+                           </padding>
+                           <children>
+                              <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="475.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Firstname">
+                                       <font>
+                                          <Font name="System Italic" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="fNameVIew" text="Arbuz Arbuzovich" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></Label>
+                                 </children>
+                              </GridPane>
+                              <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="475.0" GridPane.rowIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Country">
+                                       <font>
+                                          <Font name="System Italic" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="countryView" text="Slovakia" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></Label>
+                                 </children>
+                              </GridPane>
+                              <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="475.0" GridPane.rowIndex="2">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Date of registration">
+                                       <font>
+                                          <Font name="System Italic" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="dateOfRegView" text="12.03.2024" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                              <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="475.0" GridPane.columnIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Lastname">
+                                       <font>
+                                          <Font name="System Italic" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lNameView" text="Arbuzov" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                              <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="475.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Region">
+                                       <font>
+                                          <Font name="System Italic" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="regionView" text="Bratislava region" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                              <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="475.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Date of birth">
+                                       <font>
+                                          <Font name="System Italic" size="30.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="dateOfBirthView" text="12.01.2024" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab text="Edit">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <GridPane fx:id="dateOfBirthEdit" hgap="20.0" vgap="30.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+                           </rowConstraints>
+                           <children>
+                              <MFXTextField fx:id="fNameEdit" floatMode="ABOVE" floatingText="Firstname" prefColumnCount="24" />
+                              <MFXTextField fx:id="lNameEdit" floatMode="ABOVE" floatingText="Lastname" prefColumnCount="24" GridPane.columnIndex="1" />
+                              <MFXTextField fx:id="dateOfRegEdit" editable="false" floatMode="ABOVE" floatingText="Registration date" prefColumnCount="24" selectable="false" GridPane.rowIndex="2" />
+                              <MFXTextField fx:id="countryEdit" floatMode="ABOVE" floatingText="Country" prefColumnCount="24" GridPane.rowIndex="1" />
+                              <MFXTextField fx:id="regionEdit" floatMode="ABOVE" floatingText="Region" prefColumnCount="24" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <MFXDatePicker editable="false" floatMode="ABOVE" floatingText="Date of birth" prefColumnCount="21" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                           <padding>
+                              <Insets top="30.0" />
+                           </padding>
+                        </GridPane>
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="saveBtn" alignment="CENTER" mnemonicParsing="false" onAction="#handleSaveBtn" text="Save" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <top>
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Coworker Profile" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="52.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>
