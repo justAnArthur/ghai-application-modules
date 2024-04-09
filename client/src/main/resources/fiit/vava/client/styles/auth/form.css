@@ -1,0 +1,10 @@
+.grid-pane-form {
+  -fx-border-color: #e5e7eb;
+  -fx-border-radius: 25px;
+  -fx-border-width: 2px;
+}
+
+.form-field {
+  -fx-border-color: #e5e7eb !important;
+  -fx-border-width: 2px !important;
+}

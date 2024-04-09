@@ -39,6 +39,9 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers.auth.login;
     opens fiit.vava.client.controllers.auth.login to javafx.fxml;
 
+    exports fiit.vava.client.controllers.auth.registration;
+    opens fiit.vava.client.controllers.auth.registration to javafx.fxml;
+    
     exports fiit.vava.client.controllers.client.documents;
     opens fiit.vava.client.controllers.client.documents to javafx.fxml;
 

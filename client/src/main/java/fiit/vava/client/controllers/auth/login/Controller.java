@@ -10,11 +10,11 @@ import fiit.vava.server.Empty;
 import fiit.vava.server.User;
 import fiit.vava.server.UserRole;
 import fiit.vava.server.UserServiceGrpc;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -25,10 +25,10 @@ public class Controller {
     private MFXPasswordField passwordField;
 
     @FXML
-    private MFXButton signInBtn;
+    private Button signInBtn;
 
     @FXML
-    private MFXButton signUpBtn;
+    private Button signUpBtn;
 
     @FXML
     private MFXTextField usernameField;
@@ -54,8 +54,8 @@ public class Controller {
         XMLResourceBundle bundle = XMLResourceBundleProvider.getInstance().getBundle("fiit.vava.client.bundles.auth.messages");
 
         signInBtn.setText(bundle.getString("sign_in"));
-        usernameField.setPromptText(bundle.getString("usr_name"));
-        passwordField.setPromptText(bundle.getString("usr_pass"));
+        // usernameField.setPromptText(bundle.getString("usr_name"));
+        // passwordField.setPromptText(bundle.getString("usr_pass"));
     }
 
     @FXML
@@ -92,4 +92,8 @@ public class Controller {
 
         Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
     }
+  @FXML
+  private void goToRegistration() throws IOException{
+    Router.getInstance().navigateTo("auth/registration");
+  }
 }
