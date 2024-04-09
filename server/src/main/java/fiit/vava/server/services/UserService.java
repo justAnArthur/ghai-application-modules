@@ -2,8 +2,8 @@ package fiit.vava.server.services;
 
 import fiit.vava.server.*;
 import fiit.vava.server.config.Constants;
-import fiit.vava.server.dao.repositories.ClientRepository;
-import fiit.vava.server.dao.repositories.UserRepository;
+import fiit.vava.server.dao.repositories.user.UserRepository;
+import fiit.vava.server.dao.repositories.user.client.ClientRepository;
 import io.grpc.stub.StreamObserver;
 
 import java.util.List;

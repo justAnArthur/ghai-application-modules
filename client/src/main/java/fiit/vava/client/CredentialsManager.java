@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 
 public class CredentialsManager {
 
+    /*
+     * TODO rewrite to use Dotenv
+     */
     private static final String CREDENTIALS_FILE = System.getProperty("user.home") + "/.ghai/credentials";
 
     public static void storeCredentials(String email, String password) {

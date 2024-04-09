@@ -1,6 +1,7 @@
 package fiit.vava.client;
 
 import fiit.vava.client.callers.BearerToken;
+import fiit.vava.server.DocumentServiceGrpc;
 import fiit.vava.server.Server;
 import fiit.vava.server.UserServiceGrpc;
 import fiit.vava.server.config.Constants;
@@ -53,5 +54,9 @@ public class StubsManager {
 
     public UserServiceGrpc.UserServiceBlockingStub getUserServiceBlockingStub() {
         return (UserServiceGrpc.UserServiceBlockingStub) appendCredentials(UserServiceGrpc.newBlockingStub(channel));
+    }
+
+    public DocumentServiceGrpc.DocumentServiceBlockingStub getDocumentServiceBlockingStub() {
+        return (DocumentServiceGrpc.DocumentServiceBlockingStub) appendCredentials(DocumentServiceGrpc.newBlockingStub(channel));
     }
 }

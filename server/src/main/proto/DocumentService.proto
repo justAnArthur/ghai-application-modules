@@ -5,40 +5,89 @@ package fiit.vava.server;
 
 import "UserService.proto";
 
-// Utility messages for common responses and actions
-message ActionResponse {
-  oneof result {
-    bool success = 1;
-    string message = 2;
-  }
+message CreateDocumentTemplateRequest {
+  bytes file = 1;
+  string name = 2;
+  DocumentTemplateType type = 4;
+  repeated DocumentTemplateField fields = 5;
 }
 
-// Additional enum definitions for new or updated states and roles, if necessary
+message GetFileByPathRequest {
+  string path = 1;
+}
 
-enum DocumentRequestStatus {
-  PENDING_DOCUMENT_REQUEST_STATUS = 0;
-  APPROVED_DOCUMENT_REQUEST_STATUS = 1;
-  REJECTED = 2;
-  GENERATED = 3;
+message GetFileByPathResponse {
+  bytes file = 1;
+}
+
+message GetAllDocumentTemplates {
+  repeated DocumentTemplate templates = 1;
+}
+
+message GetDocumentTemplateByIdRequest {
+  string id = 1;
+}
+
+message DocumentTemplateWithFields {
+  DocumentTemplate template = 1;
+  repeated DocumentTemplateField fields = 2;
 }
 
 service DocumentService {
-  rpc submitDocumentRequest(DocumentRequest) returns (ActionResponse);
-  rpc updateDocumentRequestStatus(DocumentRequest) returns (ActionResponse);
+  rpc getFileByPath(GetFileByPathRequest) returns (GetFileByPathResponse) {}
+
+  rpc getAllDocumentTemplates(Empty) returns (GetAllDocumentTemplates) {}
+
+  rpc getDocumentTemplateById(GetDocumentTemplateByIdRequest) returns (DocumentTemplateWithFields) {}
+
+  rpc createDocumentTemplate(CreateDocumentTemplateRequest) returns (DocumentTemplate) {}
 }
 
-enum DocumentRequestState {
-  PENDING_REQUEST_STATE = 0;
-  GENERATED_REQUEST_STATE = 1;
-  REJECRED_REQUEST_STATE = 2;
+message Document {
+  string id = 1;
+  string name = 2;
+  string path = 3;
+  optional DocumentRequest request = 4;
+}
+
+enum DocumentRequestStatus {
+  CREATED = 0;
+  ASSIGNED = 1;
+  DISCARDED = 2;
+  VALIDATED = 3;
+  GENERATED = 4;
 }
 
 message DocumentRequest {
   string id = 1;
-  Client requestedBy = 2;
-  string reviewedById = 3;
-  DocumentRequestState status = 4; // Consider using an enum for status if you have a limited set of possible values
-  string requestedTemplateId = 5;
-  string generatedDocumentId = 6;
-  string feedback = 7;
+  Client client = 2;
+  DocumentRequestStatus status = 3;
+}
+
+enum DocumentTemplateType {
+  MEDICAL = 0;
+  LEGAL = 1;
+  OTHER = 2;
+}
+
+message DocumentTemplate {
+  string id = 1;
+  string name = 2;
+  string path = 3;
+  DocumentTemplateType type = 4;
+}
+
+message DocumentTemplateField {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  bool required = 4;
+  DocumentTemplate template = 5;
+}
+
+message DocumentField {
+  string id = 1;
+  string value = 2;
+  Document document = 3;
+  DocumentTemplateField field = 4;
 }

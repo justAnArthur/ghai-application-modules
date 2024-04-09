@@ -1,6 +1,6 @@
 package fiit.vava.client;
 
-import fiit.vava.client.routes.AppController;
+import fiit.vava.client.controllers.AppController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,21 +11,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Stream;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class Router {
-    private static final Logger logger = LoggerFactory.getLogger(Router.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("client." + Router.class.toString());
 
     private AppController appController;
     private final Stage modalStage = new Stage() {{
         initModality(Modality.APPLICATION_MODAL);
     }};
 
-    private final Map<String, Path> routes = new HashMap<>();
+    private final Map<String, URL> routes = new HashMap<>();
     private final List<String> routesHistory = new ArrayList<>();
 
     private static Router instance;
@@ -46,31 +51,69 @@ public class Router {
     }
 
     private void loadRoutes() throws IOException {
-        Path start = Paths.get("src/main/java/fiit/vava/client/routes");
+        String resourceDirectory = "/fiit/vava/client/fxml";
+        URL dirURL = getClass().getResource(resourceDirectory);
+        if (dirURL != null && dirURL.getProtocol().equals("jar")) {
+            try {
+                // If we're running from a JAR, the entries will be listed by the JarFile
+                JarURLConnection jarConnection = (JarURLConnection) dirURL.openConnection();
+                JarFile jarFile = jarConnection.getJarFile();
+                Enumeration<JarEntry> entries = jarFile.entries();
 
-
-        try (Stream<Path> paths = Files.walk(start)) {
-            paths.filter(Files::isRegularFile)
-                    .filter(_path -> !_path.toString().contains("_")) // filter `_components`
-                    .filter(_path -> _path.toString().endsWith(".fxml")) // filter only `.fxml`s
-                    .forEach(_path -> {
-                        String route = start.relativize(_path).toString()
-                                .replaceAll("\\\\", "/")
-                                .replaceAll(".fxml", "")
-                                .replaceAll("/index", "");
-                        routes.put(route, _path);
-                    });
-        } catch (IOException e) {
-            logger.warn("Unable to load routes" + e);
+                while (entries.hasMoreElements()) {
+                    JarEntry entry = entries.nextElement();
+                    String name = entry.getName();
+                    if (name.startsWith(resourceDirectory.substring(1)) && name.endsWith(".fxml")) {
+                        addRouteFromResourceName(name, resourceDirectory.substring(1));
+                    }
+                }
+            } catch (IOException e) {
+                logger.warn("Unable to load routes from JAR", e);
+            }
+        } else if (dirURL != null) {
+            // If we're running from the filesystem (e.g., from an IDE), use Files.walk
+            try {
+                Path start = Paths.get(dirURL.toURI());
+                Files.walk(start)
+                        .filter(Files::isRegularFile)
+                        .forEach(path -> addRouteFromPath(path, start));
+            } catch (URISyntaxException e) {
+                logger.warn("Unable to load routes from filesystem", e);
+            }
+        } else {
+            logger.warn("Resource directory not found: " + resourceDirectory);
         }
 
         logger.info("Routes loaded: " + routes);
     }
 
-    public void loadApp(Stage stage) throws IOException {
-        Path path = routes.get("app");
+    private void addRouteFromResourceName(String resourceName, String resourceDirectory) {
+        String route = resourceName.replaceAll("^" + resourceDirectory + "/", "").replaceAll(".fxml$", "");
+        if (route.endsWith("/index")) {
+            route = route.substring(0, route.length() - 6); // Removing "/index" from the end
+        }
+        if (!route.contains("_") && !route.endsWith("index")) {
+            routes.put(route, getClass().getResource("/" + resourceName));
+        }
+    }
 
-        FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+    private void addRouteFromPath(Path path, Path start) {
+        try {
+            String route = start.relativize(path).toString()
+                    .replaceAll("\\\\", "/")
+                    .replaceAll(".fxml$", "")
+                    .replaceAll("/index$", "");
+            if (!route.contains("_")) {
+                routes.put(route, path.toUri().toURL());
+            }
+        } catch (MalformedURLException e) {
+            logger.warn("Malformed URL for path: " + path, e);
+        }
+    }
+
+    public void loadApp(Stage stage) throws IOException {
+        URL path = routes.get("app");
+        FXMLLoader loader = new FXMLLoader(path);
         Parent root = loader.load();
 
         stage.setTitle("GHAI");
@@ -83,14 +126,13 @@ public class Router {
     }
 
     public void navigateTo(String route) throws IOException, NoSuchElementException {
-        Path path = routes.get(route);
-
+        URL path = routes.get(route);
         routesHistory.add(route);
 
         if (path == null)
             throw new NoSuchElementException("Route not found: " + route);
 
-        FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+        FXMLLoader loader = new FXMLLoader(path);
         Node page = loader.load();
 
         logger.info("Navigating to: " + route);
@@ -109,18 +151,18 @@ public class Router {
     }
 
     public void changeNavBar(String route) throws IOException {
-        Path path = routes.get(route);
+        URL path = routes.get(route);
 
-        FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+        FXMLLoader loader = new FXMLLoader(path);
         Node page = loader.load();
 
         appController.setSidebar(page);
     }
 
     public void showModal(String route) throws IOException {
-        Path path = routes.get(route);
+        URL path = routes.get(route);
 
-        FXMLLoader dialogLoader = new FXMLLoader(path.toUri().toURL());
+        FXMLLoader dialogLoader = new FXMLLoader(path);
         Parent dialogRoot = dialogLoader.load();
 
         modalStage.setScene(new Scene(dialogRoot));

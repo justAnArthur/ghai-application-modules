@@ -1,0 +1,10 @@
+.grid-pane {
+  -fx-background-color: #333;
+}
+
+.label-btn:hover { 
+    -fx-background-color: #555 !important;
+} 
+.label-btn{
+    -fx-background-radius: 12.5px;
+} 

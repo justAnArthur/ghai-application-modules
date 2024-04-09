@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<Button text="Back"
+        fx:controller="fiit.vava.client.controllers._components.routing.BackButtonController"
+        onAction="#handleButtonClick"
+        xmlns:fx="http://javafx.com/fxml"
+/>
+

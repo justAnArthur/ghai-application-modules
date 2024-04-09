@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="fiit.vava.client.controllers.auth.registerClient_Legacy.LoginRegisterController">
+    <Tab text="Login">
+        <GridPane alignment="CENTER" hgap="10" vgap="10">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+            </rowConstraints>
+
+            <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button text="Login" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                    onAction="#handleLogin"/>
+            <Label fx:id="messageLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        </GridPane>
+    </Tab>
+    <Tab text="Register">
+        <GridPane alignment="CENTER" hgap="10" vgap="10">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20"/>
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10" vgrow="SOMETIMES"/>
+            </rowConstraints>
+
+            <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="registerUsernameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="FirstName:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="registerFirstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="LastName:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="registerLastNameField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="DateOfBirth:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <DatePicker fx:id="registerDateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="Region:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="registerRegionField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text="Country:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField fx:id="registerCountryField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+            <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <PasswordField fx:id="registerPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+            <Button text="Register" GridPane.columnIndex="1" GridPane.rowIndex="7" onAction="#handleRegisterClient"/>
+            <Label fx:id="registerMessageLabel" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+        </GridPane>
+    </Tab>
+</TabPane>
