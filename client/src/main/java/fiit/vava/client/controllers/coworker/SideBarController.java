@@ -41,9 +41,10 @@ public class SideBarController {
         Router.getInstance().navigateTo("coworker/clients/approve");
     }
 
-    public void handleProfileBtn(MouseEvent event) {
+    public void handleProfileBtn(MouseEvent event) throws IOException  {
         noHighlight();
         profileBtn.setStyle("-fx-background-color: #555;");
+        Router.getInstance().navigateTo("coworker/profile");
     }
 
     public void handleSettingsBtn(MouseEvent event) {

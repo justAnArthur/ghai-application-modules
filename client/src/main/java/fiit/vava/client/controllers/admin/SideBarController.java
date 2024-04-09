@@ -40,9 +40,10 @@ public class SideBarController {
         usersBtn.setStyle("-fx-background-color: #555;");
     }
 
-    public void handleProfileBtn(MouseEvent event) {
+    public void handleProfileBtn(MouseEvent event) throws IOException {
         noHighlight();
         profileBtn.setStyle("-fx-background-color: #555;");
+        Router.getInstance().navigateTo("admin/profile");
     }
 
     public void handleSettingsBtn(MouseEvent event) {
