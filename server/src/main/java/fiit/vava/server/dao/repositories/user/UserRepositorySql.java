@@ -1,4 +1,4 @@
-package fiit.vava.server.dao.repositories;
+package fiit.vava.server.dao.repositories.user;
 
 import fiit.vava.server.User;
 

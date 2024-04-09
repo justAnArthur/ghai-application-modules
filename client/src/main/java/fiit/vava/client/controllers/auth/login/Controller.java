@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class Controller {
-    private boolean offline = true;
+    private boolean offline = false;
     @FXML
     private MFXPasswordField passwordField;
 

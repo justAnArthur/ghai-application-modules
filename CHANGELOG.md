@@ -1,5 +1,14 @@
 # Changelog
 
+#### justAnArthur on 4/9/2024
+
+MAIN-T-31
+
+- feat: Added new service: DocumentService with several new Repositories for handling creating DocumentTemplates with
+  JavaFx logic to create one
+- fix: saving existing and setting id for non in internal implementation of repositories
+- removed old UserService._proto
+
 #### Aldeimeter on 3/29/2024 at 10:43 PM
 
 ### Resources should be in src/*/resources

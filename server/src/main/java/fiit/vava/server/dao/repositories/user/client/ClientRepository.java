@@ -1,6 +1,7 @@
-package fiit.vava.server.dao.repositories;
+package fiit.vava.server.dao.repositories.user.client;
 
 import fiit.vava.server.Client;
+import fiit.vava.server.dao.repositories.IRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.List;

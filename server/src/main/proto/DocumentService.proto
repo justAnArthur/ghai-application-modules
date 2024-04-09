@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package fiit.vava.server;
+
+import "UserService.proto";
+
+message CreateDocumentTemplateRequest {
+  bytes file = 1;
+  string name = 2;
+  DocumentTemplateType type = 4;
+  repeated DocumentTemplateField fields = 5;
+}
+
+message GetFileByPathRequest {
+  string path = 1;
+}
+
+message GetFileByPathResponse {
+  bytes file = 1;
+}
+
+message GetAllDocumentTemplates {
+  repeated DocumentTemplate templates = 1;
+}
+
+message GetDocumentTemplateByIdRequest {
+  string id = 1;
+}
+
+message DocumentTemplateWithFields {
+  DocumentTemplate template = 1;
+  repeated DocumentTemplateField fields = 2;
+}
+
+service DocumentService {
+  rpc getFileByPath(GetFileByPathRequest) returns (GetFileByPathResponse) {}
+
+  rpc getAllDocumentTemplates(Empty) returns (GetAllDocumentTemplates) {}
+
+  rpc getDocumentTemplateById(GetDocumentTemplateByIdRequest) returns (DocumentTemplateWithFields) {}
+
+  rpc createDocumentTemplate(CreateDocumentTemplateRequest) returns (DocumentTemplate) {}
+}
+
+message Document {
+  string id = 1;
+  string name = 2;
+  string path = 3;
+  optional DocumentRequest request = 4;
+}
+
+enum DocumentRequestStatus {
+  CREATED = 0;
+  ASSIGNED = 1;
+  DISCARDED = 2;
+  VALIDATED = 3;
+  GENERATED = 4;
+}
+
+message DocumentRequest {
+  string id = 1;
+  Client client = 2;
+  DocumentRequestStatus status = 3;
+}
+
+enum DocumentTemplateType {
+  MEDICAL = 0;
+  LEGAL = 1;
+  OTHER = 2;
+}
+
+message DocumentTemplate {
+  string id = 1;
+  string name = 2;
+  string path = 3;
+  DocumentTemplateType type = 4;
+}
+
+message DocumentTemplateField {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  bool required = 4;
+  DocumentTemplate template = 5;
+}
+
+message DocumentField {
+  string id = 1;
+  string value = 2;
+  Document document = 3;
+  DocumentTemplateField field = 4;
+}

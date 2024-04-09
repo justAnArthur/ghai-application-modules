@@ -1,10 +1,12 @@
-package fiit.vava.server.dao.repositories;
+package fiit.vava.server.dao.repositories.user.client;
 
 import fiit.vava.server.Client;
 import fiit.vava.server.User;
+import fiit.vava.server.dao.repositories.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ClientRepositoryInternal extends ClientRepository {
@@ -16,8 +18,11 @@ public class ClientRepositoryInternal extends ClientRepository {
     }};
 
     public Client save(Client toSave) {
-        if (toSave.getId() != null)
-            clients.removeIf(client -> client.getId().equals(toSave.getId()));
+        if (toSave.getId() != null && !toSave.getId().isEmpty()) {
+            Client finalToSave = toSave;
+            clients.removeIf(client -> client.getId().equals(finalToSave.getId()));
+        } else
+            toSave = toSave.toBuilder().setId(UUID.randomUUID().toString()).build();
 
         clients.add(toSave);
         return toSave;

@@ -1,5 +1,6 @@
 package fiit.vava.server;
 
+import fiit.vava.server.services.DocumentService;
 import fiit.vava.server.services.UserService;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
@@ -19,10 +20,14 @@ public class Server {
 
     private void start() throws IOException {
         UserService userService = new UserService();
+        DocumentService documentService = new DocumentService();
+
+        AuthorizationServerInterceptor interceptor = new AuthorizationServerInterceptor(userService);
 
         server = Grpc.newServerBuilderForPort(PORT, InsecureServerCredentials.create())
                 .addService(userService)
-                .intercept(new AuthorizationServerInterceptor(userService))
+                .addService(documentService)
+                .intercept(interceptor)
                 .build()
                 .start();
 

@@ -23,6 +23,10 @@ public class AppController {
 
     @FXML
     void initialize() throws IOException {
+        handleAuthPage();
+    }
+
+    public void handleAuthPage() throws IOException {
         Router router = Router.getInstance();
         router.setAppController(this);
 

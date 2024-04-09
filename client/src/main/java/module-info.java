@@ -12,6 +12,9 @@ module fiit.vava.client {
     requires io.grpc.stub;
     requires org.slf4j;
     requires MaterialFX;
+    requires org.apache.pdfbox;
+    requires protobuf.java;
+    requires java.dotenv;
 
     opens fiit.vava.client to javafx.fxml;
     exports fiit.vava.client;
@@ -41,4 +44,10 @@ module fiit.vava.client {
 
     exports fiit.vava.client.controllers.client.profile;
     opens fiit.vava.client.controllers.client.profile to javafx.fxml;
+
+    exports fiit.vava.client.controllers.admin.templates;
+    opens fiit.vava.client.controllers.admin.templates to javafx.fxml;
+
+    exports fiit.vava.client.controllers.admin.templates.create;
+    opens fiit.vava.client.controllers.admin.templates.create to javafx.fxml;
 }

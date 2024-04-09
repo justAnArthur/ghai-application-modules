@@ -10,25 +10,20 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URISyntaxException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.io.IOException;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.net.JarURLConnection;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.stream.Stream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 public class Router {
-    private static final Logger logger = LoggerFactory.getLogger(Router.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("client." + Router.class.toString());
 
     private AppController appController;
     private final Stage modalStage = new Stage() {{
@@ -55,7 +50,7 @@ public class Router {
         return instance;
     }
 
-    private void loadRoutes() throws IOException{
+    private void loadRoutes() throws IOException {
         String resourceDirectory = "/fiit/vava/client/fxml";
         URL dirURL = getClass().getResource(resourceDirectory);
         if (dirURL != null && dirURL.getProtocol().equals("jar")) {
@@ -64,7 +59,7 @@ public class Router {
                 JarURLConnection jarConnection = (JarURLConnection) dirURL.openConnection();
                 JarFile jarFile = jarConnection.getJarFile();
                 Enumeration<JarEntry> entries = jarFile.entries();
-                
+
                 while (entries.hasMoreElements()) {
                     JarEntry entry = entries.nextElement();
                     String name = entry.getName();
@@ -93,28 +88,28 @@ public class Router {
     }
 
     private void addRouteFromResourceName(String resourceName, String resourceDirectory) {
-      String route = resourceName.replaceAll("^" + resourceDirectory + "/", "").replaceAll(".fxml$", "");
-      if (route.endsWith("/index")) {
-          route = route.substring(0, route.length() - 6); // Removing "/index" from the end
-      }
-      if (!route.contains("_") && !route.endsWith("index")) {
-          routes.put(route, getClass().getResource("/" + resourceName));
-      }
+        String route = resourceName.replaceAll("^" + resourceDirectory + "/", "").replaceAll(".fxml$", "");
+        if (route.endsWith("/index")) {
+            route = route.substring(0, route.length() - 6); // Removing "/index" from the end
+        }
+        if (!route.contains("_") && !route.endsWith("index")) {
+            routes.put(route, getClass().getResource("/" + resourceName));
+        }
     }
 
-  private void addRouteFromPath(Path path, Path start) {
-    try {
-        String route = start.relativize(path).toString()
-                .replaceAll("\\\\", "/")
-                .replaceAll(".fxml$", "")
-                .replaceAll("/index$", "");
-        if (!route.contains("_")) {
-            routes.put(route, path.toUri().toURL());
+    private void addRouteFromPath(Path path, Path start) {
+        try {
+            String route = start.relativize(path).toString()
+                    .replaceAll("\\\\", "/")
+                    .replaceAll(".fxml$", "")
+                    .replaceAll("/index$", "");
+            if (!route.contains("_")) {
+                routes.put(route, path.toUri().toURL());
+            }
+        } catch (MalformedURLException e) {
+            logger.warn("Malformed URL for path: " + path, e);
         }
-    } catch (MalformedURLException e) {
-        logger.warn("Malformed URL for path: " + path, e);
     }
-  }
 
     public void loadApp(Stage stage) throws IOException {
         URL path = routes.get("app");

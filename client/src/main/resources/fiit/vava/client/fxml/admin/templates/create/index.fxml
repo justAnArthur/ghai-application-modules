@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="fiit.vava.client.controllers.admin.templates.create.Controller"
+          prefHeight="400.0" prefWidth="600.0">
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="60"/>
+        <ColumnConstraints percentWidth="40"/>
+    </columnConstraints>
+
+    <VBox GridPane.columnIndex="0">
+        <ImageView fx:id="pdfPreview" fitHeight="300" fitWidth="400" preserveRatio="true"/>
+        <Button text="upload PDF" onAction="#handleUploadPdf"/>
+    </VBox>
+
+
+    <VBox fx:id="fieldsPane" GridPane.columnIndex="1">
+        <Button text="add field" onAction="#handleAddField"/>
+    </VBox>
+
+    <Button text="submit" onAction="#handleCreateTemplate" GridPane.columnIndex="1"/>
+</GridPane>
