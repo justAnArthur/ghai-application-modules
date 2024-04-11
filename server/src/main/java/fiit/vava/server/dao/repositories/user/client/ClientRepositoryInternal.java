@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
 public class ClientRepositoryInternal extends ClientRepository {
 
     private final ArrayList<Client> clients = new ArrayList<>() {{
-        add(Client.newBuilder().setId("1").setFirstName("first").setLastName("first").setUser(
-                User.newBuilder().setId("1").build()
-        ).build());
+        add(Client.newBuilder().setId("1").setFirstName("first").setLastName("first").setUser(User.newBuilder()
+                .setId("1").build()).build());
+        add(Client.newBuilder().setId("2").setFirstName("client").setLastName("client").setUser(User.newBuilder()
+                .setId("5").build()).build());
     }};
 
     public Client save(Client toSave) {
@@ -36,6 +37,7 @@ public class ClientRepositoryInternal extends ClientRepository {
                 .orElse(null);
     }
 
+    @Override
     public List<Client> findAll() {
         UserRepository userRepository = UserRepository.getInstance();
 
@@ -52,7 +54,16 @@ public class ClientRepositoryInternal extends ClientRepository {
     /*
      * TODO add filtering by coworker
      */
+    @Override
     public List<Client> getNonConfirmedClients() {
         return findAll().stream().filter(client -> !client.getUser().getConfirmed()).collect(Collectors.toList());
+    }
+
+    @Override
+    public Client findByUserId(String id) {
+        return clients.stream()
+                .filter(client -> client.getUser().getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }

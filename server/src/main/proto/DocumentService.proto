@@ -33,6 +33,15 @@ message DocumentTemplateWithFields {
   repeated DocumentTemplateField fields = 2;
 }
 
+message CreateDocumentRequest {
+  string templateId = 1;
+  repeated DocumentField fields = 2;
+}
+
+message GetAllDocumentRequestsResponse {
+  repeated DocumentRequest documentRequests = 1;
+}
+
 service DocumentService {
   rpc getFileByPath(GetFileByPathRequest) returns (GetFileByPathResponse) {}
 
@@ -41,13 +50,16 @@ service DocumentService {
   rpc getDocumentTemplateById(GetDocumentTemplateByIdRequest) returns (DocumentTemplateWithFields) {}
 
   rpc createDocumentTemplate(CreateDocumentTemplateRequest) returns (DocumentTemplate) {}
+
+  rpc createDocumentRequest(CreateDocumentRequest) returns (DocumentRequest) {}
+
+  rpc getAllMineDocumentRequests(Empty) returns (GetAllDocumentRequestsResponse) {}
 }
 
 message Document {
   string id = 1;
   string name = 2;
   string path = 3;
-  optional DocumentRequest request = 4;
 }
 
 enum DocumentRequestStatus {
@@ -62,6 +74,8 @@ message DocumentRequest {
   string id = 1;
   Client client = 2;
   DocumentRequestStatus status = 3;
+  DocumentTemplate template = 4;
+  optional Document document = 5;
 }
 
 enum DocumentTemplateType {
@@ -88,6 +102,6 @@ message DocumentTemplateField {
 message DocumentField {
   string id = 1;
   string value = 2;
-  Document document = 3;
   DocumentTemplateField field = 4;
+  DocumentRequest request = 5;
 }

@@ -27,12 +27,14 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
+public class CreateTemplateController {
 
     @FXML
     public VBox fieldsPane;
     @FXML
     public ImageView pdfPreview;
+    @FXML
+    public TextField templateName;
 
     private byte[] fileBytes = null;
     private final List<List<Control>> fields = new ArrayList<>();
@@ -40,9 +42,15 @@ public class Controller {
     private Node createFieldGroup() {
         VBox fieldGroup = new VBox();
 
-        TextField nameField = new TextField();
-        TextField typeField = new TextField();
-        Control requiredCheckbox = new CheckBox();
+        TextField nameField = new TextField() {{
+            setPromptText("Name");
+        }};
+        TextField typeField = new TextField() {{
+            setPromptText("Type");
+        }};
+        Control requiredCheckbox = new CheckBox() {{
+            setText("Is required");
+        }};
 
         List<Control> fieldsGroupMap = List.of(
                 nameField,
@@ -97,6 +105,7 @@ public class Controller {
         DocumentServiceGrpc.DocumentServiceBlockingStub stub = StubsManager.getInstance().getDocumentServiceBlockingStub();
 
         CreateDocumentTemplateRequest request = CreateDocumentTemplateRequest.newBuilder()
+                .setName(templateName.getText())
                 .setFile(ByteString.copyFrom(fileBytes))
                 .addAllFields(fields.stream()
                         .map(field -> DocumentTemplateField.newBuilder()

@@ -1,6 +1,7 @@
 package fiit.vava.server.dao.repositories.user.client;
 
 import fiit.vava.server.Client;
+import fiit.vava.server.dao.repositories.ToImplement;
 import fiit.vava.server.infrastructure.DBConnection;
 
 import java.sql.*;
@@ -13,11 +14,11 @@ public class ClientRepositorySql extends ClientRepository {
     public List<Client> getNonConfirmedClients() {
         List<Client> nonConfirmedClients = new ArrayList<>();
         String sql = "SELECT * FROM \"Client\" JOIN \"User\" ON \"Client\".user_id = \"User\".id WHERE \"User\".confirmed = false";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
-             
+
             while (rs.next()) {
                 nonConfirmedClients.add(mapRowToClient(rs));
             }
@@ -31,10 +32,10 @@ public class ClientRepositorySql extends ClientRepository {
     public Client save(Client toSave) {
         // This method assumes you are updating the Client details. Adjust accordingly for insert vs. update.
         String sql = "UPDATE \"Client\" SET registration_date = ?, first_name = ?, last_name = ?, date_of_birth = ?, region_in_new_country = ?, country = ? WHERE id = ?";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-             
+
             // Assuming the Client class has getter methods for these properties.
             pstmt.setDate(1, Date.valueOf(toSave.getRegistrationDate()));
             pstmt.setString(2, toSave.getFirstName());
@@ -45,7 +46,7 @@ public class ClientRepositorySql extends ClientRepository {
             pstmt.setString(7, toSave.getId());
             pstmt.executeUpdate();
             return toSave;
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,11 +57,11 @@ public class ClientRepositorySql extends ClientRepository {
     public List<Client> findAll() {
         List<Client> clients = new ArrayList<>();
         String sql = "SELECT * FROM \"Client\"";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
-             
+
             while (rs.next()) {
                 clients.add(mapRowToClient(rs));
             }
@@ -73,10 +74,10 @@ public class ClientRepositorySql extends ClientRepository {
     @Override
     public Client findById(String id) {
         String sql = "SELECT * FROM \"Client\" WHERE id = ?";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-             
+
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -87,7 +88,7 @@ public class ClientRepositorySql extends ClientRepository {
         }
         return null;
     }
-    
+
     private Client mapRowToClient(ResultSet rs) throws SQLException {
         // Assuming the existence of a builder or constructor for Client that matches these properties
         Client client = Client.newBuilder()
@@ -95,5 +96,11 @@ public class ClientRepositorySql extends ClientRepository {
                 // Set other fields from the ResultSet
                 .build();
         return client;
+    }
+
+    @ToImplement
+    @Override
+    public Client findByUserId(String id) {
+        return null;
     }
 }

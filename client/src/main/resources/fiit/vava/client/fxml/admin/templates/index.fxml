@@ -5,7 +5,7 @@
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:id="gridPane"
-          fx:controller="fiit.vava.client.controllers.admin.templates.Controller"
+          fx:controller="fiit.vava.client.controllers.admin.templates.TemplatesController"
           prefHeight="400.0" prefWidth="600.0">
 
     <columnConstraints>

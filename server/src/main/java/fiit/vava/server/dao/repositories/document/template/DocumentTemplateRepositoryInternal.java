@@ -13,7 +13,7 @@ public class DocumentTemplateRepositoryInternal extends DocumentTemplateReposito
     public DocumentTemplate save(DocumentTemplate toSave) {
         if (toSave.getId() != null && !toSave.getId().isEmpty()) {
             DocumentTemplate finalToSave = toSave;
-            documentTemplates.removeIf(client -> client.getId().equals(finalToSave.getId()));
+            documentTemplates.removeIf(documentTemplate -> documentTemplate.getId().equals(finalToSave.getId()));
         } else
             toSave = toSave.toBuilder().setId(UUID.randomUUID().toString()).build();
 
@@ -29,6 +29,7 @@ public class DocumentTemplateRepositoryInternal extends DocumentTemplateReposito
                 .orElse(null);
     }
 
+    @Override
     public List<DocumentTemplate> findAll() {
         return documentTemplates;
     }

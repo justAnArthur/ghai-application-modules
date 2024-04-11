@@ -33,4 +33,6 @@ public abstract class ClientRepository implements IRepository<Client> {
      * TODO add filtering by coworker
      */
     public abstract List<Client> getNonConfirmedClients();
+
+    public abstract Client findByUserId(String id);
 }

@@ -3,8 +3,8 @@
 <?import javafx.scene.layout.GridPane?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:id="documentsPane"
-          fx:controller="fiit.vava.client.controllers.client.documents.DocumentsController"
+          fx:id="gridPane"
+          fx:controller="fiit.vava.client.controllers.client.templates.ClientAvailableTemplatesController"
           prefHeight="400.0" prefWidth="600.0">
 
 </GridPane>

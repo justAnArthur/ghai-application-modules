@@ -15,6 +15,7 @@ public class UserRepositoryInternal extends UserRepository {
         add(User.newBuilder().setId("2").setEmail("second@second.second").setPassword("second").setRole(UserRole.COWORKER).build());
         add(User.newBuilder().setId("3").setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build());
         add(User.newBuilder().setId("4").setEmail("admin@admin.admin").setPassword("admin").setRole(UserRole.ADMIN).build());
+        add(User.newBuilder().setId("5").setEmail("client@client.client").setPassword("client").setRole(UserRole.CLIENT).setConfirmed(true).build());
     }};
 
     @Override
@@ -42,12 +43,14 @@ public class UserRepositoryInternal extends UserRepository {
         return toSave;
     }
 
+    @Override
     public Optional<User> findByEmail(String email) {
         return users.stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
     }
 
+    @Override
     public boolean setConfirmed(User requested) {
         Optional<User> userOptional = users.stream()
                 .filter(_user -> _user.getId().equals(requested.getId()))

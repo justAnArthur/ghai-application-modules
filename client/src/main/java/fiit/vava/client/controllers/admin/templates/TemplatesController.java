@@ -22,7 +22,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
-public class Controller {
+public class TemplatesController {
 
     @FXML
     private GridPane gridPane;

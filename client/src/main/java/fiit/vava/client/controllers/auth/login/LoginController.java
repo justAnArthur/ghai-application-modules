@@ -19,23 +19,20 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-public class Controller {
-    private boolean offline = true;
+public class LoginController {
+
+    private boolean offline = false;
+
     @FXML
     private MFXPasswordField passwordField;
-
     @FXML
     private Button signInBtn;
-
     @FXML
     private Button signUpBtn;
-
     @FXML
     private MFXTextField usernameField;
-
     @FXML
     private Label errorMessageLabel;
-
     @FXML
     private MFXComboBox<String> langSelectCombo;
 

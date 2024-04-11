@@ -1,6 +1,5 @@
 package fiit.vava.client.controllers;
 
-import fiit.vava.client.CredentialsManager;
 import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
 import fiit.vava.server.Empty;
@@ -32,7 +31,8 @@ public class AppController {
 
         String startingScenePath = "auth/login";
 
-        String[] credentials = CredentialsManager.retrieveCredentials();
+        // todo uncomment String[] credentials = CredentialsManager.retrieveCredentials();
+        String[] credentials = null;
 
         if (credentials != null) {
             logger.info("Using credentials: " + credentials[0] + " " + credentials[1]);

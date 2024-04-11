@@ -60,6 +60,9 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers.admin.templates.create;
     opens fiit.vava.client.controllers.admin.templates.create to javafx.fxml;
 
-    exports fiit.vava.client.controllers.client.documents.createByTemplate;
-    opens fiit.vava.client.controllers.client.documents.createByTemplate to javafx.fxml;
+    exports fiit.vava.client.controllers.client.templates.createByTemplate;
+    opens fiit.vava.client.controllers.client.templates.createByTemplate to javafx.fxml;
+
+    exports fiit.vava.client.controllers.client.templates;
+    opens fiit.vava.client.controllers.client.templates to javafx.fxml;
 }
