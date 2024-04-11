@@ -30,6 +30,7 @@ public class Router {
         initModality(Modality.APPLICATION_MODAL);
     }};
 
+    private final Map<String, String> parameters = new HashMap<>();
     private final Map<String, URL> routes = new HashMap<>();
     private final List<String> routesHistory = new ArrayList<>();
 
@@ -53,6 +54,7 @@ public class Router {
     private void loadRoutes() throws IOException {
         String resourceDirectory = "/fiit/vava/client/fxml";
         URL dirURL = getClass().getResource(resourceDirectory);
+
         if (dirURL != null && dirURL.getProtocol().equals("jar")) {
             try {
                 // If we're running from a JAR, the entries will be listed by the JarFile
@@ -126,11 +128,35 @@ public class Router {
     }
 
     public void navigateTo(String route) throws IOException, NoSuchElementException {
-        URL path = routes.get(route);
-        routesHistory.add(route);
+        String pathString = routes.keySet().stream()
+                .filter(_route -> {
+                    String[] routeParts = route.split("/");
+                    String[] _pathParts = _route.split("/");
+
+                    if (routeParts.length != _pathParts.length)
+                        return false;
+
+                    for (int i = 0; i < routeParts.length; i++) {
+                        if (_pathParts[i].startsWith("[") && _pathParts[i].endsWith("]")) {
+                            parameters.put(_pathParts[i].substring(1, _pathParts[i].length() - 1), routeParts[i]);
+                            continue;
+                        }
+
+                        if (!routeParts[i].equals(_pathParts[i]))
+                            return false;
+                    }
+
+                    return true;
+                })
+                .findFirst()
+                .orElse(null);
+
+        URL path = routes.get(pathString);
 
         if (path == null)
             throw new NoSuchElementException("Route not found: " + route);
+
+        routesHistory.add(route);
 
         FXMLLoader loader = new FXMLLoader(path);
         Node page = loader.load();
@@ -138,6 +164,10 @@ public class Router {
         logger.info("Navigating to: " + route);
 
         appController.setCenter(page);
+    }
+
+    public String getParameter(String key) {
+        return parameters.get(key);
     }
 
     public void navigateBack() throws IOException, NoSuchElementException {

@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class Controller {
-    private boolean offline = false;
+    private boolean offline = true;
     @FXML
     private MFXPasswordField passwordField;
 
@@ -60,24 +60,12 @@ public class Controller {
 
     @FXML
     private void handleLogin() throws IOException {
-      if(offline){
-        switch (usernameField.getText()) {
-        case "client":
-            Router.getInstance().navigateTo("client");
-            break;
-
-          case "coworker":
-            Router.getInstance().navigateTo("coworker");
-            break;
-          case "admin":
-            Router.getInstance().navigateTo("admin");
-            break;
-          default:
-            break;
+        if (offline) {
+            Router.getInstance().navigateTo(usernameField.getText());
+            return;
         }
-        return;
-      }      
-      errorMessageLabel.setText(null);
+
+        errorMessageLabel.setText(null);
 
         CredentialsManager.storeCredentials(usernameField.getText(), passwordField.getText());
 
@@ -92,8 +80,9 @@ public class Controller {
 
         Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
     }
-  @FXML
-  private void goToRegistration() throws IOException{
-    Router.getInstance().navigateTo("auth/registration");
-  }
+
+    @FXML
+    private void goToRegistration() throws IOException {
+        Router.getInstance().navigateTo("auth/registration");
+    }
 }
