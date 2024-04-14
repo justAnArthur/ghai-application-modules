@@ -24,7 +24,6 @@ import java.util.jar.JarFile;
 
 public class Router {
     private static final Logger logger = LoggerFactory.getLogger("client." + Router.class.toString());
-
     private AppController appController;
     private final Stage modalStage = new Stage() {{
         initModality(Modality.APPLICATION_MODAL);
