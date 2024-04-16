@@ -3,6 +3,7 @@ package fiit.vava.server;
 import fiit.vava.server.infrastructure.DBseed;
 import fiit.vava.server.services.DocumentService;
 import fiit.vava.server.services.UserService;
+import fiit.vava.server.services.AdminService;
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
 import org.slf4j.Logger;
@@ -23,12 +24,14 @@ public class Server {
         // DBseed.seed();
         UserService userService = new UserService();
         DocumentService documentService = new DocumentService();
+        AdminService adminService = new AdminService();
 
         AuthorizationServerInterceptor interceptor = new AuthorizationServerInterceptor(userService);
 
         server = Grpc.newServerBuilderForPort(PORT, InsecureServerCredentials.create())
                 .addService(userService)
                 .addService(documentService)
+                .addService(adminService)
                 .intercept(interceptor)
                 .build()
                 .start();
