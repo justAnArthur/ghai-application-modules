@@ -1,5 +1,6 @@
 package fiit.vava.server;
 
+import fiit.vava.server.infrastructure.DBseed;
 import fiit.vava.server.services.DocumentService;
 import fiit.vava.server.services.UserService;
 import io.grpc.Grpc;
@@ -19,6 +20,7 @@ public class Server {
     private io.grpc.Server server;
 
     private void start() throws IOException {
+        // DBseed.seed();
         UserService userService = new UserService();
         DocumentService documentService = new DocumentService();
 
