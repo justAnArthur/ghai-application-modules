@@ -32,9 +32,8 @@ public class Router {
     private final Map<String, String> parameters = new HashMap<>();
     private final Map<String, URL> routes = new HashMap<>();
     private final List<String> routesHistory = new ArrayList<>();
-
+    
     private static Router instance;
-
     private Router() {
         try {
             loadRoutes();

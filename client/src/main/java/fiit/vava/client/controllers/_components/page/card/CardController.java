@@ -14,12 +14,15 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Pagination;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -31,6 +34,10 @@ import java.util.List;
 
 public class CardController{
 
+    @FXML 
+    private BorderPane imageBorderPane;
+    @FXML 
+    private BorderPane card;
     @FXML
     private ImageView imageView;
 
@@ -47,6 +54,7 @@ public class CardController{
         
         if (obj instanceof DocumentTemplate){
           DocumentTemplate template = (DocumentTemplate) obj;
+          PDDocument document = null;
           try {
               DocumentServiceGrpc.DocumentServiceBlockingStub stub = StubsManager.getInstance().getDocumentServiceBlockingStub();
 
@@ -55,7 +63,7 @@ public class CardController{
                       .getFile()
                       .toByteArray();
 
-              PDDocument document = PDDocument.load(file);
+              document = PDDocument.load(file);
 
               PDFRenderer renderer = new PDFRenderer(document);
 
@@ -65,11 +73,47 @@ public class CardController{
 
           } catch (IOException e) {
               errorLabel.setText("Unable to load preview");
+          } finally{
+            if (document != null) {
+                    try {
+                        document.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
           }
           nameLabel.setText(template.getName());
           statusLabel.setText(template.getId());
+          if(mode.equals("ClientTemplates")){
+
+            card.setOnMouseClicked(event -> {
+                try {
+                    Router.getInstance().navigateTo("client/templates/createBy/" + template.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+          }
         } else if(obj instanceof DocumentRequest){
-          return;
+          DocumentRequest document = (DocumentRequest) obj;
+          switch (document.getStatus().name()) {
+            case "CREATED":
+              imageBorderPane.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
+              break;
+
+            default:
+              break;
+          }
+          nameLabel.setText(document.getTemplate().getName());
+          statusLabel.setText(document.getStatus().name());
+          // card.setOnMouseClicked(event -> {
+          //     try {
+          //         // TODO navigate to document or document request ?
+          //         Router.getInstance().navigateTo("client/documents" + document.getDocument().getId());
+          //     } catch (IOException e) {
+          //         e.printStackTrace();
+          //     }
+          // });
         }
     }
 }

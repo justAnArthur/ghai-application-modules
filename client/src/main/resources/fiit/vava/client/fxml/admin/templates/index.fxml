@@ -17,7 +17,7 @@
          <top>
             <BorderPane BorderPane.alignment="BOTTOM_LEFT">
                <left>
-                  <Label text="Document list" textFill="#2d3480" BorderPane.alignment="CENTER">
+                  <Label text="Templates" textFill="#2d3480" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -30,9 +30,9 @@
                   <Pagination fx:id="pagination" maxPageIndicatorCount="3" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                </center>
                <right>
-                  <Button mnemonicParsing="false" onAction="#handleCreateAction" text="Create " BorderPane.alignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#handleCreateAction" text="Create" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
-                        <Insets right="50.0" />
+                        <Insets right="25.0" />
                      </BorderPane.margin>
                   </Button>
                </right>

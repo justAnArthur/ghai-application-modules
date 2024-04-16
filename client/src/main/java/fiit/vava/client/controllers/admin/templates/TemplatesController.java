@@ -53,8 +53,9 @@ public class TemplatesController {
       if(amountOfElements < ITEMS_PER_PAGE){
         pages = 1;
       }else{
-       pages = (amountOfElements - (amountOfElements % ITEMS_PER_PAGE)) / ITEMS_PER_PAGE;
+        pages = (amountOfElements - (amountOfElements % ITEMS_PER_PAGE)) / ITEMS_PER_PAGE + 1;
       }
+      
       pagination.setPageCount(pages);
       // pagination.setPageFactory(this::createPage);
       

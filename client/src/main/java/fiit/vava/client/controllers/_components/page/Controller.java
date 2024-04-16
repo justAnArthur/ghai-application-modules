@@ -60,7 +60,7 @@ public class Controller {
             listOfAll = stub.getAllDocumentTemplates(Empty.newBuilder().build()).getTemplatesList();
             break;
           case "ClientDocuments":
-            // listOfAll = stub.getMyDocuments(Empty.newBuilder().build(), /* skip*/ pageIndex*8, /*amount*/ 8).getTemplatesList();
+        listOfAll = stub.getAllMineDocumentRequests(Empty.newBuilder().build()).getDocumentRequestsList();
             break;
           default:
             break;
