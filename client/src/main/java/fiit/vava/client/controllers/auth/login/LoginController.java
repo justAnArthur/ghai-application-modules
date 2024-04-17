@@ -58,8 +58,19 @@ public class LoginController {
     @FXML
     private void handleLogin() throws IOException {
         if (offline) {
-            Router.getInstance().navigateTo(usernameField.getText());
-            return;
+          switch (usernameField.getText().trim()) {
+            case "admin":
+              usernameField.setText("admin@admin.admin");
+              passwordField.setText("admin");
+              break;
+
+            case "client":
+              usernameField.setText("client@client.client");
+              passwordField.setText("client");
+              break;
+            default:
+              break;
+          }
         }
 
         errorMessageLabel.setText(null);
