@@ -24,7 +24,6 @@ import java.util.jar.JarFile;
 
 public class Router {
     private static final Logger logger = LoggerFactory.getLogger("client." + Router.class.toString());
-
     private AppController appController;
     private final Stage modalStage = new Stage() {{
         initModality(Modality.APPLICATION_MODAL);
@@ -33,9 +32,8 @@ public class Router {
     private final Map<String, String> parameters = new HashMap<>();
     private final Map<String, URL> routes = new HashMap<>();
     private final List<String> routesHistory = new ArrayList<>();
-
+    
     private static Router instance;
-
     private Router() {
         try {
             loadRoutes();

@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.*?>
-<GridPane xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:id="gridPane"
-          fx:controller="fiit.vava.client.controllers.admin.templates.TemplatesController"
-          prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-    <columnConstraints>
-        <ColumnConstraints percentWidth="25"/>
-        <ColumnConstraints percentWidth="25"/>
-        <ColumnConstraints percentWidth="25"/>
-        <ColumnConstraints percentWidth="25"/>
-    </columnConstraints>
-
-    <Button text="Create" onAction="#handleCreateAction" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
-</GridPane>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.admin.templates.TemplatesController">
+   <top>
+      <BorderPane BorderPane.alignment="BOTTOM_LEFT">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <top>
+            <BorderPane BorderPane.alignment="BOTTOM_LEFT">
+               <left>
+                  <Label text="Templates" textFill="#2d3480" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </Label>
+               </left>
+               <center>
+                  <Pagination fx:id="pagination" maxPageIndicatorCount="3" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <right>
+                  <Button mnemonicParsing="false" onAction="#handleCreateAction" text="Create" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="25.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </right>
+            </BorderPane>
+         </top>
+         <center>
+            <Separator prefWidth="200.0" style="-fx-background-color: #b9c8f7;" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </top>
+</BorderPane>
