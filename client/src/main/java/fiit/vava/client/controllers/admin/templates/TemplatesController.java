@@ -13,20 +13,25 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Pagination;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import fiit.vava.client.controllers._components.page.Controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
 public class TemplatesController {
-
-    @FXML
-    private GridPane gridPane;
-
+    private static final int ITEMS_PER_PAGE = 8;
+    @FXML 
+    BorderPane borderPane;
+    @FXML 
+    Pagination pagination; 
     /*
      * TODO import VBox from `.fxml` file:
      * ```java
@@ -35,68 +40,46 @@ public class TemplatesController {
      * VBox card = loader.load();
      * ```
      */
-    private VBox createCard(DocumentTemplate template) {
-        VBox card = new VBox();
-        card.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-
-        try {
-            DocumentServiceGrpc.DocumentServiceBlockingStub stub = StubsManager.getInstance().getDocumentServiceBlockingStub();
-
-            byte[] file = stub.getFileByPath(GetFileByPathRequest.newBuilder()
-                            .setPath(template.getPath()).build())
-                    .getFile()
-                    .toByteArray();
-
-            PDDocument document = PDDocument.load(file);
-
-            PDFRenderer renderer = new PDFRenderer(document);
-
-            BufferedImage image = renderer.renderImageWithDPI(0, 100);
-            Image fxImage = SwingFXUtils.toFXImage(image, null);
-            ImageView imageView = new ImageView(fxImage);
-            imageView.setFitWidth(100);
-            imageView.setPreserveRatio(true);
-
-            card.getChildren().add(imageView);
-        } catch (IOException e) {
-            card.getChildren().add(new Label("Unable to load preview"));
-        }
-
-        Label label = new Label(template.getId());
-
-        card.getChildren().add(label);
-        return card;
-    }
-
     @FXML
     void initialize() {
-        loadData();
+        init_pagination();
     }
+    private void init_pagination(){
+      //TODO I need getAmountOfDocuments and getAmountOfDocumentTemplates for pagination 
+      DocumentServiceGrpc.DocumentServiceBlockingStub stub = StubsManager.getInstance().getDocumentServiceBlockingStub();
+      // int amountOfElements = stub.getAmountOfDocuments();
+      int amountOfElements = stub.getAllDocumentTemplates(Empty.newBuilder().build()).getTemplatesList().size();
+      int pages = 0;
+      if(amountOfElements < ITEMS_PER_PAGE){
+        pages = 1;
+      }else{
+        pages = (amountOfElements - (amountOfElements % ITEMS_PER_PAGE)) / ITEMS_PER_PAGE + 1;
+      }
+      
+      pagination.setPageCount(pages);
+      // pagination.setPageFactory(this::createPage);
+      
+      pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> {
+            // Load the new content into, for example, the center of the BorderPane
+            borderPane.setCenter(createPage(newIndex.intValue()));
+        });
 
-    public void loadData() {
-        DocumentServiceGrpc.DocumentServiceBlockingStub stub = StubsManager.getInstance().getDocumentServiceBlockingStub();
-
-        List<DocumentTemplate> templates = stub.getAllDocumentTemplates(Empty.newBuilder().build()).getTemplatesList();
-
-        System.out.println(templates.size());
-
-        if (templates.isEmpty()) {
-            Label label = new Label("No templates found.");
-            gridPane.add(label, 0, 0);
-        } else {
-            int rowIndex = 0, columnIndex = 0;
-            for (DocumentTemplate template : templates) {
-                VBox card = createCard(template);
-                gridPane.add(card, columnIndex, rowIndex);
-
-                if (++columnIndex > 3) {
-                    columnIndex = 0;
-                    rowIndex++;
-                }
-            }
-        }
+        // Initially load the first page content into the center
+        borderPane.setCenter(createPage(0));
     }
-
+    
+    private Node createPage(int pageIndex){
+      try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fiit/vava/client/fxml/_components/page/paginationGrid.fxml"));
+        Node pageContent = loader.load();
+        Controller controller = (Controller) loader.getController();
+        controller.populatePage(pageIndex, "AdminTemplates");
+        return pageContent;
+      } catch (IOException e){
+          e.printStackTrace();
+          return null;
+      }
+    }
     @FXML
     public void handleCreateAction(ActionEvent actionEvent) throws IOException {
         Router.getInstance().navigateTo("admin/templates/create");

@@ -70,3 +70,8 @@ message Coworker {
   string createdBy = 3;
   repeated string preferredCountries = 4;
 }
+
+message Admin {
+  string id = 1;
+  User user = 2;
+}

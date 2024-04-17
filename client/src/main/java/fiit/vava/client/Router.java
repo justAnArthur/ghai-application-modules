@@ -35,14 +35,9 @@ public class Router {
     private final List<String> routesHistory = new ArrayList<>();
 
     private static Router instance;
-    
+
     private static String role = null;
-    public static void setRole(String newRole){
-      role = newRole;
-    }
-    public static String getRole() {
-      return role;
-    }
+
     private Router() {
         try {
             loadRoutes();
@@ -199,6 +194,7 @@ public class Router {
     public void destroyNavBar() {
         appController.setSidebar(null);
     }
+
     public void showModal(String route) throws IOException {
         URL path = routes.get(route);
 
@@ -211,5 +207,12 @@ public class Router {
 
     public void hideModal() {
         modalStage.hide();
+    }
+
+    public static void setRole(String newRole){
+        role = newRole;
+    }
+    public static String getRole() {
+        return role;
     }
 }

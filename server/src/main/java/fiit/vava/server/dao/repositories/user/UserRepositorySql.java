@@ -109,11 +109,11 @@ public class UserRepositorySql extends UserRepository {
 
   private User mapRowToUser(ResultSet rs) throws SQLException {
     User.Builder user = User.newBuilder()
-    .setId(rs.getString("id"))
-    .setEmail(rs.getString("email"))
-    .setPassword(rs.getString("password")) // Consider security implications
-    .setConfirmed(rs.getBoolean("confirmed"))
-    .setRole(UserRole.valueOf(rs.getString("role"))); // Adjust to match the Role enum in your User cla
+                        .setId(rs.getString("id"))
+                        .setEmail(rs.getString("email"))
+                        .setPassword(rs.getString("password")) // Consider security implications
+                        .setConfirmed(rs.getBoolean("confirmed"))
+                        .setRole(UserRole.valueOf(rs.getString("role"))); // Adjust to match the Role enum in your User cla
     return user.build();
   }
 }
