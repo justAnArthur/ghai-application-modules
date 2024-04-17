@@ -45,6 +45,12 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers._components.routing;
     opens fiit.vava.client.controllers._components.routing to javafx.fxml;
 
+    exports fiit.vava.client.controllers._components.page;
+    opens fiit.vava.client.controllers._components.page to javafx.fxml;
+    
+    exports fiit.vava.client.controllers._components.page.card;
+    opens fiit.vava.client.controllers._components.page.card to javafx.fxml;
+
     exports fiit.vava.client.controllers.auth.login;
     opens fiit.vava.client.controllers.auth.login to javafx.fxml;
 

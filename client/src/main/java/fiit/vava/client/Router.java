@@ -115,10 +115,12 @@ public class Router {
     }
 
     public void loadApp(Stage stage) throws IOException {
-        this.stage = stage;
+        Router.stage = stage;
+
         URL path = routes.get("app");
         FXMLLoader loader = new FXMLLoader(path);
         Parent root = loader.load();
+
         stage.setTitle("GHAI");
         stage.setScene(new Scene(root, 800, 600));
         stage.show();
@@ -184,6 +186,7 @@ public class Router {
     public void changeNavBar(String route) throws IOException {
         stage.setMinWidth(1280);
         stage.setMinHeight(800);
+
         URL path = routes.get(route);
 
         FXMLLoader loader = new FXMLLoader(path);
