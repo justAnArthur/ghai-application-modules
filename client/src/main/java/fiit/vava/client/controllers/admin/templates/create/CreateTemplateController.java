@@ -15,6 +15,8 @@ import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -45,8 +47,14 @@ public class CreateTemplateController {
         TextField nameField = new TextField() {{
             setPromptText("Name");
         }};
-        TextField typeField = new TextField() {{
-            setPromptText("Type");
+        ComboBox<String> typeField = new ComboBox<String>() {{
+            setPromptText("Select an option");
+            getItems().addAll(
+                "String",
+                "Date",
+                "Number"
+            );
+            setValue("String");
         }};
         Control requiredCheckbox = new CheckBox() {{
             setText("Is required");
@@ -65,13 +73,13 @@ public class CreateTemplateController {
                 int index = fields.indexOf(fieldsGroupMap);
 
                 fields.remove(index);
-                fieldsPane.getChildren().remove(index + 1); // there's a button
+                fieldsPane.getChildren().remove(index); 
             });
         }};
 
         fieldGroup.getChildren().addAll(fieldsGroupMap);
         fieldGroup.getChildren().add(removeButton);
-
+        fieldGroup.getStyleClass().add("field-group"); 
         return fieldGroup;
     }
 
@@ -110,7 +118,7 @@ public class CreateTemplateController {
                 .addAllFields(fields.stream()
                         .map(field -> DocumentTemplateField.newBuilder()
                                 .setName(((TextField) field.get(0)).getText())
-                                .setType(((TextField) field.get(1)).getText())
+                                .setType(((ComboBox<String>) field.get(1)).getValue())
                                 .setRequired(((CheckBox) field.get(2)).isSelected())
                                 .build())
                         .toList())
