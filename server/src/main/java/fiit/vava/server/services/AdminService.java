@@ -33,27 +33,27 @@ public class AdminService extends AdminServiceGrpc.AdminServiceImplBase {
         }
     }
 
-    @Override
-    public void getCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
-        try {
-            Coworker storedCoworker = coworkerRepository.findById(requestedCoworker.getId());
-
-            if (storedCoworker == null)
-                throw new IllegalArgumentException("Coworker not found with ID: " + requestedCoworker.getId());
-
-            Response response = Response.newBuilder()
-                    .setUser(storedCoworker.getUser()) // Assuming you want to return user details
-                    .build();
-            responseObserver.onNext(response);
-        } catch (Exception ex) {
-            Response response = Response.newBuilder()
-                    .setError(ex.getMessage())
-                    .build();
-            responseObserver.onNext(response);
-        } finally {
-            responseObserver.onCompleted();
-        }
-    }
+//    @Override
+//    public void getCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
+//        try {
+//            Coworker storedCoworker = coworkerRepository.findById(requestedCoworker.getId());
+//
+//            if (storedCoworker == null)
+//                throw new IllegalArgumentException("Coworker not found with ID: " + requestedCoworker.getId());
+//
+//            Response response = Response.newBuilder()
+//                    .setUser(storedCoworker.getUser()) // Assuming you want to return user details
+//                    .build();
+//            responseObserver.onNext(response);
+//        } catch (Exception ex) {
+//            Response response = Response.newBuilder()
+//                    .setError(ex.getMessage())
+//                    .build();
+//            responseObserver.onNext(response);
+//        } finally {
+//            responseObserver.onCompleted();
+//        }
+//    }
 
     @Override
     public void updateCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
