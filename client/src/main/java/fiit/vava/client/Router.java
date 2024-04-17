@@ -1,5 +1,7 @@
 package fiit.vava.client;
 
+import fiit.vava.client.controllers._components.FileUploadController;
+import fiit.vava.client.controllers._components.ImageReceiver;
 import fiit.vava.client.controllers.AppController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -201,18 +203,17 @@ public class Router {
         appController.setSidebar(null);
     }
 
-    public void showModal(String route) throws IOException {
-        URL path = routes.get(route);
-
-        FXMLLoader dialogLoader = new FXMLLoader(path);
+    public void showModal(String route, ImageReceiver imageReceiver) throws IOException {
+        FXMLLoader dialogLoader = new FXMLLoader(getClass().getResource(route));
         Parent dialogRoot = dialogLoader.load();
-
+        FileUploadController controller = (FileUploadController) dialogLoader.getController();
+        controller.setImageReceiver(imageReceiver);
         modalStage.setScene(new Scene(dialogRoot));
         modalStage.showAndWait();
     }
 
-    public void hideModal() {
-        modalStage.hide();
+    public void closeModal() {
+        modalStage.close();
     }
 
     public static void setRole(String newRole){

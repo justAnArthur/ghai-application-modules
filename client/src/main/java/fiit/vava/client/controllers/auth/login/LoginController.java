@@ -68,6 +68,10 @@ public class LoginController {
               usernameField.setText("client@client.client");
               passwordField.setText("client");
               break;
+            case "coworker":
+              Router.getInstance().setRole("coworker");
+              Router.getInstance().navigateTo("coworker");
+              return;
             default:
               break;
           }

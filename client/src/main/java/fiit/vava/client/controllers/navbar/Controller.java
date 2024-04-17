@@ -84,10 +84,14 @@ public class Controller {
             //   Router.getInstance().navigateTo("coworker/templates");
             // });
             secondBtn.setText("User Verification");
-            // secondBtn.setOnMouseClicked(event -> {
-            //   noHighlight();
-            //   Router.getInstance().navigateTo("admin/users");
-            // });
+            secondBtn.setOnMouseClicked(event -> {
+              noHighlight(event);
+              try {
+                Router.getInstance().navigateTo("coworker/users");
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            });
           break;
         default:
           break;
