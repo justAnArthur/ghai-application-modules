@@ -9,6 +9,6 @@ public class Controller {
     
     @FXML
     void initialize() throws IOException {
-      Router.getInstance().changeNavBar("client/sideBar");
+      Router.getInstance().changeNavBar("navbar");
     }
 }
