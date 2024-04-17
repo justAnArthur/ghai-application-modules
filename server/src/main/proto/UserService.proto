@@ -21,6 +21,10 @@ message NonApprovedClientsResponse {
   repeated Client client = 1;
 }
 
+message CoworkerResponse {
+  repeated Coworker coworker = 1;
+}
+
 service UserService {
   rpc login(LoginUserRequest) returns (Response);
 
@@ -31,6 +35,17 @@ service UserService {
   rpc getNonApprovedClients(Empty) returns (NonApprovedClientsResponse);
   rpc approveClient(Client) returns (Response);
 }
+
+service AdminService {
+  rpc getAllCoworkers(Empty) returns (CoworkerResponse);
+
+  rpc registerCoworker(Coworker) returns (Response);
+
+  rpc getCoworker(Coworker) returns (Coworker);
+  rpc updateCoworker(Coworker) returns (Response);
+  rpc deleteCoworker(Coworker) returns (Response);
+}
+
 
 enum UserState {
   PENDING = 0;
@@ -71,24 +86,7 @@ message Coworker {
   repeated string preferredCountries = 4;
 }
 
-message CoworkerRequest {
-  Coworker coworker = 1;
-}
-
-message CoworkerResponse {
-  repeated Coworker coworker = 1;
-}
-
 message Admin {
   string id = 1;
   User user = 2;
 }
-
-service AdminService {
-  rpc registerCoworker(CoworkerRequest) returns (Response);
-  rpc getCoworker(CoworkerRequest) returns (Response);
-  rpc getAllCoworkers(Empty) returns (CoworkerResponse);
-  rpc updateCoworker(CoworkerRequest) returns (Response);
-  rpc deleteCoworker(CoworkerRequest) returns (Response);
-}
-  

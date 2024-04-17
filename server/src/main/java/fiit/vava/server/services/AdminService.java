@@ -1,10 +1,10 @@
 package fiit.vava.server.services;
 
-import java.util.List;
-
 import fiit.vava.server.*;
 import fiit.vava.server.dao.repositories.user.coworker.CoworkerRepository;
 import io.grpc.stub.StreamObserver;
+
+import java.util.List;
 
 
 public class AdminService extends AdminServiceGrpc.AdminServiceImplBase {
@@ -15,11 +15,9 @@ public class AdminService extends AdminServiceGrpc.AdminServiceImplBase {
     }
 
     @Override
-    public void registerCoworker(CoworkerRequest request, StreamObserver<Response> responseObserver) {
+    public void registerCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
         try {
-            Coworker coworker = request.getCoworker();
-            // TODO: Add validation of coworker data (optional)
-            Coworker savedCoworker = coworkerRepository.save(coworker);
+            Coworker savedCoworker = coworkerRepository.save(requestedCoworker);
             // Build and send a success response
             Response response = Response.newBuilder()
                     .setUser(savedCoworker.getUser())
@@ -36,16 +34,15 @@ public class AdminService extends AdminServiceGrpc.AdminServiceImplBase {
     }
 
     @Override
-    public void getCoworker(CoworkerRequest request, StreamObserver<Response> responseObserver) {
+    public void getCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
         try {
-            String coworkerId = request.getCoworker().getId();
-            Coworker coworker = coworkerRepository.findById(coworkerId);
-            if (coworker == null) {
-                throw new IllegalArgumentException("Coworker not found with ID: " + coworkerId);
-            }
+            Coworker storedCoworker = coworkerRepository.findById(requestedCoworker.getId());
+
+            if (storedCoworker == null)
+                throw new IllegalArgumentException("Coworker not found with ID: " + requestedCoworker.getId());
 
             Response response = Response.newBuilder()
-                    .setUser(coworker.getUser()) // Assuming you want to return user details
+                    .setUser(storedCoworker.getUser()) // Assuming you want to return user details
                     .build();
             responseObserver.onNext(response);
         } catch (Exception ex) {
@@ -59,11 +56,10 @@ public class AdminService extends AdminServiceGrpc.AdminServiceImplBase {
     }
 
     @Override
-    public void updateCoworker(CoworkerRequest request, StreamObserver<Response> responseObserver) {
+    public void updateCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
         try {
-            Coworker coworkerToUpdate = request.getCoworker();
             // You might want to add logic to check if the coworker exists before updating
-            Coworker updatedCoworker = coworkerRepository.save(coworkerToUpdate);
+            Coworker updatedCoworker = coworkerRepository.save(requestedCoworker);
 
             Response response = Response.newBuilder()
                     .setUser(updatedCoworker.getUser()) // Assuming you want to return the updated user details
@@ -80,13 +76,12 @@ public class AdminService extends AdminServiceGrpc.AdminServiceImplBase {
     }
 
     @Override
-    public void deleteCoworker(CoworkerRequest request, StreamObserver<Response> responseObserver) {
+    public void deleteCoworker(Coworker requestedCoworker, StreamObserver<Response> responseObserver) {
         try {
-            String coworkerId = request.getCoworker().getId();
-            Coworker coworkerToDelete = coworkerRepository.findById(coworkerId);
-            if (coworkerToDelete == null) {
-                throw new IllegalArgumentException("Coworker not found with ID: " + coworkerId);
-            }
+            Coworker coworkerToDelete = coworkerRepository.findById(requestedCoworker.getId());
+            if (coworkerToDelete == null)
+                throw new IllegalArgumentException("Coworker not found with ID: " + requestedCoworker.getId());
+
             // Assuming your CoworkerRepository has a delete method or you handle deletion logic
             // coworkerRepository.delete(coworkerToDelete); 
 
