@@ -24,23 +24,32 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers.admin;
     opens fiit.vava.client.controllers.admin to javafx.fxml;
 
+    exports fiit.vava.client.controllers.navbar;
+    opens fiit.vava.client.controllers.navbar to javafx.fxml;
+
+    exports fiit.vava.client.controllers.profile;
+    opens fiit.vava.client.controllers.profile to javafx.fxml;
+
     exports fiit.vava.client.controllers.client;
     opens fiit.vava.client.controllers.client to javafx.fxml;
 
     exports fiit.vava.client.controllers.coworker;
     opens fiit.vava.client.controllers.coworker to javafx.fxml;
 
-    exports fiit.vava.client.controllers.coworker.profile;
-    opens fiit.vava.client.controllers.coworker.profile to javafx.fxml;
-
-    exports fiit.vava.client.controllers.admin.profile;
-    opens fiit.vava.client.controllers.admin.profile to javafx.fxml;
-
     exports fiit.vava.client.controllers.coworker.clients.approve;
     opens fiit.vava.client.controllers.coworker.clients.approve to javafx.fxml;
 
+    exports fiit.vava.client.controllers._components.table;
+    opens fiit.vava.client.controllers._components.table to javafx.fxml;
+
     exports fiit.vava.client.controllers._components.routing;
     opens fiit.vava.client.controllers._components.routing to javafx.fxml;
+
+    exports fiit.vava.client.controllers._components.page;
+    opens fiit.vava.client.controllers._components.page to javafx.fxml;
+    
+    exports fiit.vava.client.controllers._components.page.card;
+    opens fiit.vava.client.controllers._components.page.card to javafx.fxml;
 
     exports fiit.vava.client.controllers.auth.login;
     opens fiit.vava.client.controllers.auth.login to javafx.fxml;
@@ -51,11 +60,11 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers.client.documents;
     opens fiit.vava.client.controllers.client.documents to javafx.fxml;
 
-    exports fiit.vava.client.controllers.client.profile;
-    opens fiit.vava.client.controllers.client.profile to javafx.fxml;
-
     exports fiit.vava.client.controllers.admin.templates;
     opens fiit.vava.client.controllers.admin.templates to javafx.fxml;
+
+    exports fiit.vava.client.controllers.admin.users;
+    opens fiit.vava.client.controllers.admin.users to javafx.fxml;
 
     exports fiit.vava.client.controllers.admin.templates.create;
     opens fiit.vava.client.controllers.admin.templates.create to javafx.fxml;

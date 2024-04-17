@@ -8,6 +8,6 @@ import java.io.IOException;
 public class Controller {
     @FXML
     void initialize() throws IOException {
-      Router.getInstance().changeNavBar("admin/sideBar");
+      Router.getInstance().changeNavBar("navbar");
     }
 }

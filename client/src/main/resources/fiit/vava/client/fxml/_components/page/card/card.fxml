@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="card" maxHeight="300.0" maxWidth="300.0" minHeight="200.0" minWidth="150.0" prefHeight="300.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers._components.page.card.CardController">
+   <bottom>
+      <Label fx:id="statusLabel" text="document status" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <BorderPane fx:id="imageBorderPane" BorderPane.alignment="CENTER">
+               <center>
+                  <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" />
+               </center>
+               <bottom>
+                  <Label fx:id="errorLabel" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+         </center>
+         <bottom>
+            <Separator prefHeight="0.0" prefWidth="220.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </center>
+   <top>
+      <Label fx:id="nameLabel" text="Document name" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>

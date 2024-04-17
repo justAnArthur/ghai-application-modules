@@ -35,6 +35,9 @@ public class Router {
     private final List<String> routesHistory = new ArrayList<>();
 
     private static Router instance;
+    private static Stage stage;
+
+    private static String role = null;
 
     private Router() {
         try {
@@ -114,12 +117,14 @@ public class Router {
     }
 
     public void loadApp(Stage stage) throws IOException {
+        Router.stage = stage;
+
         URL path = routes.get("app");
         FXMLLoader loader = new FXMLLoader(path);
         Parent root = loader.load();
 
         stage.setTitle("GHAI");
-        stage.setScene(new Scene(root, 1280, 800));
+        stage.setScene(new Scene(root, 800, 600));
         stage.show();
     }
 
@@ -181,12 +186,19 @@ public class Router {
     }
 
     public void changeNavBar(String route) throws IOException {
+        stage.setMinWidth(1280);
+        stage.setMinHeight(800);
+
         URL path = routes.get(route);
 
         FXMLLoader loader = new FXMLLoader(path);
         Node page = loader.load();
 
         appController.setSidebar(page);
+    }
+
+    public void destroyNavBar() {
+        appController.setSidebar(null);
     }
 
     public void showModal(String route) throws IOException {
@@ -201,5 +213,12 @@ public class Router {
 
     public void hideModal() {
         modalStage.hide();
+    }
+
+    public static void setRole(String newRole){
+        role = newRole;
+    }
+    public static String getRole() {
+        return role;
     }
 }

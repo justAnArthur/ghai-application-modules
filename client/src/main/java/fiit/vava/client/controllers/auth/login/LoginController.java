@@ -41,7 +41,7 @@ public class LoginController {
         langSelectCombo.getItems().addAll(SupportedLanguages.asList().stream().map(SupportedLanguages::name).toList());
         langSelectCombo.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             // TODO exchange on @FXML controller method
-            XMLResourceBundleProvider.getInstance().changeLanguage(SupportedLanguages.valueOf(newValue));
+            XMLResourceBundleProvider.getInstance().changeLanguage(SupportedLanguages.SLOVAK);
             loadTexts();
         });
         loadTexts();
@@ -58,8 +58,19 @@ public class LoginController {
     @FXML
     private void handleLogin() throws IOException {
         if (offline) {
-            Router.getInstance().navigateTo(usernameField.getText());
-            return;
+          switch (usernameField.getText().trim()) {
+            case "admin":
+              usernameField.setText("admin@admin.admin");
+              passwordField.setText("admin");
+              break;
+
+            case "client":
+              usernameField.setText("client@client.client");
+              passwordField.setText("client");
+              break;
+            default:
+              break;
+          }
         }
 
         errorMessageLabel.setText(null);
@@ -74,8 +85,8 @@ public class LoginController {
             errorMessageLabel.setText("user is not confirmed");
             return;
         }
-
-        Router.getInstance().navigateTo(user.getRole().name().toLowerCase());
+        Router.setRole(user.getRole().name().toLowerCase());
+        Router.getInstance().navigateTo(Router.getRole());
     }
 
     @FXML
