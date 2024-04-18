@@ -79,10 +79,14 @@ public class Controller {
           break;
         case "coworker":
             firstBtn.setText("Document Verification");
-            // firstBtn.setOnMouseClicked(event -> {
-            //   noHighlight();
-            //   Router.getInstance().navigateTo("coworker/templates");
-            // });
+            firstBtn.setOnMouseClicked(event -> {
+              noHighlight(event);
+              try {
+                Router.getInstance().navigateTo("coworker/documents");
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            });
             secondBtn.setText("User Verification");
             secondBtn.setOnMouseClicked(event -> {
               noHighlight(event);

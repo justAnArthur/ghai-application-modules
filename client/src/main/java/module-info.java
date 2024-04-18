@@ -39,6 +39,9 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers.coworker.users;
     opens fiit.vava.client.controllers.coworker.users to javafx.fxml;
 
+    exports fiit.vava.client.controllers.coworker.documents;
+    opens fiit.vava.client.controllers.coworker.documents to javafx.fxml;
+
     exports fiit.vava.client.controllers.coworker.clients.approve;
     opens fiit.vava.client.controllers.coworker.clients.approve to javafx.fxml;
 
