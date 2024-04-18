@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
+import fiit.vava.client.controllers.auth.Validation;
+import java.util.function.Predicate;
 import java.io.File;
 import java.io.IOException;
 import fiit.vava.client.controllers._components.ImageReceiver;
@@ -68,6 +70,7 @@ public class Controller implements ImageReceiver {
 
     @FXML
     public void initialize() {
+        initValidators();
         langSelectCombo.getItems().addAll(SupportedLanguages.asList().stream().map(SupportedLanguages::name).toList());
         langSelectCombo.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             // TODO exchange on @FXML controller method
@@ -77,6 +80,22 @@ public class Controller implements ImageReceiver {
         // loadTexts();
     }
 
+    private void initValidators(){
+      emailField.textProperty().addListener((observable,oldValue, newValue) -> Validation.validateField(newValue, emailField, Validation.emailValidation));
+      passwordField.textProperty().addListener((observable,oldValue, newValue) -> Validation.validateField(newValue, passwordField, Validation.passwordValidation));
+      passwordAgainField.textProperty().addListener((observable,oldValue, newValue) -> { 
+      Validation.validateField(newValue, passwordAgainField, Validation.passwordValidation);
+      if(newValue!=passwordField.getText()){
+        passwordAgainField.setStyle("-fx-border-color: red;");
+      } else {
+        passwordAgainField.setStyle("-fx-border-color: green;");
+      }
+    });
+      countryField.textProperty().addListener((observable, oldValue, newValue) -> Validation.validateField(newValue, countryField, Validation.nameValidation)); 
+      regionField.textProperty().addListener((observable, oldValue, newValue) -> Validation.validateField(newValue, regionField, Validation.nameValidation)); 
+      fNameField.textProperty().addListener((observable, oldValue, newValue) -> Validation.validateField(newValue, fNameField, Validation.nameValidation)); 
+      lNameField.textProperty().addListener((observable, oldValue, newValue) -> Validation.validateField(newValue, lNameField, Validation.nameValidation));
+    }
     // private void loadTexts() {
     //     XMLResourceBundle bundle = XMLResourceBundleProvider.getInstance().getBundle("fiit.vava.client.bundles.auth.messages");
     //
@@ -89,18 +108,28 @@ public class Controller implements ImageReceiver {
     // Doesn't work
     @FXML
     private void handleRegistration(ActionEvent event) throws IOException {
+        errorMessageLabel.setText(null);
+        if (fNameField.getText() == null || lNameField.getText() == null || countryField.getText() == null || regionField.getText() == null || emailField.getText() == null || passwordField.getText() == null || passwordAgainField.getText() == null || dateOfBirthPicker.getValue() == null) {
+          errorMessageLabel.setText("All fields must be filled.");
+          return;
+        }
+        if (passwordField.getText() != passwordAgainField.getText()){
+          errorMessageLabel.setText("Passwords must match.");
+          return;
+        }
+        if(!Validation.emailValidation.test(emailField.getText())){
+          errorMessageLabel.setText("Email must be valid");
+          return;
+        } else if (!Validation.passwordValidation.test(passwordField.getText())){
+          errorMessageLabel.setText("Password must contain at least 8 symbols");
+          return;
+        } else if (!Validation.nameValidation.test(lNameField.getText()) || !Validation.nameValidation.test(fNameField.getText()) || !Validation.nameValidation.test(countryField.getText()) || !Validation.nameValidation.test(regionField.getText())){
+          errorMessageLabel.setText("Name and region fields must contain letters only");
+          return;
+        }
         if(frontsideImage == null || backsideImage == null){
           Router.getInstance().showModal("/fiit/vava/client/fxml/_components/fileUpload.fxml", this);
         } else { 
-          errorMessageLabel.setText(null);
-          if (fNameField.getText() == null || lNameField.getText() == null || countryField.getText() == null || regionField.getText() == null || emailField.getText() == null || passwordField.getText() == null || passwordAgainField.getText() == null || dateOfBirthPicker.getValue() == null) {
-            errorMessageLabel.setText("All fields must be completed.");
-            return;
-          }
-          if (passwordField.getText() != passwordAgainField.getText()){
-            errorMessageLabel.setText("Passwords don't match.");
-            return;
-          }
           UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
 
           Client request = Client.newBuilder()

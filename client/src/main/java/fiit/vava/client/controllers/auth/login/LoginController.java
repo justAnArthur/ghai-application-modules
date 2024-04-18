@@ -18,10 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
-
+import fiit.vava.client.controllers.auth.Validation;
 public class LoginController {
 
-    private boolean offline = false;
+    private boolean offline = true;
 
     @FXML
     private MFXPasswordField passwordField;
@@ -38,6 +38,7 @@ public class LoginController {
 
     @FXML
     public void initialize() {
+        initValidators();
         langSelectCombo.getItems().addAll(SupportedLanguages.asList().stream().map(SupportedLanguages::name).toList());
         langSelectCombo.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             // TODO exchange on @FXML controller method
@@ -54,7 +55,10 @@ public class LoginController {
         // usernameField.setPromptText(bundle.getString("usr_name"));
         // passwordField.setPromptText(bundle.getString("usr_pass"));
     }
-
+    private void initValidators(){
+      usernameField.textProperty().addListener((observable,oldValue, newValue) -> Validation.validateField(newValue, usernameField, Validation.emailValidation));
+      passwordField.textProperty().addListener((observable,oldValue, newValue) -> Validation.validateField(newValue, passwordField, Validation.passwordValidation));
+    }
     @FXML
     private void handleLogin() throws IOException {
         if (offline) {
