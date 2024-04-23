@@ -17,10 +17,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
+import java.io.File;
 import java.io.IOException;
-
-public class Controller {
- @FXML
+import fiit.vava.client.controllers._components.ImageReceiver;
+public class Controller implements ImageReceiver {
+    @FXML
     private MFXTextField countryField;
 
     @FXML
@@ -55,6 +56,15 @@ public class Controller {
 
     @FXML
     private Button signUpBtn;
+    
+    private File frontsideImage = null;
+    private File backsideImage = null;
+    
+    @Override 
+    public void setImages(File frontsideImage, File backsideImage){
+      this.frontsideImage = frontsideImage;
+      this.backsideImage = backsideImage;
+    } 
 
     @FXML
     public void initialize() {
@@ -62,15 +72,15 @@ public class Controller {
         langSelectCombo.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             // TODO exchange on @FXML controller method
             XMLResourceBundleProvider.getInstance().changeLanguage(SupportedLanguages.valueOf(newValue));
-            loadTexts();
+            // loadTexts();
         });
-        loadTexts();
+        // loadTexts();
     }
 
-    private void loadTexts() {
-        XMLResourceBundle bundle = XMLResourceBundleProvider.getInstance().getBundle("fiit.vava.client.bundles.auth.messages");
-
-    }
+    // private void loadTexts() {
+    //     XMLResourceBundle bundle = XMLResourceBundleProvider.getInstance().getBundle("fiit.vava.client.bundles.auth.messages");
+    //
+    // }
     @FXML
     private void goToLogin(ActionEvent event) throws IOException {
       Router.getInstance().navigateTo("auth/login");
@@ -78,38 +88,41 @@ public class Controller {
 
     // Doesn't work
     @FXML
-    private void handleRegistration(ActionEvent event) {
- 
-        errorMessageLabel.setText(null);
-        if (fNameField.getText() == null || lNameField.getText() == null || countryField.getText() == null || regionField.getText() == null || emailField.getText() == null || passwordField.getText() == null || passwordAgainField.getText() == null || dateOfBirthPicker.getValue() == null) {
-          errorMessageLabel.setText("All fields must be completed.");
-          return;
-        }
-        if (passwordField.getText() != passwordAgainField.getText()){
-          errorMessageLabel.setText("Passwords don't match.");
-          return;
-        }
-        UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
+    private void handleRegistration(ActionEvent event) throws IOException {
+        if(frontsideImage == null || backsideImage == null){
+          Router.getInstance().showModal("/fiit/vava/client/fxml/_components/fileUpload.fxml", this);
+        } else { 
+          errorMessageLabel.setText(null);
+          if (fNameField.getText() == null || lNameField.getText() == null || countryField.getText() == null || regionField.getText() == null || emailField.getText() == null || passwordField.getText() == null || passwordAgainField.getText() == null || dateOfBirthPicker.getValue() == null) {
+            errorMessageLabel.setText("All fields must be completed.");
+            return;
+          }
+          if (passwordField.getText() != passwordAgainField.getText()){
+            errorMessageLabel.setText("Passwords don't match.");
+            return;
+          }
+          UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
 
-        Client request = Client.newBuilder()
-                .setUser(User.newBuilder()
-                        .setEmail(emailField.getText())
-                        .setPassword(passwordField.getText())
-                        .build()
-                )
-                .setFirstName(fNameField.getText())
-                .setLastName(lNameField.getText())
-                .setDateOfBirth(dateOfBirthPicker.getValue().toString())
-                .setRegion(regionField.getText())
-                .setCountry(countryField.getText())
-                .build();
+          Client request = Client.newBuilder()
+                  .setUser(User.newBuilder()
+                          .setEmail(emailField.getText())
+                          .setPassword(passwordField.getText())
+                          .build()
+                  )
+                  .setFirstName(fNameField.getText())
+                  .setLastName(lNameField.getText())
+                  .setDateOfBirth(dateOfBirthPicker.getValue().toString())
+                  .setRegion(regionField.getText())
+                  .setCountry(countryField.getText())
+                  .build();
 
-        Response response = stub.registerClient(request);
+          Response response = stub.registerClient(request);
 
-        if (response.getUser() != null) {
-            errorMessageLabel.setText("Status: " + response.getUser().getStatus().name());
-        } else {
-            errorMessageLabel.setText(response.getError());
+          if (response.getUser() != null) {
+              errorMessageLabel.setText("Status: " + response.getUser().getStatus().name());
+          } else {
+              errorMessageLabel.setText(response.getError());
+          }
         }
     }
 }

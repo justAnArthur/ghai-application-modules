@@ -18,7 +18,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ResourceBundle;
-
+import fiit.vava.client.controllers._components.ImageReceiver;
 public class FileUploadController {
     
     private File frontSideFile;
@@ -46,6 +46,12 @@ public class FileUploadController {
 
     @FXML
     private URL location;
+    
+    private ImageReceiver imageReceiver;
+    
+    public void setImageReceiver(ImageReceiver imageReceiver){
+        this.imageReceiver = imageReceiver;
+    }
 
     @FXML
     void initialize() {
@@ -105,30 +111,32 @@ public class FileUploadController {
             System.err.println("Error: No image files selected.");
             return;
         }
-
-        String backName = generateUniqueName(backSideFile.getName());
-        String backExt = getFileExtension(backSideFile.getName());
-        String frontName = generateUniqueName(frontSideFile.getName());
-        String frontExt = getFileExtension(frontSideFile.getName());
-
-        if (backName != null && backExt != null && frontName != null && frontExt != null) {
-            System.out.println(System.getProperty("user.dir"));
-            String path = System.getProperty("user.dir");
-            String backDestination = path + "/" + backName + "." + backExt;
-            String frontDestination = path + "/" + frontName + "." + frontExt;
-
-            try {
-                saveImage(backSideFile, backDestination);
-                saveImage(frontSideFile, frontDestination);
-                System.out.println("Images saved successfully.");
-                Router.getInstance().hideModal();
-            } catch (IOException e) {
-                System.err.println("Failed to save images: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("Error: Unable to determine image name or extension.");
-        }
+        
+        imageReceiver.setImages(frontSideFile, backSideFile);
+        Router.getInstance().closeModal();
+        // String backName = generateUniqueName(backSideFile.getName());
+        // String backExt = getFileExtension(backSideFile.getName());
+        // String frontName = generateUniqueName(frontSideFile.getName());
+        // String frontExt = getFileExtension(frontSideFile.getName());
+        //
+        // if (backName != null && backExt != null && frontName != null && frontExt != null) {
+        //     System.out.println(System.getProperty("user.dir"));
+        //     String path = System.getProperty("user.dir");
+        //     String backDestination = path + "/" + backName + "." + backExt;
+        //     String frontDestination = path + "/" + frontName + "." + frontExt;
+        //
+        //     try {
+        //         saveImage(backSideFile, backDestination);
+        //         saveImage(frontSideFile, frontDestination);
+        //         System.out.println("Images saved successfully.");
+        //         Router.getInstance().hideModal();
+        //     } catch (IOException e) {
+        //         System.err.println("Failed to save images: " + e.getMessage());
+        //         e.printStackTrace();
+        //     }
+        // } else {
+        //     System.err.println("Error: Unable to determine image name or extension.");
+        // }
     }
     // put save to backend logic here if possible. 
     private void saveImage(File source, String destinationPath) throws IOException{
@@ -141,7 +149,7 @@ public class FileUploadController {
 
     @FXML
     private void cancel(){
-      Router.getInstance().hideModal();
+      Router.getInstance().closeModal();
     }
 
     private String generateUniqueName(String imageName) {

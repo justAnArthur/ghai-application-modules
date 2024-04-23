@@ -36,11 +36,17 @@ module fiit.vava.client {
     exports fiit.vava.client.controllers.coworker;
     opens fiit.vava.client.controllers.coworker to javafx.fxml;
 
+    exports fiit.vava.client.controllers.coworker.users;
+    opens fiit.vava.client.controllers.coworker.users to javafx.fxml;
+
     exports fiit.vava.client.controllers.coworker.clients.approve;
     opens fiit.vava.client.controllers.coworker.clients.approve to javafx.fxml;
 
     exports fiit.vava.client.controllers._components.table;
     opens fiit.vava.client.controllers._components.table to javafx.fxml;
+
+    exports fiit.vava.client.controllers._components;
+    opens fiit.vava.client.controllers._components to javafx.fxml;
 
     exports fiit.vava.client.controllers._components.routing;
     opens fiit.vava.client.controllers._components.routing to javafx.fxml;
