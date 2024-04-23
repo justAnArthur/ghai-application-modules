@@ -4,6 +4,8 @@ import fiit.vava.server.DocumentField;
 import fiit.vava.server.dao.repositories.IRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 
+import java.util.List;
+
 public abstract class DocumentFieldRepository implements IRepository<DocumentField> {
 
     private static DocumentFieldRepository instance = null;
@@ -26,4 +28,6 @@ public abstract class DocumentFieldRepository implements IRepository<DocumentFie
 
         return instance;
     }
+
+    public abstract List<DocumentField> findAllByDocumentRequestId(String documentRequestId);
 }

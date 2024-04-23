@@ -47,9 +47,12 @@ module fiit.vava.client {
 
     exports fiit.vava.client.controllers._components.page;
     opens fiit.vava.client.controllers._components.page to javafx.fxml;
-    
+
     exports fiit.vava.client.controllers._components.page.card;
     opens fiit.vava.client.controllers._components.page.card to javafx.fxml;
+
+    exports fiit.vava.client.controllers._components.auth;
+    opens fiit.vava.client.controllers._components.auth to javafx.fxml;
 
     exports fiit.vava.client.controllers.auth.login;
     opens fiit.vava.client.controllers.auth.login to javafx.fxml;
@@ -74,4 +77,10 @@ module fiit.vava.client {
 
     exports fiit.vava.client.controllers.client.templates;
     opens fiit.vava.client.controllers.client.templates to javafx.fxml;
+
+    exports fiit.vava.client.controllers.coworker.documentRequests;
+    opens fiit.vava.client.controllers.coworker.documentRequests to javafx.fxml;
+
+    exports fiit.vava.client.controllers.coworker.documentRequests.approve;
+    opens fiit.vava.client.controllers.coworker.documentRequests.approve to javafx.fxml;
 }

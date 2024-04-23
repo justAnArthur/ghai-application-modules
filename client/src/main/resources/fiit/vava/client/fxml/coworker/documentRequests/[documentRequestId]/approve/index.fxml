@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.mfxcore.controls.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="fiit.vava.client.controllers.coworker.documentRequests.approve.ApproveDocumentRequestController"
+          prefHeight="400.0" prefWidth="600.0">
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="66.67"/>
+        <ColumnConstraints percentWidth="33.33"/>
+    </columnConstraints>
+
+    <VBox GridPane.columnIndex="0">
+        <Label text="Created on:"/>
+        <Label fx:id="creationDateLabel"/>
+        <Label text="Created by:"/>
+        <Label fx:id="creatorLabel"/>
+        <Label text="Related Documents:"/>
+
+        <GridPane fx:id="dataInputs">
+
+        </GridPane>
+        <!--        <Label fx:id="relatedDocsLabel"/>-->
+    </VBox>
+
+    <VBox GridPane.columnIndex="1">
+        <Label text="Requirements:"/>
+        <Text fx:id="requirements"/>
+        <Button text="Approve" onAction="#handleApprove"/>
+        <Button text="Reject" onAction="#handleReject"/>
+    </VBox>
+</GridPane>

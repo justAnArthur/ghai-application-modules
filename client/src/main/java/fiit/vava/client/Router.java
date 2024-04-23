@@ -185,7 +185,7 @@ public class Router {
         navigateTo(previousRoute);
     }
 
-    public void changeNavBar(String route) throws IOException {
+    public void setSideBar(String route) throws IOException {
         stage.setMinWidth(1280);
         stage.setMinHeight(800);
 
@@ -197,7 +197,7 @@ public class Router {
         appController.setSidebar(page);
     }
 
-    public void destroyNavBar() {
+    public void removeSidebar() {
         appController.setSidebar(null);
     }
 

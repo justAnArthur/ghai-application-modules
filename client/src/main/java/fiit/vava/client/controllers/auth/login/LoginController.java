@@ -85,6 +85,7 @@ public class LoginController {
             errorMessageLabel.setText("user is not confirmed");
             return;
         }
+
         Router.setRole(user.getRole().name().toLowerCase());
         Router.getInstance().navigateTo(Router.getRole());
     }

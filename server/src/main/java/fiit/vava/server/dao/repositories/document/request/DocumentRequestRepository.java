@@ -1,6 +1,7 @@
 package fiit.vava.server.dao.repositories.document.request;
 
 import fiit.vava.server.DocumentRequest;
+import fiit.vava.server.DocumentRequestStatus;
 import fiit.vava.server.dao.repositories.IRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -30,4 +31,6 @@ public abstract class DocumentRequestRepository implements IRepository<DocumentR
     }
 
     public abstract List<DocumentRequest> findAllByClientId(String clientId);
+
+    public abstract List<DocumentRequest> findAllByStatus(DocumentRequestStatus status);
 }

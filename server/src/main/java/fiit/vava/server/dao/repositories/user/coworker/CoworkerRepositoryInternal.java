@@ -1,6 +1,7 @@
 package fiit.vava.server.dao.repositories.user.coworker;
 
 import fiit.vava.server.Coworker;
+import fiit.vava.server.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,10 @@ import java.util.UUID;
 
 public class CoworkerRepositoryInternal extends CoworkerRepository {
 
-    private final List<Coworker> coworkers = new ArrayList<>();
+    private final List<Coworker> coworkers = new ArrayList<>() {{
+        add(Coworker.newBuilder().setId("1").setUser(User.newBuilder()
+                .setId("6").build()).build());
+    }};
 
     @Override
     public Coworker save(Coworker toSave) {

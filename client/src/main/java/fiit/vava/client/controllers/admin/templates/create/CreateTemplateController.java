@@ -9,14 +9,9 @@ import fiit.vava.server.DocumentTemplateField;
 import io.github.palexdev.mfxcore.utils.fx.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Control;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -37,6 +32,8 @@ public class CreateTemplateController {
     public ImageView pdfPreview;
     @FXML
     public TextField templateName;
+    @FXML
+    public TextField templateRequirements;
 
     private byte[] fileBytes = null;
     private final List<List<Control>> fields = new ArrayList<>();
@@ -50,9 +47,9 @@ public class CreateTemplateController {
         ComboBox<String> typeField = new ComboBox<String>() {{
             setPromptText("Select an option");
             getItems().addAll(
-                "String",
-                "Date",
-                "Number"
+                    "String",
+                    "Date",
+                    "Number"
             );
             setValue("String");
         }};
@@ -73,13 +70,13 @@ public class CreateTemplateController {
                 int index = fields.indexOf(fieldsGroupMap);
 
                 fields.remove(index);
-                fieldsPane.getChildren().remove(index); 
+                fieldsPane.getChildren().remove(index);
             });
         }};
 
         fieldGroup.getChildren().addAll(fieldsGroupMap);
         fieldGroup.getChildren().add(removeButton);
-        fieldGroup.getStyleClass().add("field-group"); 
+        fieldGroup.getStyleClass().add("field-group");
         return fieldGroup;
     }
 
@@ -114,6 +111,7 @@ public class CreateTemplateController {
 
         CreateDocumentTemplateRequest request = CreateDocumentTemplateRequest.newBuilder()
                 .setName(templateName.getText())
+                .setRequirements(templateRequirements.getText())
                 .setFile(ByteString.copyFrom(fileBytes))
                 .addAllFields(fields.stream()
                         .map(field -> DocumentTemplateField.newBuilder()

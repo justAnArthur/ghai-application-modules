@@ -1,110 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<GridPane maxHeight="1080.0" maxWidth="150.0" minHeight="600.0" minWidth="100.0" prefHeight="800.0" prefWidth="150.0"
+          styleClass="grid-pane" stylesheets="@../../styles/side-bar.css" xmlns="http://javafx.com/javafx/21"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.coworker.SideBarController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="400.0" minHeight="300.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="ALWAYS"/>
+    </rowConstraints>
+    <children>
+        <GridPane alignment="BOTTOM_CENTER" maxHeight="400.0" maxWidth="150.0" minHeight="300.0" minWidth="100.0"
+                  prefHeight="400.0" prefWidth="125.0" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                vgrow="ALWAYS"/>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                vgrow="ALWAYS"/>
+            </rowConstraints>
+            <children>
+                <Label fx:id="settingsBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308"
+                       onMouseClicked="#handleSettingsBtn" style="-fx-text-fill: #FFFFFF;" styleClass="label-btn"
+                       text="Settings" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </Label>
 
-<GridPane maxHeight="1080.0" maxWidth="150.0" minHeight="600.0" minWidth="100.0" prefHeight="800.0" prefWidth="150.0" styleClass="grid-pane" stylesheets="@../../styles/side-bar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.coworker.SideBarController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="400.0" minHeight="300.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="ALWAYS" />
-  </rowConstraints>
-   <children>
-      <GridPane alignment="BOTTOM_CENTER" maxHeight="400.0" maxWidth="150.0" minHeight="300.0" minWidth="100.0" prefHeight="400.0" prefWidth="125.0" GridPane.rowIndex="1">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-         </rowConstraints>
-         <children>
-            <Label fx:id="settingsBtn" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" onMouseClicked="#handleSettingsBtn" style="-fx-text-fill: #FFFFFF;" styleClass="label-btn" text="Settings" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font size="22.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets left="10.0" right="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label fx:id="profileBtn" onMouseClicked="#handleProfileBtn" style="-fx-text-fill: #FFFFFF;" styleClass="label-btn" text="My profile" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.rowIndex="1">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font size="22.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </children>
-      </GridPane>
-      <GridPane alignment="TOP_CENTER" maxHeight="400.0" maxWidth="150.0" minHeight="300.0" minWidth="100.0" prefHeight="400.0" prefWidth="125.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-         </rowConstraints>
-         <children>
-            <Label fx:id="documentsBtn" alignment="CENTER" onMouseClicked="#handleDocumentsBtn" style="-fx-text-fill: #FFFFFF;" styleClass="label-btn" text="Document Verification" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.rowIndex="1">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets left="10.0" right="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label fx:id="usersBtn" onMouseClicked="#handleUserVerificationBtn" style="-fx-text-fill: #FFFFFF;" styleClass="label-btn" text="User Verification" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <GridPane.margin>
-                  <Insets left="10.0" right="10.0" />
-               </GridPane.margin>
-            </Label>
-            <Label style="-fx-text-fill: #FFFFFF;" text="GHAI" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font size="43.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-         </children>
-      </GridPane>
-   </children>
-   <padding>
-      <Insets bottom="10.0" top="10.0" />
-   </padding>
+                <fx:include source="../_components/auth/logoutButton.fxml"/>
+
+                <Label fx:id="profileBtn" onMouseClicked="#handleProfileBtn" style="-fx-text-fill: #FFFFFF;"
+                       styleClass="label-btn" text="My profile" textAlignment="CENTER" textFill="WHITE" wrapText="true"
+                       GridPane.rowIndex="1">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                </Label>
+            </children>
+        </GridPane>
+        <GridPane alignment="TOP_CENTER" maxHeight="400.0" maxWidth="150.0" minHeight="300.0" minWidth="100.0"
+                  prefHeight="400.0" prefWidth="125.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                vgrow="ALWAYS"/>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                vgrow="ALWAYS"/>
+                <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER"
+                                vgrow="ALWAYS"/>
+            </rowConstraints>
+            <children>
+                <Label fx:id="documentsBtn" alignment="CENTER" onMouseClicked="#handleDocumentsApproveBtn"
+                       style="-fx-text-fill: #FFFFFF;" styleClass="label-btn" text="Document Verification"
+                       textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <Label fx:id="usersBtn" onMouseClicked="#handleUserVerificationBtn" style="-fx-text-fill: #FFFFFF;"
+                       styleClass="label-btn" text="User Verification" textAlignment="CENTER" textFill="WHITE"
+                       wrapText="true" GridPane.rowIndex="2">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <Label style="-fx-text-fill: #FFFFFF;" text="GHAI" textAlignment="CENTER" textFill="WHITE"
+                       wrapText="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <font>
+                        <Font size="43.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                </Label>
+            </children>
+        </GridPane>
+    </children>
+    <padding>
+        <Insets bottom="10.0" top="10.0"/>
+    </padding>
 </GridPane>

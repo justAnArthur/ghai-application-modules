@@ -16,6 +16,7 @@ public class UserRepositoryInternal extends UserRepository {
         add(User.newBuilder().setId("3").setEmail("third@third.third").setPassword("third").setRole(UserRole.ADMIN).build());
         add(User.newBuilder().setId("4").setEmail("admin@admin.admin").setPassword("admin").setRole(UserRole.ADMIN).build());
         add(User.newBuilder().setId("5").setEmail("client@client.client").setPassword("client").setRole(UserRole.CLIENT).setConfirmed(true).build());
+        add(User.newBuilder().setId("6").setEmail("coworker@coworker.coworker").setPassword("coworker").setRole(UserRole.COWORKER).setConfirmed(true).build());
     }};
 
     @Override

@@ -16,6 +16,8 @@ public class ClientRepositoryInternal extends ClientRepository {
                 .setId("1").build()).build());
         add(Client.newBuilder().setId("2").setFirstName("client").setLastName("client").setUser(User.newBuilder()
                 .setId("5").build()).build());
+        add(Client.newBuilder().setId("3").setFirstName("coworker").setLastName("coworker").setUser(User.newBuilder()
+                .setId("6").build()).build());
     }};
 
     public Client save(Client toSave) {

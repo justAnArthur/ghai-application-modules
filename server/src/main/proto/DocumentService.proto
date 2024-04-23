@@ -3,11 +3,13 @@ syntax = "proto3";
 option java_multiple_files = true;
 package fiit.vava.server;
 
+import "google/protobuf/timestamp.proto";
 import "UserService.proto";
 
 message CreateDocumentTemplateRequest {
   bytes file = 1;
   string name = 2;
+  string requirements = 6;
   DocumentTemplateType type = 4;
   repeated DocumentTemplateField fields = 5;
 }
@@ -42,8 +44,27 @@ message GetAllDocumentRequestsResponse {
   repeated DocumentRequest documentRequests = 1;
 }
 
+message GetDocumentRequestByIdRequest {
+  string id = 1;
+}
+
+message ApproveRejectDocumentRequestRequest {
+  string documentRequestId = 1;
+  string comment = 2;
+}
+
+message GetDocumentFieldsByDocumentRequestIdRequest {
+  string documentRequestId = 1;
+}
+
+message DocumentFieldsResponse {
+  repeated DocumentField fields = 1;
+}
+
 service DocumentService {
   rpc getFileByPath(GetFileByPathRequest) returns (GetFileByPathResponse) {}
+
+  // documentTemplates
 
   rpc getAllDocumentTemplates(Empty) returns (GetAllDocumentTemplates) {}
 
@@ -51,9 +72,23 @@ service DocumentService {
 
   rpc createDocumentTemplate(CreateDocumentTemplateRequest) returns (DocumentTemplate) {}
 
+  // documentRequests
+
+  rpc getDocumentRequestById(GetDocumentRequestByIdRequest) returns (DocumentRequest) {}
+
   rpc createDocumentRequest(CreateDocumentRequest) returns (DocumentRequest) {}
 
   rpc getAllMineDocumentRequests(Empty) returns (GetAllDocumentRequestsResponse) {}
+
+  rpc getAllDocumentRequestsToApprove(Empty) returns (GetAllDocumentRequestsResponse) {}
+
+  rpc approveDocumentRequest(ApproveRejectDocumentRequestRequest) returns (Response) {}
+
+  rpc rejectDocumentRequest(ApproveRejectDocumentRequestRequest) returns (Response) {}
+
+  // documentFields
+
+  rpc getAllDocumentFieldsByDocumentRequestId(GetDocumentFieldsByDocumentRequestIdRequest) returns (DocumentFieldsResponse) {}
 }
 
 message Document {
@@ -72,6 +107,8 @@ enum DocumentRequestStatus {
 
 message DocumentRequest {
   string id = 1;
+  google.protobuf.Timestamp createdAt = 6;
+
   Client client = 2;
   DocumentRequestStatus status = 3;
   DocumentTemplate template = 4;
@@ -89,6 +126,7 @@ message DocumentTemplate {
   string name = 2;
   string path = 3;
   DocumentTemplateType type = 4;
+  string requirements = 5;
 }
 
 message DocumentTemplateField {

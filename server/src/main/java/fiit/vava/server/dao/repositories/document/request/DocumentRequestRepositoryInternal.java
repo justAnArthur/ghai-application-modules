@@ -1,6 +1,7 @@
 package fiit.vava.server.dao.repositories.document.request;
 
 import fiit.vava.server.DocumentRequest;
+import fiit.vava.server.DocumentRequestStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class DocumentRequestRepositoryInternal extends DocumentRequestRepository
     private final ArrayList<DocumentRequest> documentRequests = new ArrayList<>();
 
     public DocumentRequest save(DocumentRequest toSave) {
+        System.out.println("Saving document request: " + toSave.getId() + " " + toSave.getDocument() + " " + toSave.getStatus());
         if (toSave.getId() != null && !toSave.getId().isEmpty()) {
             DocumentRequest finalToSave = toSave;
             documentRequests.removeIf(documentRequest -> documentRequest.getId().equals(finalToSave.getId()));
@@ -38,6 +40,13 @@ public class DocumentRequestRepositoryInternal extends DocumentRequestRepository
     public List<DocumentRequest> findAllByClientId(String clientId) {
         return documentRequests.stream()
                 .filter(documentRequest -> documentRequest.getClient().getId().equals(clientId))
+                .toList();
+    }
+
+    @Override
+    public List<DocumentRequest> findAllByStatus(DocumentRequestStatus status) {
+        return documentRequests.stream()
+                .filter(documentRequest -> documentRequest.getStatus().equals(status))
                 .toList();
     }
 }

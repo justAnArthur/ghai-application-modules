@@ -1,6 +1,7 @@
 package fiit.vava.server.services;
 
 import com.google.protobuf.ByteString;
+import com.google.protobuf.Timestamp;
 import fiit.vava.server.*;
 import fiit.vava.server.config.Constants;
 import fiit.vava.server.dao.repositories.document.DocumentRepository;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -51,13 +53,17 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
         return path.toString();
     }
 
+    private ByteString getFileByPath(String path) throws IOException {
+        byte[] data = Files.readAllBytes(Paths.get(path));
+        return ByteString.copyFrom(data);
+    }
+
     @Override
     public void getFileByPath(GetFileByPathRequest request, StreamObserver<GetFileByPathResponse> responseObserver) {
         try {
-            byte[] data = Files.readAllBytes(Paths.get(request.getPath()));
             responseObserver.onNext(
                     GetFileByPathResponse.newBuilder()
-                            .setFile(ByteString.copyFrom(data))
+                            .setFile(getFileByPath(request.getPath()))
                             .build()
             );
             responseObserver.onCompleted();
@@ -143,6 +149,7 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
                         .setClient(client)
                         .setTemplate(template)
                         .setStatus(status)
+                        .setCreatedAt(Timestamp.newBuilder().setNanos(Instant.now().getNano()).build())
                         .build());
 
         request.getFieldsList().forEach(field ->
@@ -168,6 +175,96 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
                 .build();
 
         responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getDocumentRequestById(GetDocumentRequestByIdRequest request, StreamObserver<DocumentRequest> responseObserver) {
+        DocumentRequest documentRequest = documentRequestRepository.findById(request.getId());
+
+        if (documentRequest == null)
+            throw new RuntimeException("Document request not found.");
+
+        responseObserver.onNext(documentRequest);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getAllDocumentRequestsToApprove(Empty request, StreamObserver<GetAllDocumentRequestsResponse> responseObserver) {
+        // TODO: filter by coworker's admin region
+        List<DocumentRequest> documentRequests = documentRequestRepository.findAllByStatus(DocumentRequestStatus.CREATED);
+
+        GetAllDocumentRequestsResponse response = GetAllDocumentRequestsResponse.newBuilder()
+                .addAllDocumentRequests(documentRequests)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getAllDocumentFieldsByDocumentRequestId(GetDocumentFieldsByDocumentRequestIdRequest request, StreamObserver<DocumentFieldsResponse> responseObserver) {
+        List<DocumentField> fields = documentFieldRepository.findAllByDocumentRequestId(request.getDocumentRequestId());
+
+        DocumentFieldsResponse response = DocumentFieldsResponse.newBuilder()
+                .addAllFields(fields)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    private Document generateDocumentBasedOnRequest(DocumentRequest documentRequest) throws IOException {
+        // now - just save a copy of file
+        String name = documentRequest.getClient().getUser().getEmail() + "-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
+
+        String path = saveFile(name, getFileByPath(documentRequest.getTemplate().getPath()).toByteArray());
+
+        return Document.newBuilder()
+                .setName(name)
+                .setPath(path)
+                .build();
+    }
+
+    @Override
+    public void approveDocumentRequest(ApproveRejectDocumentRequestRequest request, StreamObserver<Response> responseObserver) {
+        DocumentRequest documentRequest = documentRequestRepository.findById(request.getDocumentRequestId());
+
+        if (documentRequest == null)
+            throw new RuntimeException("Document request not found.");
+
+        Document document = null;
+        try {
+            document = generateDocumentBasedOnRequest(documentRequest);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        documentRequestRepository.save(documentRequest.toBuilder()
+                .setDocument(document)
+                .setStatus(DocumentRequestStatus.VALIDATED)
+                .build());
+
+        // todo notify client
+
+        responseObserver.onNext(Response.newBuilder().build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void rejectDocumentRequest(ApproveRejectDocumentRequestRequest request, StreamObserver<Response> responseObserver) {
+        DocumentRequest documentRequest = documentRequestRepository.findById(request.getDocumentRequestId());
+
+        if (documentRequest == null)
+            throw new RuntimeException("Document request not found.");
+
+        documentRequestRepository.save(documentRequest.toBuilder()
+                .setStatus(DocumentRequestStatus.DISCARDED)
+                .build());
+
+        // todo notify client
+
+        responseObserver.onNext(Response.newBuilder().build());
         responseObserver.onCompleted();
     }
 }

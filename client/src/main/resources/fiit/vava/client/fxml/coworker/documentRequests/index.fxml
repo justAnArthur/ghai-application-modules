@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fiit.vava.client.controllers.coworker.documentRequests.DocumentRequestsController"
+            prefHeight="400.0" prefWidth="600.0">
+    <fx:include source="../../_components/routing/backButton.fxml"/>
+
+    <center>
+        <TableView fx:id="nonApprovedDocumentRequests" prefHeight="200.0" prefWidth="200.0"
+                   BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="templateName" prefWidth="75.0" text="templateName"/>
+                <TableColumn fx:id="clientsName" prefWidth="119.5" text="clientsName"/>
+                <TableColumn fx:id="createdAt" prefWidth="75.0" text="createdAt"/>
+                <TableColumn fx:id="actionsColumn" prefWidth="119.5" text="approve"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

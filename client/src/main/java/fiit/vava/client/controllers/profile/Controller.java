@@ -1,16 +1,17 @@
 package fiit.vava.client.controllers.profile;
 
+import fiit.vava.client.CredentialsManager;
+import fiit.vava.client.Router;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.event.ActionEvent;
-import fiit.vava.client.CredentialsManager;
-import fiit.vava.client.Router;
+
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class Controller {
 
@@ -73,7 +74,7 @@ public class Controller {
     private void handleLogOut(){
         try {
             CredentialsManager.removeCredentials();
-            Router.getInstance().destroyNavBar();
+            Router.getInstance().removeSidebar();
             Router.getInstance().navigateTo("auth/login");
         } catch (IOException e) {
             e.printStackTrace();

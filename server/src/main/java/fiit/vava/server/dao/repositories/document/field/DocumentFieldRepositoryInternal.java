@@ -33,4 +33,11 @@ public class DocumentFieldRepositoryInternal extends DocumentFieldRepository {
     public List<DocumentField> findAll() {
         return documentFields;
     }
+
+    @Override
+    public List<DocumentField> findAllByDocumentRequestId(String documentRequestId) {
+        return documentFields.stream()
+                .filter(documentField -> documentField.getRequest().getId().equals(documentRequestId))
+                .toList();
+    }
 }

@@ -32,28 +32,35 @@ public class Controller {
     @FXML
     private TableColumn<Client, String> actionsColumn;
 
+    public void handleApprove(Client client) {
+        UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
+
+        stub.approveClient(client);
+        loadData();
+    }
+
     public void initialize() {
-        // idColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getId()));
-        // emailColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUser().getEmail()));
-        // firstNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFirstName()));
-        // lastNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLastName()));
-        //
-        // actionsColumn.setCellFactory(param -> new TableCell<>() {
-        //     final Button btn = new Button("approve");
-        //
-        //     @Override
-        //     public void updateItem(String item, boolean empty) {
-        //         super.updateItem(item, empty);
-        //         if (empty) {
-        //             setGraphic(null);
-        //         } else {
-        //             btn.setOnAction(event -> handleApprove(getTableView().getItems().get(getIndex())));
-        //             setGraphic(btn);
-        //         }
-        //     }
-        // });
-        //
-        // loadData();
+        idColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getId()));
+        emailColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUser().getEmail()));
+        firstNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFirstName()));
+        lastNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLastName()));
+
+        actionsColumn.setCellFactory(param -> new TableCell<>() {
+            final Button btn = new Button("approve");
+
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    btn.setOnAction(event -> handleApprove(getTableView().getItems().get(getIndex())));
+                    setGraphic(btn);
+                }
+            }
+        });
+
+        loadData();
     }
 
     public void loadData() {
@@ -64,12 +71,5 @@ public class Controller {
         System.out.println(nonApprovedClients.size());
 
         nonApprovedClientsTable.getItems().addAll(nonApprovedClients);
-    }
-
-    public void handleApprove(Client client) {
-        UserServiceGrpc.UserServiceBlockingStub stub = StubsManager.getInstance().getUserServiceBlockingStub();
-
-        stub.approveClient(client);
-        loadData();
     }
 }
