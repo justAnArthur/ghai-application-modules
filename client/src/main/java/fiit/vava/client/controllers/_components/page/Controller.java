@@ -1,30 +1,15 @@
 package fiit.vava.client.controllers._components.page;
 
-import javafx.scene.Node;
-import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
+import fiit.vava.client.controllers._components.page.card.DocumentCardController;
 import fiit.vava.server.DocumentServiceGrpc;
-import fiit.vava.server.DocumentTemplate;
 import fiit.vava.server.Empty;
-import fiit.vava.server.GetFileByPathRequest;
-import io.github.palexdev.mfxcore.utils.fx.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.control.Pagination;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.PDFRenderer;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.FXML;
-import fiit.vava.client.controllers._components.page.card.CardController;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 public class Controller {
@@ -36,8 +21,8 @@ public class Controller {
       try{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fiit/vava/client/fxml/_components/page/card/card.fxml"));
         Node card = loader.load();
-        CardController controller = (CardController) loader.getController();
-        controller.setObject(obj,mode);
+          DocumentCardController controller = (DocumentCardController) loader.getController();
+          controller.setData(obj);
         return card;
       } catch (IOException e){
           e.printStackTrace();

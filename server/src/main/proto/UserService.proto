@@ -25,13 +25,20 @@ message CoworkerResponse {
   repeated Coworker coworker = 1;
 }
 
+message RegisterClientRequest {
+  Client client = 1;
+  bytes documentFile = 2;
+}
+
 service UserService {
   rpc login(LoginUserRequest) returns (Response);
 
   rpc me(Empty) returns (User);
 
-  rpc registerClient(Client) returns (Response);
+  rpc registerClient(RegisterClientRequest) returns (Response);
+}
 
+service CoworkerService {
   rpc getNonApprovedClients(Empty) returns (NonApprovedClientsResponse);
   rpc approveClient(Client) returns (Response);
 }

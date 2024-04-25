@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<Button text="Back"
-        fx:controller="fiit.vava.client.controllers._components.routing.BackButtonController"
-        onAction="#handleButtonClick"
-        xmlns:fx="http://javafx.com/fxml"
-/>
 
+<?import javafx.scene.control.Button?>
+<Button onAction="#handleButtonClick" text="← Back"
+        style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"
+        xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="fiit.vava.client.controllers._components.routing.BackButtonController">
+</Button>

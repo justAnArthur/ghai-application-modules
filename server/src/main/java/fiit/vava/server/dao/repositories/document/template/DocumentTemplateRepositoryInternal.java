@@ -1,6 +1,7 @@
 package fiit.vava.server.dao.repositories.document.template;
 
 import fiit.vava.server.DocumentTemplate;
+import fiit.vava.server.DocumentTemplateType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,16 @@ import java.util.UUID;
 
 public class DocumentTemplateRepositoryInternal extends DocumentTemplateRepository {
 
-    private final ArrayList<DocumentTemplate> documentTemplates = new ArrayList<>();
+    private static String CLIENT_PASSPORT_NAME = "Client Passport";
+
+    private final ArrayList<DocumentTemplate> documentTemplates = new ArrayList<>() {{
+        add(DocumentTemplate.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setName(CLIENT_PASSPORT_NAME)
+                .setType(DocumentTemplateType.LEGAL)
+                .setPrivate(true)
+                .build());
+    }};
 
     public DocumentTemplate save(DocumentTemplate toSave) {
         if (toSave.getId() != null && !toSave.getId().isEmpty()) {
@@ -32,5 +42,13 @@ public class DocumentTemplateRepositoryInternal extends DocumentTemplateReposito
     @Override
     public List<DocumentTemplate> findAll() {
         return documentTemplates;
+    }
+
+    @Override
+    public DocumentTemplate getClientPassportTemplate() {
+        return documentTemplates.stream()
+                .filter(documentTemplate -> documentTemplate.getName().equals(CLIENT_PASSPORT_NAME))
+                .findFirst()
+                .orElse(null);
     }
 }

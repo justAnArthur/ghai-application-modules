@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fiit.vava.client.controllers.coworker.documentRequests.DocumentRequestsController"
-            prefHeight="400.0" prefWidth="600.0">
-    <fx:include source="../../_components/routing/backButton.fxml"/>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fiit.vava.client.controllers.coworker.documentRequests.DocumentRequestsController"
+      style="-fx-padding: 10px; -fx-font-size: 15px" spacing="20">
+    <HBox>
+        <VBox style="-fx-grow: 1;">
+            <Label text="Document requests" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <Label text="Document request that waiting on approval. And after which will be generated document for client."
+                   style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
+        </VBox>
+        <!--
+                <Button text="Add user"
+                        style="-fx-background-color: #667eea; -fx-padding: 10px 15px; -fx-text-fill: #ffffff; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.19), 5, 0.0, 0, 1);"/>
+        -->
+    </HBox>
 
-    <center>
-        <TableView fx:id="nonApprovedDocumentRequests" prefHeight="200.0" prefWidth="200.0"
-                   BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="templateName" prefWidth="75.0" text="templateName"/>
-                <TableColumn fx:id="clientsName" prefWidth="119.5" text="clientsName"/>
-                <TableColumn fx:id="createdAt" prefWidth="75.0" text="createdAt"/>
-                <TableColumn fx:id="actionsColumn" prefWidth="119.5" text="approve"/>
-            </columns>
-        </TableView>
-    </center>
-</BorderPane>
+    <TableView fx:id="nonApprovedDocumentRequests" HBox.hgrow="ALWAYS">
+        <placeholder>
+            <Label text="No document requests found." style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568;"/>
+        </placeholder>
+        <columns>
+            <TableColumn fx:id="templateName" text="Template name"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <TableColumn fx:id="clientsName" text="Client name"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <TableColumn fx:id="clientsEmail" text="Client email"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <!--
+                        <TableColumn fx:id="createdAt" text="Created at"
+                                     style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            -->
+            <TableColumn fx:id="actionsColumn" text="Approve"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <!--
+             <TableColumn fx:id="templateName" prefWidth="75.0" text="templateName"/>
+            <TableColumn fx:id="clientsName" prefWidth="119.5" text="clientsName"/>
+            <TableColumn fx:id="createdAt" prefWidth="75.0" text="createdAt"/>
+            <TableColumn fx:id="actionsColumn" prefWidth="119.5" text="approve"/>
+            -->
+        </columns>
+    </TableView>
+</VBox>

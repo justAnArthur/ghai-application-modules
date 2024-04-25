@@ -1,69 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="600.0" minWidth="800.0" prefHeight="800.0"
-            prefWidth="1200.0" stylesheets="@../../../../styles/admin/templates/create/styles.css"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fiit.vava.client.controllers.admin.templates.create.CreateTemplateController">
-    <right>
-        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="300.0" minHeight="-Infinity" minWidth="150.0"
-                    prefWidth="300.0" styleClass="right-column" BorderPane.alignment="CENTER">
-            <bottom>
-                <Button onAction="#handleCreateTemplate" text="submit" BorderPane.alignment="CENTER"/>
-            </bottom>
-            <top>
-                <GridPane BorderPane.alignment="CENTER">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"/>
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
-                    <children>
-                        <TextField fx:id="templateName" promptText="Template name"/>
-                        <TextField fx:id="templateRequirements" promptText="Template requirements"/>
+<HBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fiit.vava.client.controllers.admin.templates.create.CreateTemplateController">
+    <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" style="-fx-padding: 25">
+        <BorderPane>
+            <center>
+                <fx:include source="../../../_components/fileUpload.fxml"/>
+            </center>
+        </BorderPane>
+    </VBox>
 
-                        <Button onAction="#handleAddField" text="add field" GridPane.rowIndex="1"/>
-                    </children>
-                </GridPane>
-            </top>
-            <center>
-                <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <content>
-                        <VBox fx:id="fieldsPane" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308"
-                              maxWidth="1.7976931348623157E308" styleClass="fields-vbox">
-                            <padding>
-                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-                            </padding>
-                        </VBox>
-                    </content>
-                    <BorderPane.margin>
-                        <Insets/>
-                    </BorderPane.margin>
-                </ScrollPane>
-            </center>
-            <BorderPane.margin>
-                <Insets bottom="25.0" right="5.0" top="25.0"/>
-            </BorderPane.margin>
-        </BorderPane>
-    </right>
-    <center>
-        <BorderPane BorderPane.alignment="CENTER">
-            <center>
-                <ImageView fx:id="pdfPreview" fitHeight="665.0" fitWidth="745.0" preserveRatio="true"
-                           BorderPane.alignment="CENTER"/>
-            </center>
-            <bottom>
-                <Button onAction="#handleUploadPdf" text="upload PDF" BorderPane.alignment="CENTER">
-                    <BorderPane.margin>
-                        <Insets bottom="50.0"/>
-                    </BorderPane.margin>
-                </Button>
-            </bottom>
-        </BorderPane>
-    </center>
-</BorderPane>
+    <VBox spacing="5" style="-fx-border-color: #a0aec0; -fx-border-width: 0 0 0 1; -fx-padding: 10px">
+        <Label fx:id="templateNameLabel" text="Template name"
+               style="-fx-font-size: 1em; -fx-font-weight: medium; -fx-text-fill: #2d3748;"/>
+        <TextField fx:id="templateName" promptText="Template name"
+                   style="-fx-background-color: #edf2f7; -fx-border-color: #a0aec0; -fx-border-width: 1px; -fx-border-radius: 0.25em; -fx-padding: 0.375em 0.75em; -fx-text-fill: #2d3748;"/>
+
+        <Label fx:id="typeLabel" text="Template type"
+               style="-fx-font-size: 1em; -fx-font-weight: medium; -fx-text-fill: #2d3748;"/>
+        <ComboBox fx:id="type"
+                  style="-fx-background-color: #edf2f7; -fx-border-color: #a0aec0; -fx-border-width: 1px; -fx-border-radius: 0.25em; -fx-text-fill: #2d3748;"/>
+
+        <VBox fx:id="fieldsPane" style="-fx-border-color: #a0aec0; -fx-border-width: 0 0 1 0;">
+            <!--fields-->
+        </VBox>
+
+        <Button onAction="#handleAddField" text="Add new field"
+                style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
+
+        <Button onAction="#handleCreateTemplate" text="Submit create template"
+                style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
+
+        <Label fx:id="labelError" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold;"/>
+    </VBox>
+</HBox>

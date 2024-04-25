@@ -5,12 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.client.profile.Controller">
+            minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #f0f8ff;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fiit.vava.client.controllers.client.profile.Controller">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="My profile">
+             <Label text="My profile" textFill="#2d3480">
                <font>
                   <Font size="60.0" />
                </font>
@@ -21,7 +22,13 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="myDocumentsBtn" maxWidth="200.0" mnemonicParsing="false" onAction="#handleMyDocumentsBtn" prefHeight="50.0" prefWidth="150.0" text="My documents" HBox.hgrow="ALWAYS" />
+             <Button fx:id="myDocumentsBtn" maxWidth="200.0" mnemonicParsing="false" onAction="#handleMyDocumentsBtn"
+                     prefHeight="50.0" prefWidth="150.0" stylesheets="@../../../styles/button-dark.css"
+                     text="My documents" HBox.hgrow="ALWAYS">
+                 <font>
+                     <Font name="System Bold" size="18.0"/>
+                 </font>
+             </Button>
          </children>
       </HBox>
    </bottom>
@@ -47,12 +54,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <Label text="Name:">
+                   <Label text="Name:" textFill="#2d3480">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="name" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text="SomeName" GridPane.columnIndex="1">
+                   <Label fx:id="name" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text="SomeName"
+                          textFill="#2d3480" GridPane.columnIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -71,12 +79,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <Label text="Surname:">
+                   <Label text="Surname:" textFill="#2d3480">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="surname" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text="SomeSurname" GridPane.columnIndex="1">
+                   <Label fx:id="surname" maxWidth="1.7976931348623157E308" styleClass="data-info-field"
+                          text="SomeSurname" textFill="#2d3480" GridPane.columnIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -95,12 +104,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <Label text="Date of Birth:">
+                   <Label text="Date of Birth:" textFill="#2d3480">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="dateOfBirth" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text="12.12.2024" GridPane.columnIndex="1">
+                   <Label fx:id="dateOfBirth" maxWidth="1.7976931348623157E308" styleClass="data-info-field"
+                          text="12.12.2024" textFill="#2d3480" GridPane.columnIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -119,12 +129,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <Label text="Sex:">
+                   <Label text="Sex:" textFill="#2d3480">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="sex" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text="Female" GridPane.columnIndex="1">
+                   <Label fx:id="sex" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text="Female"
+                          textFill="#2d3480" GridPane.columnIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -143,12 +154,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <Label text="Verified:">
+                   <Label text="Verified:" textFill="#2d3480">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="verified" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text=" Yes" GridPane.columnIndex="1">
+                   <Label fx:id="verified" maxWidth="1.7976931348623157E308" styleClass="data-info-field" text=" Yes"
+                          textFill="#2d3480" GridPane.columnIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>

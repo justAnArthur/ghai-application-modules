@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fiit.vava.client.controllers._components.intl.ChangeLanguageController">
+    <Label fx:id="labelLanguage" text="Change language"
+           style="-fx-font-weight: medium; -fx-text-fill: #718096; -fx-font-size: 15px"/>
+    <ComboBox fx:id="language"
+              style="-fx-background-color: #edf2f7; -fx-border-color: #a0aec0; -fx-border-width: 1px; -fx-border-radius: 0.25em; -fx-text-fill: #2d3748;">
+        <!--items-->
+    </ComboBox>
+</VBox>

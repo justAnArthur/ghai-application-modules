@@ -18,7 +18,7 @@ message GetFileByPathRequest {
   string path = 1;
 }
 
-message GetFileByPathResponse {
+message GetFileResponse {
   bytes file = 1;
 }
 
@@ -61,8 +61,18 @@ message DocumentFieldsResponse {
   repeated DocumentField fields = 1;
 }
 
+message GetDocumentRequestByClientIdRequest {
+  string clientId = 1;
+}
+
+message GetFileByDocumentId {
+  string documentId = 1;
+}
+
 service DocumentService {
-  rpc getFileByPath(GetFileByPathRequest) returns (GetFileByPathResponse) {}
+  rpc getFileByPath(GetFileByPathRequest) returns (GetFileResponse) {}
+
+  rpc getFileByDocumentId(GetFileByDocumentId) returns (GetFileResponse) {}
 
   // documentTemplates
 
@@ -85,6 +95,8 @@ service DocumentService {
   rpc approveDocumentRequest(ApproveRejectDocumentRequestRequest) returns (Response) {}
 
   rpc rejectDocumentRequest(ApproveRejectDocumentRequestRequest) returns (Response) {}
+
+  rpc getDocumentRequestsByClientId(GetDocumentRequestByClientIdRequest) returns (GetAllDocumentRequestsResponse) {}
 
   // documentFields
 
@@ -127,6 +139,7 @@ message DocumentTemplate {
   string path = 3;
   DocumentTemplateType type = 4;
   string requirements = 5;
+  bool private = 6;
 }
 
 message DocumentTemplateField {

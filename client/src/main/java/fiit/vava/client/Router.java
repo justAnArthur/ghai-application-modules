@@ -1,8 +1,7 @@
 package fiit.vava.client;
 
-import fiit.vava.client.controllers._components.FileUploadController;
-import fiit.vava.client.controllers._components.ImageReceiver;
 import fiit.vava.client.controllers.AppController;
+import fiit.vava.client.controllers._components.ImageReceiver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -32,9 +31,11 @@ public class Router {
         initModality(Modality.APPLICATION_MODAL);
     }};
 
-    private final Map<String, String> parameters = new HashMap<>();
     private final Map<String, URL> routes = new HashMap<>();
     private final List<String> routesHistory = new ArrayList<>();
+
+    private final Map<String, String> parameters = new HashMap<>();
+    private final Map<String, Object> sharedData = new HashMap<>();
 
     private static Router instance;
     private static Stage stage;
@@ -188,8 +189,8 @@ public class Router {
     }
 
     public void setSideBar(String route) throws IOException {
-        stage.setMinWidth(1280);
-        stage.setMinHeight(800);
+//        stage.setMinWidth(1280);
+//        stage.setMinHeight(800);
 
         URL path = routes.get(route);
 
@@ -206,8 +207,8 @@ public class Router {
     public void showModal(String route, ImageReceiver imageReceiver) throws IOException {
         FXMLLoader dialogLoader = new FXMLLoader(getClass().getResource(route));
         Parent dialogRoot = dialogLoader.load();
-        FileUploadController controller = (FileUploadController) dialogLoader.getController();
-        controller.setImageReceiver(imageReceiver);
+//        FileUploadController controller = (FileUploadController) dialogLoader.getController();
+//        controller.setImageReceiver(imageReceiver);
         modalStage.setScene(new Scene(dialogRoot));
         modalStage.showAndWait();
     }
@@ -216,10 +217,23 @@ public class Router {
         modalStage.close();
     }
 
-    public static void setRole(String newRole){
+    public static void setRole(String newRole) {
         role = newRole;
     }
+
     public static String getRole() {
         return role;
+    }
+
+    public AppController getAppController() {
+        return appController;
+    }
+
+    public void addSharedData(String key, Object value) {
+        sharedData.put(key, value);
+    }
+
+    public Object getSharedData(String key) {
+        return sharedData.get(key);
     }
 }

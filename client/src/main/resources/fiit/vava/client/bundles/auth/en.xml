@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="header.login">Login</entry>
+    <entry key="label.email">Email address</entry>
+    <entry key="label.password">Password</entry>
+    <entry key="button.signIn">Sign In</entry>
+    <entry key="label.goToRegistration">Dont have an account yet?</entry>
+    <entry key="button.goToRegistration">Create one now</entry>
+</properties>

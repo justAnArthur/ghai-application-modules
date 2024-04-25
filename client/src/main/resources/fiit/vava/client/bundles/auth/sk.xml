@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="header.login">Prihlásenie</entry>
+    <entry key="label.email">Používateľské meno</entry>
+    <entry key="label.password">Heslo</entry>
+    <entry key="button.signIn">Prihlásiť sa</entry>
+    <entry key="label.goToRegistration">Ešte nemáte konto?</entry>
+    <entry key="button.goToRegistration">Vytvorite si ho teraz</entry>
+</properties>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fiit.vava.client.controllers._components.ProfileLabelController">
+    <Label fx:id="profileNameLabel" text="Your profile"
+           style="-fx-font-size: 0.875em; -fx-text-fill: #718096; -fx-padding: 15px 0 0 0"/>
+    <Label fx:id="profileName" text="Tom Cook" style="-fx-text-fill: #667eea; -fx-font-weight: bold;"/>
+</VBox>

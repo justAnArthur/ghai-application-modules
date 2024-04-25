@@ -32,7 +32,7 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
     DocumentFieldRepository documentFieldRepository;
     ClientRepository clientRepository;
 
-    private final String PATH_TO_SAVE_FILES;
+    private static String PATH_TO_SAVE_FILES;
 
     public DocumentService() {
         this.documentRepository = DocumentRepository.getInstance();
@@ -43,10 +43,10 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
         this.clientRepository = ClientRepository.getInstance();
 
         Dotenv dotenv = Dotenv.load();
-        this.PATH_TO_SAVE_FILES = dotenv.get("PATH_TO_SAVE_FILES");
+        PATH_TO_SAVE_FILES = dotenv.get("PATH_TO_SAVE_FILES");
     }
 
-    private String saveFile(String fileName, byte[] data) throws IOException {
+    public static String saveFile(String fileName, byte[] data) throws IOException {
         Path path = Paths.get(PATH_TO_SAVE_FILES, fileName);
         Files.createDirectories(path.getParent());
         Files.write(path, data, StandardOpenOption.CREATE);
@@ -59,10 +59,10 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
     }
 
     @Override
-    public void getFileByPath(GetFileByPathRequest request, StreamObserver<GetFileByPathResponse> responseObserver) {
+    public void getFileByPath(GetFileByPathRequest request, StreamObserver<GetFileResponse> responseObserver) {
         try {
             responseObserver.onNext(
-                    GetFileByPathResponse.newBuilder()
+                    GetFileResponse.newBuilder()
                             .setFile(getFileByPath(request.getPath()))
                             .build()
             );
@@ -220,10 +220,10 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
 
         String path = saveFile(name, getFileByPath(documentRequest.getTemplate().getPath()).toByteArray());
 
-        return Document.newBuilder()
+        return documentRepository.save(Document.newBuilder()
                 .setName(name)
                 .setPath(path)
-                .build();
+                .build());
     }
 
     @Override
@@ -242,7 +242,7 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
 
         documentRequestRepository.save(documentRequest.toBuilder()
                 .setDocument(document)
-                .setStatus(DocumentRequestStatus.VALIDATED)
+                .setStatus(DocumentRequestStatus.GENERATED)
                 .build());
 
         // todo notify client
@@ -265,6 +265,37 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
         // todo notify client
 
         responseObserver.onNext(Response.newBuilder().build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getFileByDocumentId(GetFileByDocumentId request, StreamObserver<GetFileResponse> responseObserver) {
+        Document document = documentRepository.findById(request.getDocumentId());
+
+        if (document == null)
+            throw new RuntimeException("Document not found.");
+
+        try {
+            responseObserver.onNext(
+                    GetFileResponse.newBuilder()
+                            .setFile(getFileByPath(document.getPath()))
+                            .build()
+            );
+            responseObserver.onCompleted();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to read a file from local file system.");
+        }
+    }
+
+    @Override
+    public void getDocumentRequestsByClientId(GetDocumentRequestByClientIdRequest request, StreamObserver<GetAllDocumentRequestsResponse> responseObserver) {
+        List<DocumentRequest> documentRequests = documentRequestRepository.findAllByClientId(request.getClientId());
+
+        GetAllDocumentRequestsResponse response = GetAllDocumentRequestsResponse.newBuilder()
+                .addAllDocumentRequests(documentRequests)
+                .build();
+
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

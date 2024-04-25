@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.spi.ResourceBundleProvider;
 
@@ -18,6 +20,8 @@ public class XMLResourceBundleProvider implements ResourceBundleProvider {
 
     private SupportedLanguages currentLanguage;
 
+    private List<OnChangeValueListener> listeners = new ArrayList<>();
+
     private XMLResourceBundleProvider() {
         this.currentLanguage = SupportedLanguages.ENGLISH;
     }
@@ -29,6 +33,8 @@ public class XMLResourceBundleProvider implements ResourceBundleProvider {
 
         return instance;
     }
+
+    // intl
 
     public XMLResourceBundle getBundle(String baseName) {
         return getBundle(baseName, currentLanguage.getLocale());
@@ -53,18 +59,33 @@ public class XMLResourceBundleProvider implements ResourceBundleProvider {
     }
 
     private String toBundleName(String baseName, Locale locale) {
-        return baseName + "_" + locale;
+        return baseName + "." + locale;
+    }
+
+    public void changeLanguage(SupportedLanguages locale) {
+        this.currentLanguage = locale;
+        notifyListeners();
+    }
+
+    public SupportedLanguages getCurrentLanguage() {
+        return currentLanguage;
     }
 
     private String toResourceName(String bundleName, String format) {
         return bundleName.replace('.', '/') + "." + format;
     }
 
-    public void changeLanguage(SupportedLanguages locale) {
-        this.currentLanguage = locale;
+    // observable
+
+    public void subscribe(OnChangeValueListener listener) {
+        listeners.add(listener);
     }
 
-    public SupportedLanguages getCurrentLanguage() {
-        return currentLanguage;
+    private void notifyListeners() {
+        listeners.forEach(listener -> listener.onChangeValue(this.currentLanguage));
+    }
+
+    public interface OnChangeValueListener {
+        void onChangeValue(SupportedLanguages language);
     }
 }

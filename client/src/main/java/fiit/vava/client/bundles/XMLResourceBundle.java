@@ -6,6 +6,7 @@ import java.util.*;
 
 /**
  * XML Resource Bundle
+ *
  * @author slabbe
  */
 public class XMLResourceBundle extends ResourceBundle {
@@ -14,7 +15,9 @@ public class XMLResourceBundle extends ResourceBundle {
 
     public XMLResourceBundle(InputStream stream) throws IOException {
         properties = new Properties();
-        properties.loadFromXML(stream);
+
+        if (stream != null)
+            properties.loadFromXML(stream);
     }
 
     @Override

@@ -2,21 +2,31 @@ package fiit.vava.server.services;
 
 import fiit.vava.server.*;
 import fiit.vava.server.config.Constants;
+import fiit.vava.server.dao.repositories.document.DocumentRepository;
+import fiit.vava.server.dao.repositories.document.request.DocumentRequestRepository;
+import fiit.vava.server.dao.repositories.document.template.DocumentTemplateRepository;
 import fiit.vava.server.dao.repositories.user.UserRepository;
 import fiit.vava.server.dao.repositories.user.client.ClientRepository;
 import io.grpc.stub.StreamObserver;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 
 public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
     private final UserRepository userRepository;
     private final ClientRepository clientRepository;
+    private final DocumentRepository documentRepository;
+    private final DocumentRequestRepository documentRequestRepository;
+    private final DocumentTemplateRepository documentTemplateRepository;
 
     public UserService() {
+        this.documentRepository = DocumentRepository.getInstance();
         this.userRepository = UserRepository.getInstance();
         this.clientRepository = ClientRepository.getInstance();
+        this.documentRequestRepository = DocumentRequestRepository.getInstance();
+        this.documentTemplateRepository = DocumentTemplateRepository.getInstance();
     }
 
     public User authorize(String email, String password) throws SecurityException, NoSuchElementException {
@@ -38,13 +48,31 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     @SkipAuthorization
-    public void registerClient(Client request, StreamObserver<Response> responseObserver) {
+    public void registerClient(RegisterClientRequest request, StreamObserver<Response> responseObserver) {
         try {
-            User user = userRepository.save(request.getUser().toBuilder()
-                    /*.setStatus(UserState.PENDING)*/.build());
-            
-            Client client = clientRepository.save(request.toBuilder()
+            User user = userRepository.save(request.getClient().getUser().toBuilder()
+                    .setStatus(UserState.PENDING).build());
+
+            Client client = clientRepository.save(request.getClient().toBuilder()
                     .setUser(user).build());
+
+            // creating document request (will not be used as plain document request) for client passport
+
+            String name = user.getEmail() + "-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
+
+            String path = DocumentService.saveFile(name, request.getDocumentFile().toByteArray());
+
+            Document document = documentRepository.save(Document.newBuilder()
+                    .setName(name)
+                    .setPath(path)
+                    .build());
+
+            documentRequestRepository.save(DocumentRequest.newBuilder()
+                    .setClient(client)
+                    .setTemplate(documentTemplateRepository.getClientPassportTemplate())
+                    .setStatus(DocumentRequestStatus.CREATED)
+                    .setDocument(document)
+                    .build());
 
             Response response = Response.newBuilder()
                     .setUser(user).build();
@@ -56,35 +84,6 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
             responseObserver.onNext(response);
         }
-        responseObserver.onCompleted();
-    }
-
-    @Override
-    public void getNonApprovedClients(Empty request, StreamObserver<NonApprovedClientsResponse> responseObserver) {
-        List<Client> clients = clientRepository.getNonConfirmedClients();
-
-        NonApprovedClientsResponse.Builder builder = NonApprovedClientsResponse.newBuilder();
-
-        clients.forEach(builder::addClient);
-
-        NonApprovedClientsResponse response = builder.build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    @Override
-    public void approveClient(Client request, StreamObserver<Response> responseObserver) {
-        boolean result = userRepository.setConfirmed(request.getUser());
-
-        Response.Builder builder = Response.newBuilder();
-
-        if (!result)
-            builder.setError("unable to approve");
-
-        Response response = builder.build();
-
-        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

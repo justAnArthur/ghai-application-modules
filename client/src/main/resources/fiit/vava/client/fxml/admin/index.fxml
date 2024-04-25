@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fiit.vava.client.controllers.admin.Controller"
+            fx:controller="fiit.vava.client.controllers.admin.AdminController"
             prefHeight="400.0" prefWidth="600.0">
 </AnchorPane>

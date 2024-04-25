@@ -1,86 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane style="-fx-background-color: #f0f8ff;" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.auth.login.LoginController">
+    <center>
+        <VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+              style="-fx-padding: 10px; -fx-max-width: 400px">
+            <ImageView fitHeight="40" fitWidth="40">
+                <image>
+                    <Image url="@../../../logotype.png"/>
+                </image>
+            </ImageView>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.auth.login.LoginController">
-   <center>
-      <GridPane maxHeight="400.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="grid-pane-form" stylesheets="@../../../styles/auth/form.css">
-          <columnConstraints>
-              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          </columnConstraints>
-          <rowConstraints>
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
-              <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-          <children>
-              <Label text="Login">
-                  <font>
-                      <Font size="48.0" />
-                  </font>
-              </Label>
-              <GridPane GridPane.rowIndex="3">
-                  <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                      <Label text="Don't have an account yet?" wrapText="true">
-                          <font>
-                              <Font size="20.0" />
-                          </font>
-                          <GridPane.margin>
-                              <Insets right="10.0" />
-                          </GridPane.margin>
-                      </Label>
-                  <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#goToRegistration" style="-fx-background-color: green;" text="Create one now" GridPane.columnIndex="1" />
-                  </children>
-              </GridPane>
-              <Label fx:id="errorMessageLabel" textFill="RED" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-                  <font>
-                      <Font size="14.0" />
-                  </font>
-              </Label>
-              <MFXComboBox fx:id="langSelectCombo" GridPane.rowIndex="4">
-                  <GridPane.margin>
-                      <Insets left="10.0" />
-                  </GridPane.margin>
-              </MFXComboBox>
-            <GridPane vgap="10.0" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <MFXTextField fx:id="usernameField" alignment="CENTER" floatingText="Email" maxHeight="30.0" minHeight="35.0" prefColumnCount="32" prefHeight="30.0" />
-                  <MFXPasswordField fx:id="passwordField" alignment="CENTER" floatingText="Password " minHeight="35.0" prefColumnCount="29" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
-            <Button fx:id="signInBtn" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="80.0" text="Sign in" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </Button>
-          </children>
-      </GridPane>
-   </center>
+            <Label fx:id="labelHeaderLogin" text="Login"
+                   style="-fx-font-size: 2em; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+
+            <VBox spacing="10">
+                <Label fx:id="labelEmail" text="Email address"
+                       style="-fx-font-size: 1em; -fx-font-weight: medium; -fx-text-fill: #2d3748;"/>
+                <TextField fx:id="email"
+                           style="-fx-background-color: #edf2f7; -fx-border-color: #a0aec0; -fx-border-width: 1px; -fx-border-radius: 0.25em; -fx-padding: 0.375em 0.75em; -fx-text-fill: #2d3748;"/>
+
+                <HBox spacing="10">
+                    <Label fx:id="labelPassword" text="Password"
+                           style="-fx-font-size: 1em; -fx-font-weight: medium; -fx-text-fill: #2d3748;"/>
+                    <!--<Hyperlink text="Forgot password?" style="-fx-text-fill: #667eea;"/>-->
+                </HBox>
+                <PasswordField fx:id="password"
+                               style="-fx-background-color: #edf2f7; -fx-border-color: #a0aec0; -fx-border-width: 1px; -fx-border-radius: 0.25em; -fx-padding: 0.375em 0.75em; -fx-text-fill: #2d3748;"/>
+                <Button fx:id="signIn" text="Sign In" onAction="#handleSignIn"
+                        style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
+
+                <Label fx:id="labelError" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <Label fx:id="labelGoToRegistration" text="Dont have an account?"
+                   style="-fx-font-size: 0.875em; -fx-text-fill: #718096;"/>
+            <Button fx:id="goToRegistration" text="Go to Registration" onAction="#handleGoToRegistration"
+                    style="-fx-text-fill: #667eea; -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-underline: true;"/>
+
+            <!-- Include the intl change language component -->
+            <fx:include source="../../_components/intl/changeLanguage.fxml"/>
+        </VBox>
+    </center>
 </BorderPane>

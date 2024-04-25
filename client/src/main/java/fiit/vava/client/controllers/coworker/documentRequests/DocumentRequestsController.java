@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DocumentRequestsController {
 
@@ -24,6 +25,8 @@ public class DocumentRequestsController {
     @FXML
     public TableColumn<DocumentRequest, String> clientsName;
     @FXML
+    public TableColumn<DocumentRequest, String> clientsEmail;
+    @FXML
     public TableColumn<DocumentRequest, String> createdAt;
     @FXML
     public TableColumn<DocumentRequest, String> actionsColumn;
@@ -31,14 +34,20 @@ public class DocumentRequestsController {
     public void goToApproving(DocumentRequest documentRequest) {
         try {
             Router.getInstance().navigateTo("coworker/documentRequests/" + documentRequest.getId() + "/approve");
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public void initialize() {
         templateName.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getTemplate().getName()));
         clientsName.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getClient().getFirstName() + " " + cellData.getValue().getClient().getLastName()));
-        createdAt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCreatedAt().toString()));
+        clientsEmail.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getClient().getUser().getEmail()));
+        /*createdAt.setCellValueFactory(cellData -> {
+            Instant instant = Instant.ofEpochSecond(cellData.getValue().getCreatedAt().getSeconds(), cellData.getValue().getCreatedAt().getNanos());
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+            return new ReadOnlyStringWrapper(localDateTime.toString());
+        });*/
 
         actionsColumn.setCellFactory(param -> new TableCell<>() {
             final Button btn = new Button("approve");
@@ -61,7 +70,9 @@ public class DocumentRequestsController {
     private void loadData() {
         DocumentServiceGrpc.DocumentServiceBlockingStub stub = StubsManager.getInstance().getDocumentServiceBlockingStub();
 
-        List<DocumentRequest> documentRequests = stub.getAllDocumentRequestsToApprove(Empty.newBuilder().build()).getDocumentRequestsList();
+        List<DocumentRequest> documentRequests = stub.getAllDocumentRequestsToApprove(Empty.newBuilder().build()).getDocumentRequestsList().stream()
+                .filter(documentRequest -> !documentRequest.getTemplate().getPrivate())
+                .collect(Collectors.toList());
 
         nonApprovedDocumentRequests.getItems().addAll(documentRequests);
     }

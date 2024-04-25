@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Pagination?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.*?>
+<VBox fx:controller="fiit.vava.client.controllers.client.templates.ClientAvailableTemplatesController"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      style="-fx-padding: 25">
+    <HBox spacing="20">
+        <VBox style="-fx-grow: 1;">
+            <Label text="All available templates"
+                   style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <Label text="A list of all available for You templates. You can generate document by creating document request with selected template."
+                   style="-fx-freturont-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
+        </VBox>
+    </HBox>
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fiit.vava.client.controllers.client.templates.ClientAvailableTemplatesController">
-   <top>
-      <BorderPane BorderPane.alignment="BOTTOM_LEFT">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <top>
-            <BorderPane BorderPane.alignment="BOTTOM_LEFT">
-               <left>
-                  <Label text="Template list" textFill="#2d3480" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </Label>
-               </left>
-               <center>
-                  <Pagination fx:id="pagination" maxPageIndicatorCount="3" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
-            </BorderPane>
-         </top>
-         <center>
-            <Separator prefWidth="200.0" style="-fx-background-color: #b9c8f7;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-   </top>
-</BorderPane>
+    <GridPane fx:id="availableTemplates" hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+        </columnConstraints>
+    </GridPane>
+</VBox>

@@ -26,4 +26,6 @@ public abstract class DocumentTemplateRepository implements IRepository<Document
 
         return instance;
     }
+
+    public abstract DocumentTemplate getClientPassportTemplate();
 }

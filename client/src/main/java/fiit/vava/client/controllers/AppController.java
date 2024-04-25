@@ -61,4 +61,12 @@ public class AppController {
     public void setRightSidebar(Node node) {
         borderPane.setRight(node);
     }
+
+    public Node getCenter() {
+        return borderPane.getCenter();
+    }
+
+    public Node getSidebar() {
+        return borderPane.getLeft();
+    }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="fiit.vava.client.controllers._components.DocumentViewController"
+      spacing="10">
+    <fx:include source="../../_components/routing/backButton.fxml"/>
+
+    <ImageView fx:id="documentImage" fitHeight="400"/>
+</VBox>

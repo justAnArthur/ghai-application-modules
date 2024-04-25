@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="600.0" minWidth="800.0" prefHeight="800.0"
-            prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <center>
-        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn editable="false" minWidth="100.0" prefWidth="250.0" resizable="false" sortable="false"
-                             text="First name"/>
-                <TableColumn editable="false" minWidth="100.0" prefWidth="250.0" resizable="false" sortable="false"
-                             text="Last name"/>
-                <TableColumn editable="false" minWidth="400.0" prefWidth="500.0" resizable="false" sortable="false"
-                             text="Email"/>
-                <TableColumn editable="false" minWidth="100.0" prefWidth="200.0" resizable="false" sortable="false"/>
-            </columns>
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-            </columnResizePolicy>
-        </TableView>
-    </center>
-</BorderPane>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox style="-fx-padding: 10px; -fx-font-size: 15px" spacing="20"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="fiit.vava.client.controllers.coworker.clients.ClientsToApproveController">
+    <HBox>
+        <VBox style="-fx-grow: 1;">
+            <Label text="Pending clients" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <Label text="A list of all the clients filtered by your and their region that are awaiting to be confirmed and checked with their uploaded documents."
+                   style="-fx-freturont-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
+        </VBox>
+        <!--
+                <Button text="Add user"
+                        style="-fx-background-color: #667eea; -fx-padding: 10px 15px; -fx-text-fill: #ffffff; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.19), 5, 0.0, 0, 1);"/>
+        -->
+    </HBox>
+
+    <TableView HBox.hgrow="ALWAYS" fx:id="nonApprovedClientsTable">
+        <placeholder>
+            <Label text="No clients awaiting on confirmation was not found."
+                   style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568;"/>
+        </placeholder>
+        <columns>
+            <TableColumn text="First name" fx:id="firstNameColumn"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <TableColumn text="Last name" fx:id="lastNameColumn"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <TableColumn text="Email" fx:id="emailColumn"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <TableColumn text="Created at" fx:id="createdAtColumn"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <TableColumn text="Approve" fx:id="approveColumn"
+                         style="-fx-alignment: center-left; -fx-font-size: 0.8em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <!--
+             <TableColumn fx:id="templateName" prefWidth="75.0" text="templateName"/>
+            <TableColumn fx:id="clientsName" prefWidth="119.5" text="clientsName"/>
+            <TableColumn fx:id="createdAt" prefWidth="75.0" text="createdAt"/>
+            <TableColumn fx:id="actionsColumn" prefWidth="119.5" text="approve"/>
+            -->
+        </columns>
+    </TableView>
+</VBox>
