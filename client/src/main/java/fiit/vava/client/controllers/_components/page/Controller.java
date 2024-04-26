@@ -10,12 +10,17 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.List;
 public class Controller {
 
     @FXML
     private GridPane gridPane;
+
+    private static final Logger logger = LoggerFactory.getLogger("client.page" + Controller.class);
 
     private Node createCard(Object obj, String mode) {
       try{
@@ -51,7 +56,7 @@ public class Controller {
             break;
         } 
 
-        System.out.println(listOfAll.size());
+        logger.debug(listOfAll.size() + " templates found.");
         if (listOfAll.isEmpty()) {
             Label label = new Label("No templates found.");
             gridPane.add(label, 0, 0);

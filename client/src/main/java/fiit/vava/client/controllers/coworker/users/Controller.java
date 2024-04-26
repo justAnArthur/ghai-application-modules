@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,6 +59,8 @@ public class Controller {
 
     private List<Image> images;
 
+    private static final Logger logger = LoggerFactory.getLogger("client.coworker.users" + Controller.class);
+
     @FXML
     void initialize() {
         loadData();
@@ -78,7 +83,7 @@ public class Controller {
     private void handleImageChange() {
         int imageId = toggleImage ? 1 : 0;
         toggleImage = !toggleImage;
-        System.out.println(imageId);
+        logger.debug(imageId + " ");
         imageView.setImage(images.get(imageId));
     }
 

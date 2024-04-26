@@ -24,7 +24,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class Router {
-    private static final Logger logger = LoggerFactory.getLogger("client." + Router.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("client." + Router.class);
 
     private AppController appController;
     private final Stage modalStage = new Stage() {{

@@ -7,6 +7,9 @@ import fiit.vava.server.GetFileByDocumentId;
 import io.github.palexdev.mfxcore.utils.fx.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
@@ -15,6 +18,8 @@ import java.io.IOException;
 
 public class DocumentViewController {
     public ImageView documentImage;
+
+    private static final Logger logger = LoggerFactory.getLogger("client." + DocumentViewController.class);
 
     public void initialize() {
         loadData();
@@ -46,7 +51,7 @@ public class DocumentViewController {
             Image fxImage = SwingFXUtils.toFXImage(bim, null);
             documentImage.setImage(fxImage);
         } catch (IOException e) {
-            System.out.println("Failed to load pdf");
+            logger.warn("Unable to load document image", e);
             e.printStackTrace();
         }
     }

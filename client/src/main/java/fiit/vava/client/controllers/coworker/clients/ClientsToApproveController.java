@@ -14,6 +14,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class ClientsToApproveController {
@@ -33,21 +36,24 @@ public class ClientsToApproveController {
 
     @FXML
     private TableColumn<Client, String> approveColumn;
-    
-    @FXML 
+
+    @FXML
     private Label pendingLabel;
-    
-    @FXML 
+
+    @FXML
     private Label clientsText;
 
-    @FXML 
+    @FXML
     private Label placeholderLabel;
 
     XMLResourceBundleProvider instance;
 
+    private static final Logger logger = LoggerFactory.getLogger("client." + ClientsToApproveController.class);
+
     public ClientsToApproveController() {
         this.instance = XMLResourceBundleProvider.getInstance();
     }
+
     public void handleApprove(Client client) {
         CoworkerServiceGrpc.CoworkerServiceBlockingStub stub = StubsManager.getInstance().getCoworkerServiceBlockingStub();
 
@@ -61,6 +67,7 @@ public class ClientsToApproveController {
         loadTexts();
 
         instance.subscribe(language -> loadTexts());
+
         emailColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUser().getEmail()));
         firstNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLastName()));
@@ -95,7 +102,7 @@ public class ClientsToApproveController {
 
         List<Client> nonApprovedClients = stub.getNonApprovedClients(Empty.newBuilder().build()).getClientList();
 
-        System.out.println(nonApprovedClients.size());
+        logger.debug(nonApprovedClients.size() + " non approved clients found.");
 
         nonApprovedClientsTable.getItems().addAll(nonApprovedClients);
     }
@@ -104,13 +111,13 @@ public class ClientsToApproveController {
 
         if (bundle == null)
             return;
-        pendingLabel.setText(bundle.getString("client.label.pending")); 
-        clientsText.setText(bundle.getString("client.label.text")); 
-        placeholderLabel.setText(bundle.getString("client.label.placeholder")); 
-        firstNameColumn.setText(bundle.getString("client.label.firstname")); 
-        lastNameColumn.setText(bundle.getString("client.label.lastname")); 
-        emailColumn.setText(bundle.getString("client.label.email")); 
-        createdAtColumn.setText(bundle.getString("client.label.created")); 
-        approveColumn.setText(bundle.getString("client.label.approve")); 
+        pendingLabel.setText(bundle.getString("client.label.pending"));
+        clientsText.setText(bundle.getString("client.label.text"));
+        placeholderLabel.setText(bundle.getString("client.label.placeholder"));
+        firstNameColumn.setText(bundle.getString("client.label.firstname"));
+        lastNameColumn.setText(bundle.getString("client.label.lastname"));
+        emailColumn.setText(bundle.getString("client.label.email"));
+        createdAtColumn.setText(bundle.getString("client.label.created"));
+        approveColumn.setText(bundle.getString("client.label.approve"));
     }
 }
