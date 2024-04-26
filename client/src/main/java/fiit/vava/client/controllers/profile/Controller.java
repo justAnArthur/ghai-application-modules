@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -60,6 +63,8 @@ public class Controller {
     @FXML
     private Button saveBtn;
 
+    private static final Logger logger = LoggerFactory.getLogger("client.profile" + Controller.class);
+
     @FXML
     void initialize() {
 
@@ -67,7 +72,7 @@ public class Controller {
     
     @FXML 
     private void handleSaveBtn(ActionEvent event) {
-        System.out.println("Save button handler is empty");
+        logger.debug("Save button handler is empty");
     }
     
     @FXML 

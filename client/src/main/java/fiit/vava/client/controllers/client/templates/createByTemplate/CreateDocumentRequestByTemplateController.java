@@ -14,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
@@ -38,6 +41,8 @@ public class CreateDocumentRequestByTemplateController {
     private final List<Node> fields = new ArrayList<>();
 
     private List<DocumentTemplateField> documentTemplateFields = new ArrayList<>();
+
+    private static final Logger logger = LoggerFactory.getLogger("client." + CreateDocumentRequestByTemplateController.class);
 
     private Node createField(DocumentTemplateField templateField) {
         VBox fieldGroup = new VBox();
@@ -106,7 +111,7 @@ public class CreateDocumentRequestByTemplateController {
                 }
 
                 if (templateField.getRequired()) {
-                    System.out.println("help" + templateField.getType() + " " + serializedValue);
+                    logger.debug("help" + templateField.getType() + " " + serializedValue);
 
                     String errored = Validation.validateFields(
                             Validation.pair(templateField.getName() + " is not valid", validationPairs)
@@ -179,7 +184,7 @@ public class CreateDocumentRequestByTemplateController {
             Image fxImage = SwingFXUtils.toFXImage(bim, null);
             pdfPreview.setImage(fxImage);
         } catch (IOException e) {
-            System.out.println("Failed to load pdf");
+            logger.warn("Failed to load pdf");
             e.printStackTrace();
         }
     }

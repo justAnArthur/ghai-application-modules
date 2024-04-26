@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Application extends javafx.application.Application {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("client." + Application.class);
 
     public void initStyles() {
         UserAgentBuilder.builder()

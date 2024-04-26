@@ -13,6 +13,9 @@ import fiit.vava.server.dao.repositories.user.client.ClientRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.grpc.stub.StreamObserver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +36,8 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
     ClientRepository clientRepository;
 
     private static String PATH_TO_SAVE_FILES;
+
+    private static final Logger logger = LoggerFactory.getLogger("server." + DocumentService.class);
 
     public DocumentService() {
         this.documentRepository = DocumentRepository.getInstance();
@@ -93,7 +98,7 @@ public class DocumentService extends DocumentServiceGrpc.DocumentServiceImplBase
                 .setPath(path)
                 .build());
 
-        System.out.println("Document template created: " + documentTemplate.getId());
+        logger.info("Document template created: " + documentTemplate.getId());
 
         request.getFieldsList().forEach(field ->
                 documentTemplateFieldRepository.save(DocumentTemplateField.newBuilder()

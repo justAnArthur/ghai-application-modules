@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class AppController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AppController.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("client." + AppController.class);
 
     @FXML
     private BorderPane borderPane;
@@ -43,7 +43,7 @@ public class AppController {
                 User user = stub.me(Empty.newBuilder().build());
                 startingScenePath = user.getRole().name().toLowerCase();
             } catch (Exception ex) {
-                System.out.println("Unable to call me" + ex);
+                logger.warn("Unable to call me" + ex);
             }
         }
 

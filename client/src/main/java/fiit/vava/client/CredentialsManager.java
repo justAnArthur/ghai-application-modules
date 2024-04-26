@@ -5,12 +5,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CredentialsManager {
 
     /*
      * TODO rewrite to use Dotenv
      */
     private static final String CREDENTIALS_FILE = System.getProperty("user.home") + "/.ghai/credentials";
+
+    private static final Logger logger = LoggerFactory.getLogger("client." + CredentialsManager.class);
 
     public static void storeCredentials(String email, String password) {
         try {
@@ -25,7 +30,7 @@ public class CredentialsManager {
             writer.close();
 
         } catch (IOException e) {
-            System.out.println(e);
+            logger.warn("Unable to store credentials" + e);
         }
     }
 
@@ -42,7 +47,7 @@ public class CredentialsManager {
 
             return new String[]{email, password};
         } catch (IOException e) {
-            System.out.println(e);
+            logger.warn("Unable to retrieve credentials" + e);
             return null;
         }
     }

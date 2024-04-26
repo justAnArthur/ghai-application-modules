@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Server {
 
-    private static final Logger logger = LoggerFactory.getLogger(Server.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("server." + Server.class);
 
     public static final int PORT = 50031;
 
@@ -49,8 +49,6 @@ public class Server {
             }
             System.err.println("*** server shut down");
         }));
-
-        logger.info("Server started, listening on " + PORT);
     }
 
     private void stop() throws InterruptedException {
@@ -68,8 +66,7 @@ public class Server {
     public static void main(String[] args) throws IOException, InterruptedException {
         final Server server = new Server();
         server.start();
-        logger.info("Server started");
-
+        logger.info("Server started, listening on " + PORT);
         server.blockUntilShutdown();
     }
 }

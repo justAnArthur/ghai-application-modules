@@ -11,6 +11,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class ClientsToApproveController {
@@ -30,6 +33,8 @@ public class ClientsToApproveController {
 
     @FXML
     private TableColumn<Client, String> approveColumn;
+
+    private static final Logger logger = LoggerFactory.getLogger("client." + ClientsToApproveController.class);
 
     public void handleApprove(Client client) {
         CoworkerServiceGrpc.CoworkerServiceBlockingStub stub = StubsManager.getInstance().getCoworkerServiceBlockingStub();
@@ -75,7 +80,7 @@ public class ClientsToApproveController {
 
         List<Client> nonApprovedClients = stub.getNonApprovedClients(Empty.newBuilder().build()).getClientList();
 
-        System.out.println(nonApprovedClients.size());
+        logger.debug(nonApprovedClients.size() + " non approved clients found.");
 
         nonApprovedClientsTable.getItems().addAll(nonApprovedClients);
     }

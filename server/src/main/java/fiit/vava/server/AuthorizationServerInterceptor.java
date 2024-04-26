@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 
 public class AuthorizationServerInterceptor implements ServerInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerInterceptor.class.toString());
+    private static final Logger logger = LoggerFactory.getLogger("server." + AuthorizationServerInterceptor.class);
 
     private final JwtParser parser = Jwts.parser().setSigningKey(Constants.JWT_SIGNING_KEY);
 
