@@ -1,5 +1,7 @@
 package fiit.vava.client.controllers.client.templates.createByTemplate;
 
+import fiit.vava.client.bundles.XMLResourceBundle;
+import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
 import fiit.vava.client.controllers.auth.Validation;
@@ -11,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -34,7 +37,15 @@ public class CreateDocumentRequestByTemplateController {
     Label errorLabel;
     @FXML
     Label templateName;
+    @FXML 
+    Button submit;
 
+    XMLResourceBundleProvider instance;
+
+
+    public CreateDocumentRequestByTemplateController() {
+        this.instance = XMLResourceBundleProvider.getInstance();
+    }
     private final List<Node> fields = new ArrayList<>();
 
     private List<DocumentTemplateField> documentTemplateFields = new ArrayList<>();
@@ -136,6 +147,8 @@ public class CreateDocumentRequestByTemplateController {
 
     @FXML
     public void initialize() {
+        loadTexts();
+        instance.subscribe(language -> loadTexts());
         loadData();
     }
 
@@ -182,5 +195,12 @@ public class CreateDocumentRequestByTemplateController {
             System.out.println("Failed to load pdf");
             e.printStackTrace();
         }
+    }
+    private void loadTexts() {
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.client");
+
+        if (bundle == null)
+            return;
+        submit.setText(bundle.getString("templates.button.submit")); 
     }
 }

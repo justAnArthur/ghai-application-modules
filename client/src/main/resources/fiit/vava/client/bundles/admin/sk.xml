@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="sidebar.button.documents">Šablóny dokumentov</entry>
+    <entry key="templates.label.text">Zoznam všetkých šablón dostupných v systéme. Môžete vytvárať nové šablóny alebo upravovať existujúce.</entry>
+    <entry key="templates.label.label">Všetky šablóny</entry>
+    <entry key="templates.button.create">Vytvoriť šablónu</entry>
+    <entry key="templates.label.name">Názov šablóny</entry>
+    <entry key="templates.label.type">Typ šablóny</entry>
+    <entry key="templates.button.add">Pridať nové pole</entry>
+    <entry key="templates.button.submit">Odoslať šablónu</entry>
+</properties>

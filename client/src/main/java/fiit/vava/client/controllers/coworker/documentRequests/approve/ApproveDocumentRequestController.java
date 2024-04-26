@@ -1,5 +1,7 @@
 package fiit.vava.client.controllers.coworker.documentRequests.approve;
 
+import fiit.vava.client.bundles.XMLResourceBundle;
+import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
 import fiit.vava.client.controllers._components.page.card.DocumentCardController;
@@ -8,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,6 +21,24 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ApproveDocumentRequestController {
+    @FXML
+    public Button rejectBtn;
+    @FXML
+    public Button approveBtn;
+    @FXML
+    public Label commentLabel;
+    @FXML
+    public Label templateNameLabel;
+    @FXML
+    public Label approveLabel;
+    @FXML
+    public Label clientDocumentsLabel;
+    @FXML
+    public Label dataLabel;
+    @FXML
+    public Label creatorLabelText;
+    @FXML
+    public Label creationDateLabelText;
     @FXML
     public Label creationDateLabel;
     @FXML
@@ -51,7 +72,15 @@ public class ApproveDocumentRequestController {
         Router.getInstance().navigateTo("coworker/documentRequests");
     }
 
+    XMLResourceBundleProvider instance;
+
+    public ApproveDocumentRequestController() {
+        this.instance = XMLResourceBundleProvider.getInstance();
+    }
     public void initialize() {
+        loadTexts();
+
+        instance.subscribe(language -> loadTexts());
         loadDetails(Router.getInstance().getParameter("documentRequestId"));
     }
 
@@ -108,4 +137,20 @@ public class ApproveDocumentRequestController {
                     clientsDocumentRequests.add(node, (int) size % 3, (int) size / 3);
                 });
     }
+    private void loadTexts() {
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.coworker");
+
+        if (bundle == null)
+            return;
+        
+        rejectBtn.setText(bundle.getString("documents.button.reject"));
+        approveBtn.setText(bundle.getString("documents.button.approve"));
+        commentLabel.setText(bundle.getString("documents.label.comment"));
+        templateNameLabel.setText(bundle.getString("documents.label.template"));
+        approveLabel.setText(bundle.getString("documents.label.approve"));
+        clientDocumentsLabel.setText(bundle.getString("documents.label.client"));
+        dataLabel.setText(bundle.getString("documents.label.data"));
+        creatorLabelText.setText(bundle.getString("documents.label.creator"));
+        creationDateLabelText.setText(bundle.getString("documents.label.created"));
+    } 
 }

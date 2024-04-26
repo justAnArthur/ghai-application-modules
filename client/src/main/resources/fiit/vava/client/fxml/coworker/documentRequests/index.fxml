@@ -9,8 +9,8 @@
       style="-fx-padding: 10px; -fx-font-size: 15px" spacing="20">
     <HBox>
         <VBox style="-fx-grow: 1;">
-            <Label text="Document requests" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
-            <Label text="Document request that waiting on approval. And after which will be generated document for client."
+            <Label fx:id="documentsLabel" text="Document requests" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <Label fx:id="documentsText" text="Document request that waiting on approval. And after which will be generated document for client."
                    style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
         </VBox>
         <!--
@@ -21,7 +21,7 @@
 
     <TableView fx:id="nonApprovedDocumentRequests" HBox.hgrow="ALWAYS">
         <placeholder>
-            <Label text="No document requests found." style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568;"/>
+            <Label fx:id="placeholderLabel" text="No document requests found." style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568;"/>
         </placeholder>
         <columns>
             <TableColumn fx:id="templateName" text="Template name"

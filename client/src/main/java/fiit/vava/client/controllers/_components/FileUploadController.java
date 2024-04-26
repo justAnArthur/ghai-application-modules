@@ -1,5 +1,7 @@
 package fiit.vava.client.controllers._components;
 
+import fiit.vava.client.bundles.XMLResourceBundle;
+import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import fiit.vava.client.Router;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +22,12 @@ public class FileUploadController {
     public Button uploadButton;
     public Label fileFormatInfo;
 
+
+    XMLResourceBundleProvider instance;
+
+    public FileUploadController() {
+        this.instance = XMLResourceBundleProvider.getInstance();
+    }
     public String[] allowedFileFormats = new String[]{"*.jpg", "*.jpeg", "*.png"};
 
     private Function<File, Image> fromFileToImage = selectedFile -> new Image(selectedFile.toURI().toString());
@@ -50,6 +58,9 @@ public class FileUploadController {
     }
 
     public void initialize() {
+        loadTexts();
+
+        instance.subscribe(language -> loadTexts());
         Router.getInstance().addSharedData(FILE_SHARED_CONTROLLER, this);
     }
 
@@ -67,5 +78,13 @@ public class FileUploadController {
 
     public void setFromFileToImage(Function<File, Image> fromFileToImage) {
         this.fromFileToImage = fromFileToImage;
+    }
+    private void loadTexts() {
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.components");
+
+        if (bundle == null)
+            return;
+        uploadButton.setText(bundle.getString("upload.button.upload")); 
+        labelCoverPhoto.setText(bundle.getString("upload.label.label")); 
     }
 }

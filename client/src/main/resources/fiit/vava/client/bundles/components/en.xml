@@ -2,4 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <entry key="label.changeLanguage">Change language</entry>
+    <entry key="sidebar.label.yourProfile">Your profile</entry>
+    <entry key="sidebar.button.logout">Log out</entry>
+    <entry key="upload.button.upload">Upload file</entry>
+    <entry key="upload.label.label">Select a file with relative format.</entry>
 </properties>

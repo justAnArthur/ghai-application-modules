@@ -1,5 +1,7 @@
 package fiit.vava.client.controllers.admin.templates.create;
 
+import fiit.vava.client.bundles.XMLResourceBundle;
+import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import com.google.protobuf.ByteString;
 import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
@@ -37,6 +39,14 @@ public class CreateTemplateController {
     public Label labelError;
     public Label typeLabel;
     public ComboBox type;
+    public Button addField;
+    public Button submitTemplate;
+
+    XMLResourceBundleProvider instance;
+
+    public CreateTemplateController() {
+        this.instance = XMLResourceBundleProvider.getInstance();
+    }
 
     private final List<List<Control>> fields = new ArrayList<>();
 
@@ -128,6 +138,9 @@ public class CreateTemplateController {
     }
 
     public void initialize() {
+        loadTexts();
+
+        instance.subscribe(language -> loadTexts());
         type.getItems().addAll(Arrays.stream(DocumentTemplateType.values()).map(Enum::name).toList());
 
         fieldsPane.getChildren().add(createFieldGroup());
@@ -177,5 +190,17 @@ public class CreateTemplateController {
 
         if (error != null)
             throw new Exception(error);
+    }
+
+    private void loadTexts() {
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.admin");
+
+        if (bundle == null)
+            return;
+        templateNameLabel.setText(bundle.getString("templates.label.name")); 
+        templateName.setPromptText(bundle.getString("templates.label.name")); 
+        typeLabel.setText(bundle.getString("templates.label.type")); 
+        addField.setText(bundle.getString("templates.button.add")); 
+        submitTemplate.setText(bundle.getString("templates.button.submit")); 
     }
 }

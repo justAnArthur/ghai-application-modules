@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="client.label.pending">Pending clients</entry>
+    <entry key="client.label.text">A list of all the clients filtered by your and their region that are awaiting to be confirmed and checked with their uploaded documents.</entry>
+    <entry key="client.label.placeholder">No clients awaiting on confirmation was not found.</entry>
+    <entry key="client.label.firstname">Firstname</entry>
+    <entry key="client.label.lastname">Lastname</entry>
+    <entry key="client.label.email">Email</entry>
+    <entry key="client.label.created">Created at</entry>
+    <entry key="client.label.approve">Approve</entry>
+    <entry key="sidebar.button.documents">Document requests</entry>
+    <entry key="sidebar.button.clients">Clients approving</entry>
+    <entry key="documents.label.created">Created on:</entry>
+    <entry key="documents.label.creator">Created by:</entry>
+    <entry key="documents.label.data">Filled data</entry>
+    <entry key="documents.label.client">Client Documents:</entry>
+    <entry key="documents.label.approve">Approve or reject this request</entry>
+    <entry key="documents.label.template">Template name</entry>
+    <entry key="documents.label.comment">Comment</entry>
+    <entry key="documents.button.approve">Approve</entry>
+    <entry key="documents.button.reject">Reject</entry>
+    <entry key="documents.label.requests">Document requests</entry>
+    <entry key="documents.text.requests">Document request that waiting on approval. And after which will be generated document for client.</entry>
+    <entry key="documents.label.placeholder">No document requests found.</entry>
+    <entry key="documents.label.clients">Client name</entry>
+    <entry key="documents.label.clients.email">Client email</entry>
+</properties>

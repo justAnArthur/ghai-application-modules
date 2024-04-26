@@ -7,9 +7,9 @@
       style="-fx-padding: 25">
     <HBox spacing="20">
         <VBox style="-fx-grow: 1;">
-            <Label text="All available templates"
+            <Label fx:id="allTemplatesLabel" text="All available templates"
                    style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
-            <Label text="A list of all available for You templates. You can generate document by creating document request with selected template."
+            <Label fx:id="allTemplatesText" text="A list of all available for You templates. You can generate document by creating document request with selected template."
                    style="-fx-freturont-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
         </VBox>
     </HBox>

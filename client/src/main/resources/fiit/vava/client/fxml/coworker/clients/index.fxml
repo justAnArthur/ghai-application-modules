@@ -8,8 +8,8 @@
       fx:controller="fiit.vava.client.controllers.coworker.clients.ClientsToApproveController">
     <HBox>
         <VBox style="-fx-grow: 1;">
-            <Label text="Pending clients" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
-            <Label text="A list of all the clients filtered by your and their region that are awaiting to be confirmed and checked with their uploaded documents."
+            <Label fx:id="pendingLabel" text="Pending clients" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <Label fx:id="clientsText" text="A list of all the clients filtered by your and their region that are awaiting to be confirmed and checked with their uploaded documents."
                    style="-fx-freturont-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
         </VBox>
         <!--
@@ -20,7 +20,7 @@
 
     <TableView HBox.hgrow="ALWAYS" fx:id="nonApprovedClientsTable">
         <placeholder>
-            <Label text="No clients awaiting on confirmation was not found."
+            <Label fx:id="placeholderLabel" text="No clients awaiting on confirmation was not found."
                    style="-fx-font-size: 0.8em; -fx-text-fill: #4a5568;"/>
         </placeholder>
         <columns>

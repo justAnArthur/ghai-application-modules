@@ -8,11 +8,11 @@
       style="-fx-padding: 25">
     <HBox spacing="20">
         <VBox style="-fx-grow: 1;">
-            <Label text="All templates" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
-            <Label text="A list of all templates available in the system. You can create new templates or edit existing ones."
+            <Label text="All templates" fx:id="allTemplatesLabel" style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
+            <Label text="A list of all templates available in the system. You can create new templates or edit existing ones." fx:id="allTemplatesText"
                    style="-fx-freturont-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
         </VBox>
-        <Button text="Create template" onAction="#handleCreateTemplate"
+        <Button text="Create template" fx:id="createTemplate" onAction="#handleCreateTemplate"
                 style="-fx-background-color: #667eea; -fx-padding: 10px 15px; -fx-text-fill: #ffffff; -fx-font-size: 0.8em; -fx-font-weight: bold;"/>
     </HBox>
 

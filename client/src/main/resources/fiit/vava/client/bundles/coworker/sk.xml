@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="client.label.pending">Čakajúci klienti</entry>
+    <entry key="client.label.text">Zoznam všetkých klientov filtrovaných podľa vášho a ich regiónu, ktorí čakajú na potvrdenie a kontrolu nahraných dokumentov.</entry>
+    <entry key="client.label.placeholder">Nenašiel sa žiadny klient čakajúci na potvrdenie.</entry>
+    <entry key="client.label.firstname">Krstné meno</entry>
+    <entry key="client.label.lastname">Priezvisko</entry>
+    <entry key="client.label.email">Email</entry>
+    <entry key="client.label.created">Vytvorené dňa:</entry>
+    <entry key="client.label.approve">Schváliť</entry>
+    <entry key="sidebar.button.documents">Žiadosti o dokumenty</entry>
+    <entry key="sidebar.button.clients">Schvaľovanie klientov</entry>
+    <entry key="documents.label.created">Vytvorené dňa:</entry>
+    <entry key="documents.label.creator">Vytvoril:</entry>
+    <entry key="documents.label.data">Vyplnené údaje</entry>
+    <entry key="documents.label.client">Dokumenty klienta:</entry>
+    <entry key="documents.label.approve">Schváliť alebo zamietnuť túto žiadosť</entry>
+    <entry key="documents.label.template">Názov šablóny</entry>
+    <entry key="documents.label.comment">Komentár</entry>
+    <entry key="documents.button.approve">Schváliť</entry>
+    <entry key="documents.button.reject">Odmietnuť</entry>
+    <entry key="documents.label.requests">Žiadosti o dokumenty</entry>
+    <entry key="documents.text.requests">Žiadosť o dokument, ktorá čaká na schválenie. A po ktorej bude vygenerovaný dokument pre klienta.</entry>
+    <entry key="documents.label.placeholder">Nenašli sa žiadne žiadosti o dokument.</entry>
+    <entry key="documents.label.clients">Meno klienta</entry>
+    <entry key="documents.label.clients.email">Email klienta</entry>
+</properties>

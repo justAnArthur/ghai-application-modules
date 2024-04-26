@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="sidebar.button.documents">Dokumenty</entry>
+    <entry key="sidebar.button.templates">Dostupné šablóny</entry>
+    <entry key="documents.text.status">Všetky vaše požiadavky na dokumenty s ich stavom. Iba schválené žiadosti je možné stiahnuť s vygenerovaným PDF.</entry>
+    <entry key="templates.label.templates">Všetky dostupné šablóny</entry>
+    <entry key="templates.button.submit">Odoslať žiadosť</entry>
+    <entry key="templates.text.templates">Zoznam všetkých dostupných šablón pre vás. Dokument môžete vygenerovať vytvorením žiadosti o dokument s vybranou šablónou.</entry>
+</properties>

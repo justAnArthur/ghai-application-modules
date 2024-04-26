@@ -5,6 +5,16 @@
     <entry key="label.email">Email address</entry>
     <entry key="label.password">Password</entry>
     <entry key="button.signIn">Sign In</entry>
-    <entry key="label.goToRegistration">Dont have an account yet?</entry>
+    <entry key="label.goToRegistration">Don't have an account yet?</entry>
     <entry key="button.goToRegistration">Create one now</entry>
+    <entry key="header.registration">Registration</entry>
+    <entry key="label.firstname">Firstname</entry>
+    <entry key="label.lastname">Lastname</entry>
+    <entry key="label.region">Region</entry>
+    <entry key="label.country">Country</entry>
+    <entry key="label.date">Date of Birth</entry>
+    <entry key="label.passwordAgain">Password again</entry>
+    <entry key="label.goToLogin">Already have account?</entry>
+    <entry key="button.goToLogin">Sign In</entry>
+    <entry key="button.signUp">Sign Up</entry>
 </properties>

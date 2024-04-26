@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="sidebar.button.documents">Documents</entry>
+    <entry key="sidebar.button.templates">Available templates</entry>
+    <entry key="documents.text.status">All your document requests with their status. Only approved requests can be downloaded with generated PDF.</entry>
+    <entry key="templates.label.templates">All available templates</entry>
+    <entry key="templates.button.submit">Submit request</entry>
+    <entry key="templates.text.templates">A list of all available for You templates. You can generate document by creating document request with selected template.</entry>
+</properties>

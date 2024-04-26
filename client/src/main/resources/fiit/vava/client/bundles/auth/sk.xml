@@ -7,4 +7,14 @@
     <entry key="button.signIn">Prihlásiť sa</entry>
     <entry key="label.goToRegistration">Ešte nemáte konto?</entry>
     <entry key="button.goToRegistration">Vytvorite si ho teraz</entry>
+    <entry key="header.registration">Registrácia</entry>
+    <entry key="label.firstname">Krstné meno</entry>
+    <entry key="label.lastname">Priezvisko</entry>
+    <entry key="label.region">Región</entry>
+    <entry key="label.country">Krajina</entry>
+    <entry key="label.date">Dátum narodenia</entry>
+    <entry key="label.passwordAgain">Znovu heslo</entry>
+    <entry key="label.goToLogin">Už máte účet?</entry>
+    <entry key="button.goToLogin">Prihlásenie</entry>
+    <entry key="button.signUp">Zaregistrujte sa</entry>
 </properties>

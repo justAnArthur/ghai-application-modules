@@ -14,24 +14,24 @@
 
     <VBox GridPane.columnIndex="0" spacing="10" style="-fx-padding: 10">
         <VBox spacing="5">
-            <Label text="Created on:"/>
+            <Label fx:id="creationDateLabelText" text="Created on:" />
             <Label fx:id="creationDateLabel"/>
         </VBox>
 
         <VBox spacing="5">
-            <Label text="Created by:"/>
+            <Label fx:id="creatorLabelText" text="Created by:"/>
             <Label fx:id="creatorLabel"/>
         </VBox>
 
         <VBox fx:id="dataInputs" spacing="3"
               style="-fx-border-width: 1 0 0 0; -fx-border-color: #a0aec0; -fx-padding: 10 0 0 0">
-            <Label text="Filled data"/>
+            <Label fx:id="dataLabel" text="Filled data"/>
 
             <!--filled data-->
         </VBox>
 
         <VBox spacing="5" style="-fx-border-width: 1 0 0 0; -fx-border-color: #a0aec0; -fx-padding: 10 0 0 0">
-            <Label text="Client Documents:"/>
+            <Label fx:id="clientDocumentsLabel" text="Client Documents:"/>
             <GridPane fx:id="clientsDocumentRequests" hgap="5" vgap="5">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="33"/>
@@ -46,22 +46,22 @@
     <VBox GridPane.columnIndex="1" spacing="10"
           style="-fx-border-color: #a0aec0; -fx-border-width: 0 0 0 1; -fx-padding: 10px">
 
-        <Label text="Approve or reject this request" style="-fx-font-weight: bold;"/>
+        <Label fx:id="approveLabel" text="Approve or reject this request" style="-fx-font-weight: bold;"/>
 
         <VBox spacing="10" style="-fx-border-color: #a0aec0; -fx-border-width: 1 0 0 0; -fx-padding: 10 0">
-            <Label text="Template name"/>
+            <Label fx:id="templateNameLabel" text="Template name"/>
             <Label fx:id="templateName" text="Sample" prefHeight="20"/>
         </VBox>
 
         <VBox spacing="10" style="-fx-border-color: #a0aec0; -fx-border-width: 1 0 0 0; -fx-padding: 10 0">
-            <Label text="Comment"/>
+            <Label fx:id="commentLabel" text="Comment"/>
             <TextArea fx:id="comment" prefHeight="20"/>
         </VBox>
 
         <VBox spacing="10" style="-fx-border-color: #a0aec0; -fx-border-width: 1 0 0 0; -fx-padding: 10 0">
-            <Button text="Approve" onAction="#handleApprove"
+            <Button fx:id="approveBtn" text="Approve" onAction="#handleApprove"
                     style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
-            <Button text="Reject" onAction="#handleReject"
+            <Button fx:id="rejectButton" text="Reject" onAction="#handleReject"
                     style="-fx-background-color: red; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
         </VBox>
     </VBox>

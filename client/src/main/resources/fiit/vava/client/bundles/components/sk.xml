@@ -2,4 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <entry key="label.changeLanguage">Zmeniť jazyk</entry>
+    <entry key="sidebar.label.yourProfile">Váš profil</entry>
+    <entry key="sidebar.button.logout">Odhlásiť sa</entry>
+    <entry key="upload.button.upload">Nahrať súbor</entry>
+    <entry key="upload.label.label">Vyberte súbor s relatívnym formátom.</entry>
 </properties>

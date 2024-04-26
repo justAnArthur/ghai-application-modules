@@ -93,32 +93,32 @@ public class ClientRegistrationController {
     }
 
     private void loadTexts(XMLResourceBundleProvider instance) {
-        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.auth.registration");
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.auth");
 
         if (bundle == null)
             return;
 
         labelHeaderRegistration.setText(bundle.getString("header.registration"));
-        labelFirstName.setText(bundle.getString("label.firstName"));
-        labelLastName.setText(bundle.getString("label.lastName"));
-        labelCountry.setText(bundle.getString("label.country"));
-        labelRegion.setText(bundle.getString("label.region"));
-        labelDateOfBirth.setText(bundle.getString("label.dateOfBirth"));
+        labelFirstName.setText(bundle.getString("label.firstname"));
+        labelLastName.setText(bundle.getString("label.lastname"));
+        // labelCountry.setText(bundle.getString("label.country"));
+        // labelRegion.setText(bundle.getString("label.region"));
+        labelDateOfBirth.setText(bundle.getString("label.date"));
         labelEmail.setText(bundle.getString("label.email"));
-        labelPassword.setText(bundle.getString("label.password"));
-        labelPasswordAgain.setText(bundle.getString("label.passwordAgain"));
+        // labelPassword.setText(bundle.getString("label.password"));
+        // labelPasswordAgain.setText(bundle.getString("label.passwordAgain"));
         signUp.setText(bundle.getString("button.signUp"));
         labelGoToLogin.setText(bundle.getString("label.goToLogin"));
         goToLogin.setText(bundle.getString("button.goToLogin"));
 
-        firstName.setPromptText(bundle.getString("label.firstName"));
-        lastName.setPromptText(bundle.getString("label.lastName"));
-        country.setPromptText(bundle.getString("label.country"));
-        region.setPromptText(bundle.getString("label.region"));
-        dateOfBirth.setPromptText(bundle.getString("label.dateOfBirth"));
+        firstName.setPromptText(bundle.getString("label.firstname"));
+        lastName.setPromptText(bundle.getString("label.lastname"));
+        // country.setPromptText(bundle.getString("label.country"));
+        // region.setPromptText(bundle.getString("label.region"));
+        dateOfBirth.setPromptText(bundle.getString("label.date"));
         email.setPromptText(bundle.getString("label.email"));
-        password.setPromptText(bundle.getString("label.password"));
-        passwordAgain.setPromptText(bundle.getString("label.passwordAgain"));
+        // password.setPromptText(bundle.getString("label.password"));
+        // passwordAgain.setPromptText(bundle.getString("label.passwordAgain"));
     }
 
     private void checkFields() throws Exception {

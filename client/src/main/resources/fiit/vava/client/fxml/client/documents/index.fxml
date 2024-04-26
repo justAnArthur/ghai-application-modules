@@ -7,10 +7,8 @@
       style="-fx-padding: 25">
     <HBox spacing="20">
         <VBox style="-fx-grow: 1;">
-            <Label text="All your document requests with their status. Only approved requests can be downloaded with generated PDF."
+            <Label fx:id="statusText" text="All your document requests with their status. Only approved requests can be downloaded with generated PDF."
                    style="-fx-font-size: 1em; -fx-font-weight: bold; -fx-text-fill: #1a202c;"/>
-            <Label text="A list of all available for You templates. You can generate document by creating document request with selected template."
-                   style="-fx-freturont-size: 0.8em; -fx-text-fill: #4a5568; -fx-padding: 10px 0 0 0;"/>
         </VBox>
     </HBox>
 

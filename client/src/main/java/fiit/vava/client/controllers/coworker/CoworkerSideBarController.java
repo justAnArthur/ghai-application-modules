@@ -1,6 +1,7 @@
 package fiit.vava.client.controllers.coworker;
 
 import fiit.vava.client.Router;
+import fiit.vava.client.bundles.XMLResourceBundle;
 import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import javafx.scene.control.Button;
 
@@ -29,9 +30,15 @@ public class CoworkerSideBarController {
 
     public void initialize() {
         loadTexts();
+        instance.subscribe(language -> loadTexts());
     }
 
     private void loadTexts() {
-        // TODO: Load texts from XML
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.coworker");
+
+        if (bundle == null)
+            return;
+        documentRequests.setText(bundle.getString("sidebar.button.documents")); 
+        clientsApproving.setText(bundle.getString("sidebar.button.clients")); 
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="sidebar.button.documents">Document templates</entry>
+    <entry key="templates.label.text">A list of all templates available in the system. You can create new templates or edit existing ones.</entry>
+    <entry key="templates.label.label">All templates</entry>
+    <entry key="templates.button.create">Create template</entry>
+    <entry key="templates.label.name">Template name</entry>
+    <entry key="templates.label.type">Template type</entry>
+    <entry key="templates.button.add">Add new field</entry>
+    <entry key="templates.button.submit">Submit template</entry>
+</properties>

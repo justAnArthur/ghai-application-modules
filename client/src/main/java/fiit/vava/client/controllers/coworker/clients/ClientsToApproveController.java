@@ -1,5 +1,7 @@
 package fiit.vava.client.controllers.coworker.clients;
 
+import fiit.vava.client.bundles.XMLResourceBundle;
+import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import fiit.vava.client.StubsManager;
 import fiit.vava.server.Client;
 import fiit.vava.server.CoworkerServiceGrpc;
@@ -9,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 
 import java.util.List;
@@ -30,7 +33,21 @@ public class ClientsToApproveController {
 
     @FXML
     private TableColumn<Client, String> approveColumn;
+    
+    @FXML 
+    private Label pendingLabel;
+    
+    @FXML 
+    private Label clientsText;
 
+    @FXML 
+    private Label placeholderLabel;
+
+    XMLResourceBundleProvider instance;
+
+    public ClientsToApproveController() {
+        this.instance = XMLResourceBundleProvider.getInstance();
+    }
     public void handleApprove(Client client) {
         CoworkerServiceGrpc.CoworkerServiceBlockingStub stub = StubsManager.getInstance().getCoworkerServiceBlockingStub();
 
@@ -41,6 +58,9 @@ public class ClientsToApproveController {
     }
 
     public void initialize() {
+        loadTexts();
+
+        instance.subscribe(language -> loadTexts());
         emailColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUser().getEmail()));
         firstNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getFirstName()));
         lastNameColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getLastName()));
@@ -78,5 +98,19 @@ public class ClientsToApproveController {
         System.out.println(nonApprovedClients.size());
 
         nonApprovedClientsTable.getItems().addAll(nonApprovedClients);
+    }
+    private void loadTexts() {
+        XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.coworker");
+
+        if (bundle == null)
+            return;
+        pendingLabel.setText(bundle.getString("client.label.pending")); 
+        clientsText.setText(bundle.getString("client.label.text")); 
+        placeholderLabel.setText(bundle.getString("client.label.placeholder")); 
+        firstNameColumn.setText(bundle.getString("client.label.firstname")); 
+        lastNameColumn.setText(bundle.getString("client.label.lastname")); 
+        emailColumn.setText(bundle.getString("client.label.email")); 
+        createdAtColumn.setText(bundle.getString("client.label.created")); 
+        approveColumn.setText(bundle.getString("client.label.approve")); 
     }
 }

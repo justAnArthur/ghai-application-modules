@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <Button text="Logout"
+        fx:id="logoutButton"
         fx:controller="fiit.vava.client.controllers._components.auth.LogoutController"
         onAction="#handleLogout"
         xmlns:fx="http://javafx.com/fxml"

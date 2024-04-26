@@ -27,10 +27,10 @@
             <!--fields-->
         </VBox>
 
-        <Button onAction="#handleAddField" text="Add new field"
+        <Button fx:id="addField" onAction="#handleAddField" text="Add new field"
                 style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
 
-        <Button onAction="#handleCreateTemplate" text="Submit create template"
+        <Button fx:id="submitTemplate" onAction="#handleCreateTemplate" text="Submit template"
                 style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
 
         <Label fx:id="labelError" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold;"/>
