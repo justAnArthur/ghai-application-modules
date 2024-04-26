@@ -13,6 +13,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,7 @@ public class ClientsToApproveController {
     @FXML
     private Label placeholderLabel;
 
+    private static final Logger logger = LoggerFactory.getLogger("client." + ClientsToApproveController.class);
     XMLResourceBundleProvider instance;
 
     private static final Logger logger = LoggerFactory.getLogger("client." + ClientsToApproveController.class);
