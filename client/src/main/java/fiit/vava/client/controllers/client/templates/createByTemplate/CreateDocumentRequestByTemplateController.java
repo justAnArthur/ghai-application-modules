@@ -1,27 +1,26 @@
 package fiit.vava.client.controllers.client.templates.createByTemplate;
 
-import fiit.vava.client.bundles.XMLResourceBundle;
-import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import fiit.vava.client.Router;
 import fiit.vava.client.StubsManager;
+import fiit.vava.client.bundles.XMLResourceBundle;
+import fiit.vava.client.bundles.XMLResourceBundleProvider;
 import fiit.vava.client.controllers.auth.Validation;
 import fiit.vava.server.*;
 import io.github.palexdev.mfxcore.utils.fx.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -206,6 +205,7 @@ public class CreateDocumentRequestByTemplateController {
 
         if (bundle == null)
             return;
+
         submit.setText(bundle.getString("templates.button.submit")); 
     }
 }

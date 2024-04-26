@@ -1,21 +1,14 @@
 package fiit.vava.client.controllers.coworker.clients;
 
+import fiit.vava.client.StubsManager;
 import fiit.vava.client.bundles.XMLResourceBundle;
 import fiit.vava.client.bundles.XMLResourceBundleProvider;
-import fiit.vava.client.StubsManager;
 import fiit.vava.server.Client;
 import fiit.vava.server.CoworkerServiceGrpc;
 import fiit.vava.server.Empty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +41,6 @@ public class ClientsToApproveController {
     @FXML
     private Label placeholderLabel;
 
-    private static final Logger logger = LoggerFactory.getLogger("client." + ClientsToApproveController.class);
     XMLResourceBundleProvider instance;
 
     private static final Logger logger = LoggerFactory.getLogger("client." + ClientsToApproveController.class);

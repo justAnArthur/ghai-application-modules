@@ -61,7 +61,7 @@
         <VBox spacing="10" style="-fx-border-color: #a0aec0; -fx-border-width: 1 0 0 0; -fx-padding: 10 0">
             <Button fx:id="approveBtn" text="Approve" onAction="#handleApprove"
                     style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
-            <Button fx:id="rejectButton" text="Reject" onAction="#handleReject"
+            <Button fx:id="rejectBtn" text="Reject" onAction="#handleReject"
                     style="-fx-background-color: red; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
         </VBox>
     </VBox>

@@ -18,7 +18,7 @@
             <!--fields-->
         </VBox>
 
-        <Button fx:id="sumbit" onAction="#handleCreateDocumentRequest" text="Submit create request"
+        <Button fx:id="submit" onAction="#handleCreateDocumentRequest" text="Submit create request"
                 style="-fx-background-color: #667eea; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 0.375em 0.75em;"/>
 
         <Label fx:id="errorLabel" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold;"/>
