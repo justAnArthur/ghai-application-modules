@@ -67,7 +67,7 @@ public class DocumentRequestsController {
         });*/
 
         actionsColumn.setCellFactory(param -> new TableCell<>() {
-            final Button btn = new Button("approve");
+            final Button btn = new Button("Approve");
 
             @Override
             public void updateItem(String item, boolean empty) {

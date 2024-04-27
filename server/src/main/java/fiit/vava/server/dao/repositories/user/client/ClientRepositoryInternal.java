@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 
 public class ClientRepositoryInternal extends ClientRepository {
 
-    private final ArrayList<Client> clients = new ArrayList<>() {{
-        add(Client.newBuilder().setId("1").setFirstName("first").setLastName("first").setUser(User.newBuilder()
-                .setId("1").build()).build());
+    private final ArrayList<Client> clients = new ArrayList<>() {{;
         add(Client.newBuilder().setId("2").setFirstName("client").setLastName("client").setUser(User.newBuilder()
                 .setId("5").build()).build());
         add(Client.newBuilder().setId("3").setFirstName("coworker").setLastName("coworker").setUser(User.newBuilder()

@@ -20,6 +20,14 @@
                     <Button text="Document templates" fx:id="templates" onAction="#handleTemplates"
                             style="-fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-underline: false;"/>
                 </HBox>
+                <HBox spacing="10">
+                    <Button text="Clients"
+                            style="-fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-underline: false;"/>
+                </HBox>
+                <HBox spacing="10">
+                    <Button text="Coworker"
+                            style="-fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-underline: false;"/>
+                </HBox>
                 <!--                <HBox spacing="10">-->
                 <!--                    <Button text="Clients approving" fx:id="clientsApproving" onAction="#handleClientsApproving"-->
                 <!--                            style="-fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-underline: false"/>-->

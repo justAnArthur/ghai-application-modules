@@ -39,7 +39,7 @@ public class CreateDocumentRequestByTemplateController {
     Label errorLabel;
     @FXML
     Label templateName;
-    @FXML 
+    @FXML
     Button submit;
 
     XMLResourceBundleProvider instance;
@@ -48,6 +48,7 @@ public class CreateDocumentRequestByTemplateController {
     public CreateDocumentRequestByTemplateController() {
         this.instance = XMLResourceBundleProvider.getInstance();
     }
+
     private final List<Node> fields = new ArrayList<>();
 
     private List<DocumentTemplateField> documentTemplateFields = new ArrayList<>();
@@ -200,12 +201,13 @@ public class CreateDocumentRequestByTemplateController {
             e.printStackTrace();
         }
     }
+
     private void loadTexts() {
         XMLResourceBundle bundle = instance.getBundle("fiit.vava.client.bundles.client");
 
         if (bundle == null)
             return;
 
-        submit.setText(bundle.getString("templates.button.submit")); 
+        submit.setText(bundle.getString("templates.button.submit"));
     }
 }

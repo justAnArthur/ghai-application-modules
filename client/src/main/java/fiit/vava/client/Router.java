@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -120,6 +121,8 @@ public class Router {
     }
 
     public void loadApp(Stage stage) throws IOException {
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/fiit/vava/client/logotype.png")));
+
         Router.stage = stage;
 
         URL path = routes.get("app");
@@ -127,7 +130,7 @@ public class Router {
         Parent root = loader.load();
 
         stage.setTitle("GHAI");
-        stage.setScene(new Scene(root, 800, 600));
+        stage.setScene(new Scene(root, 850, 600));
         stage.show();
     }
 
