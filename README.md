@@ -10,6 +10,16 @@ Arthur Kozubov, Zaitsev Artem, Sichkaruk Mykhailo, Vadym Tilihuzov, Sira Dariia
 
 VAVA | Development of Applications With Multilayer Architecture
 
+## Documentation
+
+A detailed documentation of the project can be found in the following link:
+
+[Documentation](/docs/vava.pdf)
+
+You could also watch our video on YouTube:
+
+[![Video](https://img.youtube.com/vi/MFfC30np-No/0.jpg)](https://youtu.be/MFfC30np-No)
+
 ### Practitioner
 
 Mgr. Ing. Miroslav Reiter, MBA
