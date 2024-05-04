@@ -6,7 +6,7 @@ A digital document provider app and document-approving system all in one.
 
 Arthur Kozubov, Zaitsev Artem, Sichkaruk Mykhailo, Vadym Tilihuzov, Sira Dariia
 
-You could also watch our video on [![YouTube:](https://youtu.be/MFfC30np-No)](https://youtu.be/MFfC30np-No)
+You could also watch our video on [![YouTube](https://img.youtube.com/vi/MFfC30np-No/0.jpg)](https://youtu.be/MFfC30np-No)
 
 ## Subject
 
