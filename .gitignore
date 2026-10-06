@@ -43,3 +43,9 @@ build/
 
 ### Logs ###
 logs/
+
+### Local config ###
+.env
+.idea/
+__pycache__/
+node_modules/
